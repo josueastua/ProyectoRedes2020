@@ -1,0 +1,32 @@
+#ap_root{
+    -fx-background-color: #1d1d1d;
+}
+
+.button{
+    -fx-text-fill: white;
+    -fx-border-width: 0 0 5 5;
+    -fx-background-radius: 0 15 0 15;
+    -fx-border-radius: 0 15 0 15;
+    -fx-font: bold 20px "Bauhaus 93";
+    -fx-border-insets: 0 0 -1 -1;
+}
+
+#btn_Jugar{
+    -fx-background-color: #017001;
+    -fx-border-color: #0db30d;
+}
+
+#btn_Reglas{
+    -fx-background-color: #bf930d;
+    -fx-border-color: #efb810;
+}
+
+#btn_Salir{
+    -fx-background-color: #660000;
+    -fx-border-color: #cc0000;
+}
+
+.button:hover{
+    -fx-background-color: #cc00cc;
+    -fx-border-color: #ff66ff;
+}
