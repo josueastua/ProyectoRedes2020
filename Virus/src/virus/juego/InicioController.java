@@ -33,7 +33,7 @@ public class InicioController implements Initializable {
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        addEvents();
     }    
 
     @FXML
@@ -48,4 +48,24 @@ public class InicioController implements Initializable {
     private void accionSalir(ActionEvent event) {
     }
     
+    private void addEvents(){
+        ap_root.widthProperty().addListener( w -> {
+            double a = ap_root.getWidth(); 
+            imv_id.setFitWidth(a/2);
+            imv_ii.setFitWidth(a/2);
+            imv_sd.setFitWidth(a/2);
+            imv_si.setFitWidth(a/2);
+            imv_sd.setLayoutX(a/2);
+            imv_id.setLayoutX(a/2);
+        });
+        ap_root.heightProperty().addListener( h -> {
+            double l = ap_root.getHeight();
+            imv_id.setFitHeight(l/2);
+            imv_ii.setFitHeight(l/2);
+            imv_sd.setFitHeight(l/2);
+            imv_si.setFitHeight(l/2);
+            imv_id.setLayoutY(l/2);
+            imv_ii.setLayoutY(l/2);
+        });
+    }
 }

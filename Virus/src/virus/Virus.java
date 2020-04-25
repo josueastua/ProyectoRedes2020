@@ -19,10 +19,11 @@ public class Virus extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/virus/juego/Juego.fxml"));
-        
+        Parent root = FXMLLoader.load(getClass().getResource("/virus/juego/Inicio.fxml"));
+        stage.setMinWidth(600);
+        stage.setMinHeight(540);
         Scene scene = new Scene(root);
-        
+        stage.sizeToScene();
         stage.setScene(scene);
         stage.show();
     }

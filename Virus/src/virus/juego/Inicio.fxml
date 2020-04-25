@@ -9,9 +9,9 @@
 
 <AnchorPane id="AnchorPane" fx:id="ap_root" prefHeight="500.0" prefWidth="600.0" stylesheets="@../resources/Inicio.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="virus.juego.InicioController">
    <children>
-      <ImageView fx:id="imv_sd" fitHeight="250.0" fitWidth="300.0" layoutX="300.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imv_sd" fitHeight="250.0" fitWidth="300.0" layoutX="300.0" pickOnBounds="true" smooth="false" />
       <ImageView fx:id="imv_si" fitHeight="250.0" fitWidth="300.0" pickOnBounds="true" smooth="false" />
-      <ImageView fx:id="imv_ii" fitHeight="250.0" fitWidth="300.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imv_ii" fitHeight="250.0" fitWidth="300.0" layoutY="250.0" pickOnBounds="true" smooth="false" />
       <ImageView fx:id="imv_id" fitHeight="250.0" fitWidth="300.0" layoutX="300.0" layoutY="250.0" pickOnBounds="true" smooth="false" />
       <VBox fx:id="vb_contenerdor" alignment="CENTER" prefHeight="500.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
