@@ -10,7 +10,7 @@ public class Conexion {
     
     Socket cliente;
     int puerto = 44440;
-    String ip = "192.168.8.103";
+    String ip = "192.168.8.100";
     PrintStream salida;
     InputStreamReader respuesta;
     char msg[];
@@ -63,7 +63,11 @@ public class Conexion {
         return String.copyValueOf(cadena);
     }
     
-    public void accionEnviar(String data){
+    private void procesarRespuesta(String respuesta){
+        
+    }
+    
+    public void accionEnviar(String clave,String data){
         try{
             //Creamos la conexion con el servidor
             cliente = new Socket(ip, puerto);
@@ -72,7 +76,7 @@ public class Conexion {
             //Para enviar mensaje al servido
             salida = new PrintStream(cliente.getOutputStream());
             //Se envia el mensaje al servido
-            salida.println(Codificar(data));
+            salida.println(clave+Codificar(data));
             //Se recibe la respuesta del servido
             respuesta.read(msg);
             System.out.println(Decodificar(String.copyValueOf(msg)));

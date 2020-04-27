@@ -48,6 +48,7 @@ public class JuegoController implements Initializable {
 
     @FXML
     private void accionListo(ActionEvent event) {
-        con.accionEnviar("Hola Mundo".toUpperCase());
+//        con.accionEnviar("Hola Mundo".toUpperCase());
     }
+
 }
