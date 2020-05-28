@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virus.juego;
+package virus.Controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +24,7 @@ import virus.socket.Conexion;
  *
  * @author IVAN
  */
-public class JuegoController implements Initializable {
+public class JuegoController extends Controller implements Initializable {
 
     @FXML private BorderPane bp_root;
     @FXML private HBox vb_informacion;
@@ -49,6 +49,10 @@ public class JuegoController implements Initializable {
     @FXML
     private void accionListo(ActionEvent event) {
 //        con.accionEnviar("Hola Mundo".toUpperCase());
+    }
+
+    @Override
+    public void initialize() {
     }
 
 }

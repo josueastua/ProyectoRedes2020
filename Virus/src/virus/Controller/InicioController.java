@@ -1,5 +1,5 @@
 
-package virus.juego;
+package virus.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import virus.socket.Conexion;
 
 
-public class InicioController implements Initializable {
+public class InicioController extends Controller implements Initializable {
 
     @FXML private Button btn_Jugar;
     @FXML private Button btn_Reglas;
@@ -69,6 +69,10 @@ public class InicioController implements Initializable {
             imv_id.setLayoutY(l/2);
             imv_ii.setLayoutY(l/2);
         });
+    }
+
+    @Override
+    public void initialize() {
     }
 
 }

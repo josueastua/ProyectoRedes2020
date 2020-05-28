@@ -6,10 +6,8 @@
 package virus;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import virus.util.FlowController;
 
 /**
  *
@@ -19,13 +17,7 @@ public class Virus extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/virus/juego/Inicio.fxml"));
-        stage.setMinWidth(600);
-        stage.setMinHeight(540);
-        Scene scene = new Scene(root);
-        stage.sizeToScene();
-        stage.setScene(scene);
-        stage.show();
+        FlowController.getInstance().goViewInResizableWindow("Inicio", 0, 600, 0, 540, Boolean.TRUE);
     }
 
     /**
