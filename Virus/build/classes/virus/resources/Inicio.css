@@ -16,8 +16,21 @@
     -fx-stroke-width: 2;
 }
 
-#btn_Jugar{
+#btn_Jugar, #btn_Ingresar{
     -fx-background-color: #017001;
+    -fx-border-color: #0db30d;
+}
+
+
+#txt_Nickname{
+    -fx-background-color: transparent;
+    -fx-border-color: darkgray;
+    -fx-border-width: 0 0 3 0;
+    -fx-font: bold 25px "Harlow Solid Italic";
+    -fx-text-alignment: CENTER;
+}
+
+#txt_Nickname:focused{
     -fx-border-color: #0db30d;
 }
 

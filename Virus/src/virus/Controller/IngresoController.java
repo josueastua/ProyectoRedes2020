@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package virus.Controller;
 
 import java.net.URL;
@@ -10,43 +14,39 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import virus.socket.Conexion;
 
+/**
+ * FXML Controller class
+ *
+ * @author IVAN
+ */
+public class IngresoController extends Controller implements Initializable {
 
-public class InicioController extends Controller implements Initializable {
+    @FXML
+    private AnchorPane ap_root;
+    @FXML
+    private ImageView imv_sd;
+    @FXML
+    private ImageView imv_si;
+    @FXML
+    private ImageView imv_ii;
+    @FXML
+    private ImageView imv_id;
+    @FXML
+    private VBox vb_contenerdor;
+    @FXML
+    private Button btn_Ingresar;
 
-    @FXML private Button btn_Jugar;
-    @FXML private Button btn_Reglas;
-    @FXML private Button btn_Salir;
-    @FXML private AnchorPane ap_root;
-    @FXML private ImageView imv_sd;
-    @FXML private ImageView imv_si;
-    @FXML private ImageView imv_ii;
-    @FXML private ImageView imv_id;
-    @FXML private VBox vb_contenerdor;
-    Conexion con;
-
-   
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        addEvents();
-        con = new Conexion();
+        // TODO
     }    
 
     @FXML
-    private void accionJugar(ActionEvent event) {
-        con.accionEnviar("C", "");
-        btn_Jugar.setDisable(true);
-    }
-
-    @FXML
-    private void accionReglas(ActionEvent event) {
-    }
-
-    @FXML
-    private void accionSalir(ActionEvent event) {
-        this.getStage().close();
+    private void accionIngresar(ActionEvent event) {
     }
     
     private void addEvents(){
@@ -83,5 +83,5 @@ public class InicioController extends Controller implements Initializable {
         ajustarAltura();
         ajustarAncho();
     }
-
+    
 }

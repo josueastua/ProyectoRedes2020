@@ -16,27 +16,30 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import virus.socket.Conexion;
+import virus.util.Marco_Carta;
 
 /**
  *
  * @author IVAN
  */
 public class JuegoController extends Controller implements Initializable {
-
-    @FXML private BorderPane bp_root;
-    @FXML private HBox vb_informacion;
-    @FXML private HBox vb_control;
-    @FXML private VBox vb_principal;
-    @FXML private VBox vb_jugadores;
-    @FXML private Button btn_listo;
     Conexion con;
+    @FXML private GridPane gpCartas;
+    @FXML private HBox hbCartas;
+    @FXML private HBox hbMano;
+    @FXML private Button btnJugada;
+    @FXML private Label lblOponente;
+    @FXML private GridPane gpCartasOponente;
+    @FXML private Button btn_Oponente;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         con = new Conexion();
+        cargarCartas();
     }    
     
     /**
@@ -46,13 +49,32 @@ public class JuegoController extends Controller implements Initializable {
         
     }
 
-    @FXML
-    private void accionListo(ActionEvent event) {
-//        con.accionEnviar("Hola Mundo".toUpperCase());
+    public void cargarCartas(){
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 5; j++){
+                gpCartasOponente.add(new Marco_Carta(), i, j);
+            }
+        }
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 3; j++){
+                gpCartas.add(new Marco_Carta(), i, j);
+            }
+        }
+        for(int i = 0; i < 5; i++)
+            hbMano.getChildren().add(new Marco_Carta());
+        
     }
 
     @Override
     public void initialize() {
+    }
+
+    @FXML
+    private void accionJugada(ActionEvent event) {
+    }
+
+    @FXML
+    private void accionSiguente(ActionEvent event) {
     }
 
 }

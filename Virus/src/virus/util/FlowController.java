@@ -168,7 +168,7 @@ public class FlowController {
         Controller controller = loader.getController();
         Stage stage = new Stage();
         stage.setTitle("Virus");
-        stage.getIcons().add(new Image("proyecto2reborn/resources/icon.png"));
+        //stage.getIcons().add(new Image("proyecto2reborn/resources/icon.png"));
         stage.setOnHidden((WindowEvent event) -> {
             controller.getStage().getScene().setRoot(new Pane());
             controller.setStage(null);
