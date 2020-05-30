@@ -1,0 +1,74 @@
+.root{
+    -fx-background-color: whitesmoke;
+}
+
+.button{
+    -fx-text-fill: white;
+    -fx-border-width: 0 0 5 5;
+    -fx-background-radius: 0 15 0 15;
+    -fx-border-radius: 0 15 0 15;
+    -fx-font: bold 25px "Harlow Solid Italic";
+    -fx-border-insets: 0 0 -1 -1;
+}
+
+.button .text{
+    -fx-stroke: #1d1d1d;
+    -fx-stroke-width: 2;
+}
+
+#btn_Jugar, #btn_Ingresar{
+    -fx-background-color: #017001;
+    -fx-border-color: #0db30d;
+}
+
+
+#txt_Nickname{
+    -fx-background-color: transparent;
+    -fx-border-color: darkgray;
+    -fx-border-width: 0 0 3 0;
+    -fx-font: bold 25px "Harlow Solid Italic";
+    -fx-text-alignment: CENTER;
+}
+
+#txt_Nickname:focused{
+    -fx-border-color: #0db30d;
+}
+
+#btn_Reglas{
+    -fx-background-color: #bf930d;
+    -fx-border-color: #efb810;
+}
+
+#btn_Salir{
+    -fx-background-color: #660000;
+    -fx-border-color: #cc0000;
+}
+
+#btn_Jugar:hover, #btn_Reglas:hover, #btn_Salir:hover{
+    -fx-translate-x: 15;
+}
+
+.label{
+    -fx-text-fill: transparent;
+    -fx-font: bold italic 55px "Harlow Solid Italic";
+    -fx-text-alignment: CENTER;
+}
+
+.label .text{
+    -fx-stroke: #1d1d1d;
+    -fx-stroke-width: 1.5;
+}
+
+.image-view{
+    -fx-opacity: 0.05;
+    -fx-preserve-ratio: FALSE;
+    -fx-smooth: FALSE;
+}
+
+#imv_si, #imv_id{
+    -fx-image:url('../resources/virus.png')
+}
+
+#imv_sd, #imv_ii{
+    -fx-image:url('../resources/virus2.png')
+}
