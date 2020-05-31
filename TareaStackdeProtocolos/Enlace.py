@@ -1,37 +1,44 @@
 class Enlace(object):
-    def __init__(self, trama):
-        self.trama = trama
+    def __init__(self):
+        self.tramas = []
     
-    def convBinario(self):
+    def convBinario(self,segmentos):
         trama = ""
-        for carac in self.trama:
-            trama += format(ord(carac),'08b')
-            print("Binario("+format(ord(carac),'08b')+")")
-        print(trama)
-        self.trama = trama;
+        for segmento in segmentos:
+            for carac in segmento:
+                trama += format(ord(carac),'08b')
+            self.tramas.append(trama)
+            trama = ""
     
-    def convDecimal(self):
-        tam = len(self.trama)
-        a = 0
-        ind = 0
-        palabra = ''
-        binario = ''
-        while tam >= 0:
-            if a < 8 :
-                a += 1
-                tam -= 1
-                if ind < len(self.trama):
-                    binario += self.trama[ind]
-                    ind += 1
-            else:
-                print("Binario("+binario+")")
-                palabra += chr(int(binario, base=2))
-                binario = ""
-                a = 0
-        self.trama = palabra
-        print(palabra)
+    def recibirTrama(self,trama):
+        self.tramas.append(trama)
 
-cosa = Enlace("(Hola90)")
-cosa.convBinario()
-cosa.convDecimal()
+    def convDecimal(self):
+        segmentos = []
+        for trama in self.tramas:
+            tam = len(trama)
+            a = 0
+            ind = 0
+            palabra = ''
+            binario = ''
+            while tam >= 0:
+                if a < 8 :
+                    a += 1
+                    tam -= 1
+                    if ind < len(trama):
+                        binario += trama[ind]
+                        ind += 1
+                else:
+                    palabra += chr(int(binario, base=2))
+                    binario = ""
+                    a = 0
+            segmentos.append(palabra)
+        return segmentos
+
+cosa = Enlace()
+cosa.convBinario(["Hola","Adios","[80(z-2)%(x-2)]","TODO EL ABECEDARIO"])
+print(cosa.tramas)
+print(cosa.convDecimal())
+
+
 
