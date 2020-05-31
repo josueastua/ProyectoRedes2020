@@ -27,6 +27,6 @@ class Presentacion(object):
         print(mensaje)
         self.mensaje = mensaje
 
-p = Presentacion("{Buenas noches árbol} | zzz ~")
+p = Presentacion("")
 p.Codificar()
 p.Decoficar()
