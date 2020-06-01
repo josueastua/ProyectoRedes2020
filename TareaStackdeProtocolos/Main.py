@@ -274,11 +274,13 @@ class Aplicacion(object):
         self.transporte.Segmentar()
         seg = self.transporte.getSegmentos()
         self.enlace.convBinario(seg)
+        print(self.enlace.getTramas())
+        '''
         trama = ""
         for trama in self.enlace.getTramas():
             self.sesion.modoCliente(trama)
         self.enlace.clearTramas()
-        self.transporte.clearSegementos()
+        self.transporte.clearSegementos()'''
     
 
 class Presentacion(object):
@@ -364,6 +366,16 @@ class Transporte(object):
 
     def Segmentar(self):
         aux = ""
+        for a in range(len(self.mensaje)):
+            aux += self.mensaje[a]
+            if(a != 0 and a % 15 == 0):
+                self.segmentos.append(aux)
+                aux = ""
+        if(aux != ""):
+            self.segmentos.append(aux)
+        print(self.segmentos)
+        """
+        aux = ""
         aux2 = 0
         perdida = randint(1, 2)
         for a in range(len(self.mensaje)):
@@ -390,9 +402,15 @@ class Transporte(object):
             else:
                 aux += self.segmentos[a]+"%"
         return aux;
+        """
 
-    def Desegmentar(self):
-        aux = self.mensaje
+    def Desegmentar(self, lista):
+        aux = ""
+        aux2 = ""
+        for aux2 in lista:
+            aux += aux2
+        self.mensaje = aux
+        '''
         aux2 = ""
         for a in range(len(self.mensaje)):
             if(self.mensaje[a] != '%'):
@@ -413,7 +431,7 @@ class Transporte(object):
                 aux2 += self.segmentos[a]
             else:
                 aux2 += self.segmentos[a]+"%"
-        return aux2;
+        return aux2;'''
 
 class Enlace(object):
     def __init__(self):
@@ -435,6 +453,7 @@ class Enlace(object):
                 trama += format(ord(carac),'08b')
             self.tramas.append(trama)
             trama = ""
+        self.tramas.append("00000000")
     
     def recibirTrama(self,trama):
         self.tramas.append(trama)
