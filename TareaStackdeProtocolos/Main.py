@@ -5,17 +5,14 @@ import socket
 from random import randint
 from os import system
 
-
-class Aplicacion(object):
-
-    def __init__(self, lista):
+class Interfaz(object):
+    def __init__(self, lista, app):
         self.vista1 = None
         self.btnCliente = None
         self.btnServidor = None
         self.vista2 = None
         self.lblTitulo = None
         self.lblMensaje = None
-        self.lblInfo = None
         self.lblIp = None
         self.txtMensaje = None
         self.txtIp = None
@@ -23,9 +20,10 @@ class Aplicacion(object):
         self.uso = 0;
         self.mayus = False
         self.msj = None
+        self.straux = None
         self.ip = None
-        self.stringInf = ""
         self.lista = lista
+        self.app = app
 
     def initVista1(self):
         self.vista1 = tk.Tk()
@@ -45,10 +43,11 @@ class Aplicacion(object):
         self.vista1.destroy();
         self.vista2 = tk.Tk()
         self.vista2.title("Tarea de Stack de Protocolos")
-        self.vista2.geometry("1000x700")
+        self.vista2.geometry("1000x750")
         self.vista2.resizable(0, 0)
         self.msj = StringVar(self.vista2)
         self.ip = StringVar(self.vista2)
+        self.straux = StringVar(self.vista2)
         if(uso == 1):
             self.mostrarVista2("Cliente")
         else:
@@ -65,9 +64,9 @@ class Aplicacion(object):
         self.lblMensaje.config(bg="#ffffff",font=("Courier", 15, tkFont.BOLD), width=20, height=2)
         self.lblMensaje.place(x=10, y=80)
         #Etiqueta del contenido del mensaje
-        self.lblInfo = Label(self.vista2, borderwidth=2, relief="groove")
-        self.lblInfo.config(bg="#ffffff",font=("Courier", 16, tkFont.BOLD), height= 2, width = 54)
-        self.lblInfo.place(x=280, y=80)
+        self.txtMensaje = Entry(self.vista2, textvariable=self.msj, borderwidth=3, relief="groove")
+        self.txtMensaje.place(x=280, y=80, height = 50, width = 710)
+        self.txtMensaje.config(state='disabled')
         #Etiqueta del encabezado de IP
         self.lblIp = Label(self.vista2, text="IP de destino", borderwidth=2, relief="groove");
         self.lblIp.config(bg="#ffffff",font=("Courier", 15, tkFont.BOLD), width=20, height=2)
@@ -78,13 +77,170 @@ class Aplicacion(object):
         #Boton para enviar el mensaje
         self.btnEnviar = Button(self.vista2, text="Enviar mensaje", font=("Courier", 14, "bold"), command=self.obtenerDatos)
         self.btnEnviar.config(bg="#ffffff", fg="#1d1d1d", width=24, height=2)
-        self.btnEnviar.place(x=350, y=630)
+        self.btnEnviar.place(x=350, y=685)
+        #botone teclas
+        btnA = Button(self.vista2, text="A : Ʉ", command=lambda: self.escribirMensaje("A"), height = 2, width = 10)
+        btnA.place(x=170, y=230)
+        btnB = Button(self.vista2, text="B : ϐ", command=lambda: self.escribirMensaje("B"), height = 2, width = 10)
+        btnB.place(x=250, y=230)
+        btnC = Button(self.vista2, text="C : Ȼ", command=lambda: self.escribirMensaje("C"), height = 2, width = 10)
+        btnC.place(x=330, y=230)
+        btnD = Button(self.vista2, text="D : Δ", command=lambda: self.escribirMensaje("D"), height = 2, width = 10)
+        btnD.place(x=410, y=230)
+        btnE = Button(self.vista2, text="E : Ʃ", command=lambda: self.escribirMensaje("E"), height = 2, width = 10)
+        btnE.place(x=490, y=230)
+        btnF = Button(self.vista2, text="F : ƒ", command=lambda: self.escribirMensaje("F"), height = 2, width = 10)
+        btnF.place(x=570, y=230)
+        btnG = Button(self.vista2, text="G : Ƃ", command=lambda: self.escribirMensaje("G"), height = 2, width = 10)
+        btnG.place(x=650, y=230)
+        btnH = Button(self.vista2, text="H : Ħ", command=lambda: self.escribirMensaje("H"), height = 2, width = 10)
+        btnH.place(x=730, y=230)
+
+        btnI = Button(self.vista2, text="I : Ý", command=lambda: self.escribirMensaje("I"), height = 2, width = 10)
+        btnI.place(x=170, y=280)
+        btnJ = Button(self.vista2, text="J : ł", command=lambda: self.escribirMensaje("J"), height = 2, width = 10)
+        btnJ.place(x=250, y=280)
+        btnK = Button(self.vista2, text="K : ʞ", command=lambda: self.escribirMensaje("K"), height = 2, width = 10)
+        btnK.place(x=330, y=280)
+        btnL = Button(self.vista2, text="L : ȴ", command=lambda: self.escribirMensaje("L"), height = 2, width = 10)
+        btnL.place(x=410, y=280)
+        btnM = Button(self.vista2, text="M : μ", command=lambda: self.escribirMensaje("M"), height = 2, width = 10)
+        btnM.place(x=490, y=280)
+        btnN = Button(self.vista2, text="N : Ɲ", command=lambda: self.escribirMensaje("N"), height = 2, width = 10)
+        btnN.place(x=570, y=280)
+        btnO = Button(self.vista2, text="O : Φ", command=lambda: self.escribirMensaje("O"), height = 2, width = 10)
+        btnO.place(x=650, y=280)
+        btnP = Button(self.vista2, text="P : π", command=lambda: self.escribirMensaje("P"), height = 2, width = 10)
+        btnP.place(x=730, y=280)
+
+        btnQ = Button(self.vista2, text="Q : ϑ", command=lambda: self.escribirMensaje("Q"), height = 2, width = 10)
+        btnQ.place(x=170, y=330)
+        btnR = Button(self.vista2, text="R : ɻ", command=lambda: self.escribirMensaje("R"), height = 2, width = 10)
+        btnR.place(x=250, y=330)
+        btnS = Button(self.vista2, text="S : Ϟ", command=lambda: self.escribirMensaje("S"), height = 2, width = 10)
+        btnS.place(x=330, y=330)
+        btnT = Button(self.vista2, text="T : ʈ", command=lambda: self.escribirMensaje("T"), height = 2, width = 10)
+        btnT.place(x=410, y=330)
+        btnU = Button(self.vista2, text="U : Ʊ", command=lambda: self.escribirMensaje("U"), height = 2, width = 10)
+        btnU.place(x=490, y=330)
+        btnV = Button(self.vista2, text="V : ƛ", command=lambda: self.escribirMensaje("V"), height = 2, width = 10)
+        btnV.place(x=570, y=330)
+        btnW = Button(self.vista2, text="W : Ψ", command=lambda: self.escribirMensaje("W"), height = 2, width = 10)
+        btnW.place(x=650, y=330)
+        btnX = Button(self.vista2, text="X : ¤", command=lambda: self.escribirMensaje("X"), height = 2, width = 10)
+        btnX.place(x=730, y=330)
+
+        btnY = Button(self.vista2, text="Y : ɣ", command=lambda: self.escribirMensaje("Y"), height = 2, width = 10)
+        btnY.place(x=170, y=380)
+        btnZ = Button(self.vista2, text="Z : ζ", command=lambda: self.escribirMensaje("Z"), height = 2, width = 10)
+        btnZ.place(x=250, y=380)
+        btn0 = Button(self.vista2, text="0 : Ø", command=lambda: self.escribirMensaje("0"), height = 2, width = 10)
+        btn0.place(x=330, y=380)
+        btn1 = Button(self.vista2, text="1 : Ⅰ", command=lambda: self.escribirMensaje("1"), height = 2, width = 10)
+        btn1.place(x=410, y=380)
+        btn2 = Button(self.vista2, text="2 : Ⅱ", command=lambda: self.escribirMensaje("2"), height = 2, width = 10)
+        btn2.place(x=490, y=380)
+        btn3 = Button(self.vista2, text="3 : Ⅲ", command=lambda: self.escribirMensaje("3"), height = 2, width = 10)
+        btn3.place(x=570, y=380)
+        btn4 = Button(self.vista2, text="4 : Ⅳ", command=lambda: self.escribirMensaje("4"), height = 2, width = 10)
+        btn4.place(x=650, y=380)
+        btn5 = Button(self.vista2, text="5 : Ⅴ", command=lambda: self.escribirMensaje("5"), height = 2, width = 10)
+        btn5.place(x=730, y=380)
+
+        btn6 = Button(self.vista2, text="6 : Ⅵ", command=lambda: self.escribirMensaje("6"), height = 2, width = 10)
+        btn6.place(x=170, y=430)
+        btn7 = Button(self.vista2, text="7 : Ⅶ", command=lambda: self.escribirMensaje("7"), height = 2, width = 10)
+        btn7.place(x=250, y=430)
+        btn8 = Button(self.vista2, text="8 : Ⅷ", command=lambda: self.escribirMensaje("8"), height = 2, width = 10)
+        btn8.place(x=330, y=430)
+        btn9 = Button(self.vista2, text="9 : Ⅸ", command=lambda: self.escribirMensaje("9"), height = 2, width = 10)
+        btn9.place(x=410, y=430)
+        btn161 = Button(self.vista2, text="¡ : ↑", command=lambda: self.escribirMensaje("¡"), height = 2, width = 10)
+        btn161.place(x=490, y=430)
+        btn33 = Button(self.vista2, text="! : ↓", command=lambda: self.escribirMensaje("!"), height = 2, width = 10)
+        btn33.place(x=570, y=430)
+        btn63 = Button(self.vista2, text="? : ⌠", command=lambda: self.escribirMensaje("?"), height = 2, width = 10)
+        btn63.place(x=650, y=430)
+        btn191 = Button(self.vista2, text="¿ : ⌡", command=lambda: self.escribirMensaje("¿"), height = 2, width = 10)
+        btn191.place(x=730, y=430)
+
+        btnComa = Button(self.vista2, text="\" : °", command=lambda: self.escribirMensaje("\""), height = 2, width = 10)
+        btnComa.place(x=170, y=480)
+        btn35 = Button(self.vista2, text="# : ∞", command=lambda: self.escribirMensaje("#"), height = 2, width = 10)
+        btn35.place(x=250, y=480)
+        btn36 = Button(self.vista2, text="$ : †", command=lambda: self.escribirMensaje("$"), height = 2, width = 10)
+        btn36.place(x=330, y=480)
+        btn37 = Button(self.vista2, text="% : └", command=lambda: self.escribirMensaje("%"), height = 2, width = 10)
+        btn37.place(x=410, y=480)
+        btn38 = Button(self.vista2, text="& : ٨", command=lambda: self.escribirMensaje("&"), height = 2, width = 10)
+        btn38.place(x=490, y=480)
+        btn39 = Button(self.vista2, text="' : ῭", command=lambda: self.escribirMensaje("'"), height = 2, width = 10)
+        btn39.place(x=570, y=480)
+        btn40 = Button(self.vista2, text="( : ͼ", command=lambda: self.escribirMensaje("("), height = 2, width = 10)
+        btn40.place(x=650, y=480)
+        btn41 = Button(self.vista2, text=") : ͽ", command=lambda: self.escribirMensaje(")"), height = 2, width = 10)
+        btn41.place(x=730, y=480)
+
+        btn42 = Button(self.vista2, text="* : •", command=lambda: self.escribirMensaje("*"), height = 2, width = 10)
+        btn42.place(x=170, y=530)
+        btn43 = Button(self.vista2, text="+ : Ꞩ", command=lambda: self.escribirMensaje("+"), height = 2, width = 10)
+        btn43.place(x=250, y=530)
+        btn44 = Button(self.vista2, text=", : ˼", command=lambda: self.escribirMensaje(","), height = 2, width = 10)
+        btn44.place(x=330, y=530)
+        btn45 = Button(self.vista2, text="- : Ꝛ", command=lambda: self.escribirMensaje("-"), height = 2, width = 10)
+        btn45.place(x=410, y=530)
+        btn46 = Button(self.vista2, text=". : ᵨ", command=lambda: self.escribirMensaje("."), height = 2, width = 10)
+        btn46.place(x=490, y=530)
+        btn47 = Button(self.vista2, text="/ : ↙", command=lambda: self.escribirMensaje("/"), height = 2, width = 10)
+        btn47.place(x=570, y=530)
+        btn58 = Button(self.vista2, text=": : ჻", command=lambda: self.escribirMensaje(":"), height = 2, width = 10)
+        btn58.place(x=650, y=530)
+        btn59 = Button(self.vista2, text="; : ἰ", command=lambda: self.escribirMensaje(";"), height = 2, width = 10)
+        btn59.place(x=730, y=530)
+
+        btn61 = Button(self.vista2, text="= : ≈", command=lambda: self.escribirMensaje("="), height = 2, width = 10)
+        btn61.place(x=170,y=580)
+        btn64 = Button(self.vista2, text="@ : ⴋ", command=lambda: self.escribirMensaje("@"), height = 2, width = 10)
+        btn64.place(x=250,y=580)
+        btn91 = Button(self.vista2, text="[ : «", command=lambda: self.escribirMensaje("["), height = 2, width = 10)
+        btn91.place(x=330,y=580)
+        btnBarra = Button(self.vista2, text="\ : ↖", command=lambda: self.escribirMensaje("\\"), height = 2, width = 10)
+        btnBarra.place(x=410,y=580)
+        btn93 = Button(self.vista2, text="] : »", command=lambda: self.escribirMensaje("]"), height = 2, width = 10)
+        btn93.place(x=490,y=580)
+        btn95 = Button(self.vista2, text="_ : ˽", command=lambda: self.escribirMensaje("_"), height = 2, width = 10)
+        btn95.place(x=570,y=580)
+        btn123 = Button(self.vista2, text="{ : <", command=lambda: self.escribirMensaje("{"), height = 2, width = 10)
+        btn123.place(x=650,y=580)
+        btn124 = Button(self.vista2, text="| : ٧", command=lambda: self.escribirMensaje("|"), height = 2, width = 10)
+        btn124.place(x=730,y=580)
+
+        btn125 = Button(self.vista2, text="} : >", command=lambda: self.escribirMensaje("}"), height = 2, width = 10)
+        btn125.place(x=330, y=630)
+        btnEsp = Button(self.vista2, text=" ", command=lambda: self.escribirMensaje(" "), height = 2, width = 21)
+        btnEsp.place(x=410, y=630)
+        btnDel = Button(self.vista2, text="<-", command=lambda: self.escribirMensaje("<-"), height = 2, width = 10)
+        btnDel.place(x=570, y=630)
+
+    def escribirMensaje(self, letra):
+        print(lista["}"])
+        if(letra != "<-"):
+            self.straux.set(self.straux.get() + letra)
+            txt = self.msj.get()
+            txt += lista[letra]
+            self.msj.set(txt)
+        else:
+            txt = self.msj.get()
+            txt = txt[0 : len(txt)-1]
+            self.msj.set(txt)
+            txt = self.straux.get()
+            self.straux.set(txt[0 : len(txt)-1])
 
     def obtenerDatos(self):
         if(self.uso == 1):
-            if(self.stringInf != "" and self.ip.get() != ""):
-                if(messagebox.askyesno(message="Mensaje: "+self.stringInf+"\nIP Destino: "+self.ip.get(), title="Confirmar")):
-                    print("ok")
+            if(self.msj.get() != "" and self.ip.get() != ""):
+                if(messagebox.askyesno(message="Mensaje: "+self.msj.get()+"\nMensaje 2: "+self.straux.get()+"\nIP Destino: "+self.ip.get(), title="Confirmar")):
+                    app.iniciarComunicacion(self.straux.get(), self.ip.get())
             else:
                 messagebox.showerror(title="Error", message="Debe llenar el campo de mensaje y el de ip de destino")
         else:
@@ -92,15 +248,38 @@ class Aplicacion(object):
 
     def cambiarModo(self, nuevo):
         self.uso = nuevo
-        self.stringInf = ""
         if(self.uso == 1):
             self.lblTitulo.configure(text = "Cliente")
         else:
             self.lblTitulo.configure(text = "Servidor")
-        
-    def actInfo(self, texto):
-        self.stringInf += texto
-        self.lblInfo.configure(text=self.stringInf)
+      
+
+class Aplicacion(object):
+    def __init__(self, presentacion, sesion, transporte, enlace):
+        self.presentacion = presentacion
+        self.sesion = sesion
+        self.transporte = transporte
+        self.enlace = enlace
+        self.sesion.setEnlace(enlace)
+        self.gui = None
+
+    def setGui(self, gui):
+        self.gui = gui
+
+    def iniciarComunicacion(self, mensaje, ip):
+        self.sesion.setIpdestino(ip)
+        self.presentacion.setMensaje(mensaje)
+        mensaje = self.presentacion.Codificar()
+        self.transporte.setMensaje(mensaje)      
+        self.transporte.Segmentar()
+        seg = self.transporte.getSegmentos()
+        self.enlace.convBinario(seg)
+        trama = ""
+        for trama in self.enlace.getTramas():
+            self.sesion.modoCliente(trama)
+        self.enlace.clearTramas()
+        self.transporte.clearSegementos()
+    
 
 class Presentacion(object):
     def __init__(self):
@@ -136,7 +315,11 @@ class Presentacion(object):
 class Sesion(object):
     def __init__(self):
         self.conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.ipdestino
+        self.ipdestino = ""
+        self.enlace = None
+
+    def setEnlace(self, enlace):
+        self.enlace = enlace
 
     def setIpdestino(self, ipdestino):
         self.ipdestino = ipdestino
@@ -288,11 +471,16 @@ if __name__ == "__main__":
         "6":"Ⅵ", "7":"Ⅶ", "8":"Ⅷ", "9":"Ⅸ", "¡":"↑", "!":"↓", "?":"⌠", "¿":"⌡",
         "\"":"°", "#":"∞", "$":"†", "%":"└", "&":"٨", "'":"῭", "(":"ͼ", ")":"ͽ",
         "*":"•", "+":"Ꞩ", ",":"˼", "-":"Ꝛ", ".":"ᵨ", "/":"↙", ":":"჻", ";":"ἰ",
-        "=":"≈", "@":"ⴋ", "[":"«", "\\":"↖", "]":"»", "_":"˽", "{":"﴾", "|":"٧","}":"﴿"
+        "=":"≈", "@":"ⴋ", "[":"«", "\\":"↖", "]":"»", "_":"˽", "{":"<", "|":"٧",
+        "}":">", " ":" ", "<-":"<-"
     })
-    for key in lista:
-        print(key+" : "+lista[key])
-    #app = Aplicacion(lista)
-    #app.initVista1()
-    #
-    #
+    Sesion = Sesion()
+    Presentacion = Presentacion()
+    Transporte = Transporte()
+    Enlace = Enlace()
+    app = Aplicacion(Presentacion, Sesion, Transporte, Enlace)
+    GUI = Interfaz(lista, app)
+    app.setGui(GUI)
+    GUI.initVista1()
+    
+    
