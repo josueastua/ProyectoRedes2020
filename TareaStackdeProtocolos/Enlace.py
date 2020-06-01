@@ -2,6 +2,15 @@ class Enlace(object):
     def __init__(self):
         self.tramas = []
     
+    def stringTrama(self):
+        return str(self.tramas)
+
+    def clearTramas(self):
+        self.tramas.clear()
+
+    def getTramas(self):
+        return self.tramas
+
     def convBinario(self,segmentos):
         trama = ""
         for segmento in segmentos:
@@ -35,10 +44,6 @@ class Enlace(object):
             segmentos.append(palabra)
         return segmentos
 
-cosa = Enlace()
-cosa.convBinario(["Hola","Adios","[80(z-2)%(x-2)]","TODO EL ABECEDARIO"])
-print(cosa.tramas)
-print(cosa.convDecimal())
 
 
 

@@ -1,9 +1,15 @@
 import socket
+from Transporte import Transporte
+from Presentacion import Presentacion
+
 
 class Sesion(object):
     def __init__(self):
         self.conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.ipdestino = None
+        self.ipdestino
+
+    def setIpdestino(self, ipdestino):
+        self.ipdestino = ipdestino
 
     def modoCliente(self, mensaje):
         self.conexion.connect((self.ipdestino, 44440))
@@ -23,3 +29,4 @@ class Sesion(object):
             msg = '\nConexión establecida con: ' + self.conexion.gethostname()
             c.send(msg.encode('utf8'))
             c.close()
+            return msg_rec

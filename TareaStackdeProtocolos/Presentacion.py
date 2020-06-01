@@ -1,6 +1,8 @@
-
 class Presentacion(object):
-    def __init__(self, mensaje):
+    def __init__(self):
+        self.mensaje = ""
+
+    def setMensaje(self, mensaje):
         self.mensaje = mensaje
 
     def Codificar(self):
@@ -13,7 +15,7 @@ class Presentacion(object):
             elif ord(carac) >= 161:
                 codigo +=chr(ord(carac) + 5)
         print(codigo)
-        self.mensaje = codigo
+        return codigo
 
     def Decoficar(self):
         mensaje = ""
@@ -25,8 +27,5 @@ class Presentacion(object):
             elif ord(carac) >= 161:
                 mensaje +=chr(ord(carac) - 5)
         print(mensaje)
-        self.mensaje = mensaje
+        return mensaje
 
-p = Presentacion("")
-p.Codificar()
-p.Decoficar()

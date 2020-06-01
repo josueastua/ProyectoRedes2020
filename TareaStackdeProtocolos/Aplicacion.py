@@ -19,6 +19,7 @@ class Aplicacion(object):
         self.uso = 0;
         self.msj = None
         self.ip = None
+        self.stringInf = ""
 
     def initVista1(self):
         self.vista1 = tk.Tk()
@@ -79,66 +80,14 @@ class Aplicacion(object):
         else:
             messagebox.showerror(title="Error", message="De momento se encuentra en modo servidor, no puede enviar mensajes")
 
-
-
-def diHola():
-    print("Hola")
-
-"""
-ventana = tk.Tk()
-helv36 = tkFont.Font(family='Courier', size=14, weight=tkFont.BOLD)
-btnEnviar = None
-txtMensaje = None
-txtIp = None
-lblTitulo = None
-lblInf = None
-
-
-def primeraVentana():
-    global ventana
-    ventana.title("Tarea de Stack de Protocolos")
-    ventana.geometry("400x200")
-    ventana.resizable(0, 0)
-    ventana.configure(bg="#1d1d1d")
-    btnCliente = Button(ventana, text="Cliente", font=helv36, command=segundaVentana1)
-    btnCliente.config(bg="#ffffff", fg="#1d1d1d", width=24, height=2);
-    btnCliente.place(x=65, y=40)
-    btnServidor = Button(ventana, text="Servidor", font=helv36, command=segundaVentana2)
-    btnServidor.config(bg="#ffffff", fg="#1d1d1d", width=24, height=2);
-    btnServidor.place(x=65, y=110)
-    ventana.mainloop()
-
-
-def segundaVentana1():
-    global ventana, btnEnviar, txtMensaje, txtIp, lblTitulo, lblInf
-    ventana.destroy();
-    ventana2 = tk.Tk()
-    ventana2.title("Tarea de Stack de Protocolos")
-    ventana2.geometry("800x600")
-    ventana2.resizable(0, 0)
-    ventana2.configure(bg="#1d1d1d")
-
-    lblTitulo = Label(ventana2, text="Cliente")
-    lblTitulo.config(bg="#ffffff",font=("Courier", 16, tkFont.BOLD), width=59, height=2)
-    lblTitulo.place(x=10, y=10)
-    txtMensaje = Entry(ventana2)
-    txtMensaje.place(x=280, y=100, height = 50, width = 500)
-    lblMensaje = Label(ventana2, text="Ingrese el mensaje");
-    lblMensaje.config(bg="#ffffff",font=("Courier", 15, tkFont.BOLD), width=20, height=2)
-    lblMensaje.place(x=10, y=100)
-    lblInf = Label(ventana2, Tex)
-    ventana2.mainloop()
-
-def segundaVentana2():
-    global ventana, btnEnviar, txtMensaje, txtIp, lblTitulo, lblInf
-    ventana.destroy();
-    ventana2 = tk.Tk()
-    ventana2.title("Tarea de Stack de Protocolos")
-    ventana2.geometry("800x600")
-    ventana2.resizable(0, 0)
-    ventana2.configure(bg="#1d1d1d")
-    ventana2.mainloop()
-"""
-if __name__ == "__main__":
-    app = Aplicacion()
-    app.initVista1()
+    def cambiarModo(self, nuevo):
+        self.uso = nuevo
+        self.stringInf = ""
+        if(self.uso == 1):
+            self.lblTitulo.configure(text = "Cliente")
+        else:
+            self.lblTitulo.configure(text = "Servidor")
+        
+    def actInfo(self, texto):
+        self.stringInf += texto
+        self.lblInfo.configure(text=self.stringInf)

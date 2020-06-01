@@ -1,9 +1,8 @@
-
 from random import randint
 
 class Transporte(object):
-    def __init__(self, mensaje):
-        self.mensaje = mensaje
+    def __init__(self):
+        self.mensaje = ""
         self.segmentos = list()
         self.hayPerdida = False
 
@@ -12,6 +11,9 @@ class Transporte(object):
 
     def clearSegementos(self):
         self.segmentos.clear()
+
+    def stringSegementos(self):
+        return str(self.segmentos)
 
     def setMensaje(self, mensaje):
         self.mensaje = mensaje
@@ -69,11 +71,4 @@ class Transporte(object):
                 aux2 += self.segmentos[a]+"%"
         return aux2;
         
-
-T = Transporte("la%vida%es%bella")
-seg = T.Segmentar()
-print(seg)
-T.clearSegementos()
-T.setMensaje(seg)
-print(T.Desegmentar())
         
