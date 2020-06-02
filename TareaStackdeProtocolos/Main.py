@@ -251,7 +251,7 @@ class Interfaz(object):
                     app.iniciarComunicacion(self.straux.get(), self.ip.get())
                     if(self.cambio == False):
                         self.cambio = True
-                        #self.app.recibirMensaje()
+                        self.app.recibirMensaje()
             else:
                 messagebox.showerror(title="Error", message="Debe llenar el campo de mensaje y el de ip de destino")
         else:
