@@ -447,38 +447,65 @@ class Enlace(object):
         return self.tramas
 
     def convBinario(self,segmentos):
+        perdida = randint(1, 2)
         trama = ""
-        for segmento in segmentos:
-            for carac in segmento:
-                trama += format(ord(carac),'08b')
-            self.tramas.append(trama)
-            trama = ""
-        self.tramas.append("00000000")
+        if perdida == 1:
+            for segmento in segmentos:
+                for carac in segmento:
+                    trama += format(ord(carac),'08b')
+                trama = "1"+trama
+                self.tramas.append(trama)
+                trama = ""
+        else:
+            for segmento in segmentos:
+                aux = randint(1, 2)
+                for carac in segmento:
+                    trama += format(ord(carac),'08b')
+                if aux == 1:
+                    trama = "1"+trama
+                else:
+                    trama = "0"+trama
+                self.tramas.append(trama)
+                trama = ""
+        self.tramas.append("000000000")
+        print(self.tramas)
     
     def recibirTrama(self,trama):
         self.tramas.append(trama)
 
+    def dividirCaracter(self,trama):
+        palabra = []
+        cont = 0
+        a = 0
+        caracter = ""
+        while a <= len(trama):
+            if cont < 8:
+                if a < len(trama):
+                    caracter += trama[a]
+                cont+=1
+                a+=1
+            else:
+                palabra.append(caracter)
+                cont = 0
+                caracter = ""
+        print(palabra)
+        return palabra
+
     def convDecimal(self):
         segmentos = []
+        caracteres = []
+        palabra = ""
         for trama in self.tramas:
-            tam = len(trama)
-            a = 0
-            ind = 0
-            palabra = ''
-            binario = ''
-            while tam >= 0:
-                if a < 8 :
-                    a += 1
-                    tam -= 1
-                    if ind < len(trama):
-                        binario += trama[ind]
-                        ind += 1
-                else:
-                    palabra += chr(int(binario, base=2))
-                    binario = ""
-                    a = 0
-            segmentos.append(palabra)
-        return segmentos
+            if trama[0] != "0":
+                caracteres = self.dividirCaracter(trama[1:])
+                for caracter in caracteres:
+                    palabra += chr(int(caracter, base = 2))
+                segmentos.append(palabra)
+                palabra = ""
+            else:
+                segmentos.append("-&JWWTW¦.")
+        print(segmentos)
+        
 
 if __name__ == "__main__":
     system ("cls")
@@ -501,5 +528,4 @@ if __name__ == "__main__":
     GUI = Interfaz(lista, app)
     app.setGui(GUI)
     GUI.initVista1()
-    
     
