@@ -370,19 +370,19 @@ class Sesion(object):
         self.ipdestino = ipdestino
 
     def modoCliente(self, mensaje):
-        self.conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.conexion.connect((self.ipdestino, 44440))
-        msg_rec = self.conexion.recv(1024)
+        conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        conexion.connect((self.ipdestino, 44440))
+        msg_rec = conexion.recv(1024)
         print(msg_rec.decode('utf8'))
-        self.conexion.send(mensaje.encode('ascii'))
-        self.conexion.close()
+        conexion.send(mensaje.encode('ascii'))
+        conexion.close()
 
     def modoServidor(self):
-        self.conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.conexion.bind(("",44440))
-        self.conexion.listen(5)
+        conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        conexion.bind(("",44440))
+        conexion.listen(5)
         while True:
-            (c, addr) = self.conexion.accept()
+            (c, addr) = conexion.accept()
             print("Se estableció conexión con: " + str(addr))
             msg = '\nConexión establecida con: ' + socket.gethostname()
             c.send(msg.encode('utf8'))
