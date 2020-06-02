@@ -60,7 +60,6 @@ class Interfaz(object):
            
 
     def initServidor(self):
-        print("Hola")
         self.app.recibirMensaje()
 
     def mostrarVista2(self, texto):
@@ -232,7 +231,6 @@ class Interfaz(object):
         btnDel.place(x=570, y=630)
 
     def escribirMensaje(self, letra):
-        print(lista["}"])
         if(letra != "<-"):
             self.straux.set(self.straux.get() + letra)
             txt = self.msj.get()
@@ -253,7 +251,7 @@ class Interfaz(object):
                     app.iniciarComunicacion(self.straux.get(), self.ip.get())
                     if(self.cambio == False):
                         self.cambio = True
-                        app.recibirMensaje()
+                        #self.app.recibirMensaje()
             else:
                 messagebox.showerror(title="Error", message="Debe llenar el campo de mensaje y el de ip de destino")
         else:
@@ -265,12 +263,18 @@ class Interfaz(object):
             self.lblTitulo.configure(text = "Cliente")
         else:
             self.lblTitulo.configure(text = "Servidor")
+
     def recibirMsj(self, msj):
         self.msj.set("")
-        for a in len(msj):
+        print(msj)
+        for a in range(len(msj)):
+            aux = self.lista[msj[a]]
             txt = self.msj.get()
-            txt += msj[a]
+            txt += aux
             self.msj.set(txt)
+            txt = self.straux.get()
+            txt += msj[a]
+            self.straux.set(txt)
             
       
 
@@ -294,7 +298,6 @@ class Aplicacion(object):
         self.transporte.Segmentar()
         seg = self.transporte.getSegmentos()
         self.enlace.convBinario(seg)
-        print(self.enlace.getTramas())
         trama = ""
         for trama in self.enlace.getTramas():
             self.sesion.modoCliente(trama)
@@ -332,7 +335,6 @@ class Presentacion(object):
                 codigo +=chr(ord(carac) + 39)
             elif ord(carac) >= 161:
                 codigo +=chr(ord(carac) + 5)
-        print(codigo)
         return codigo
 
     def Decoficar(self):
@@ -344,13 +346,12 @@ class Presentacion(object):
                 mensaje +=chr(ord(carac) - 39)
             elif ord(carac) >= 161:
                 mensaje +=chr(ord(carac) - 5)
-        print(mensaje)
         app.mostraGui(mensaje)
         return mensaje
 
 class Sesion(object):
     def __init__(self):
-        self.conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.conexion = None
         self.ipdestino = ""
         self.enlace = None
 
@@ -361,6 +362,7 @@ class Sesion(object):
         self.ipdestino = ipdestino
 
     def modoCliente(self, mensaje):
+        self.conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.conexion.connect((self.ipdestino, 44440))
         msg_rec = self.conexion.recv(1024)
         print(msg_rec.decode('utf8'))
@@ -368,17 +370,19 @@ class Sesion(object):
         self.conexion.close()
 
     def modoServidor(self):
+        self.conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.conexion.bind(("",44440))
         self.conexion.listen(5)
         while True:
             (c, addr) = self.conexion.accept()
             print("Se estableció conexión con: " + str(addr))
+            msg = '\nConexión establecida con: ' + socket.gethostname()
+            c.send(msg.encode('utf8'))
             msg_rec = c.recv(1024)
             msg_rec = msg_rec.decode('ascii')
-            msg = '\nConexión establecida con: ' + self.conexion.gethostname()
-            c.send(msg.encode('utf8'))
             self.enlace.recibirTrama(msg_rec)
             c.close()
+            
 
 class Transporte(object):
     def __init__(self):
@@ -418,6 +422,7 @@ class Transporte(object):
         for aux2 in lista:
             aux += aux2
         self.mensaje = aux
+        print(self.mensaje)
         self.presentacion.setMensaje(self.mensaje)
         self.presentacion.Decoficar()
 
@@ -460,7 +465,6 @@ class Enlace(object):
                 self.tramas.append(trama)
                 trama = ""
         self.tramas.append("000000000")
-        print(self.tramas)
     
     def recibirTrama(self,trama):
         if(trama != "000000000"):
@@ -483,7 +487,6 @@ class Enlace(object):
                 palabra.append(caracter)
                 cont = 0
                 caracter = ""
-        print(palabra)
         return palabra
 
     def convDecimal(self):
@@ -500,7 +503,6 @@ class Enlace(object):
             else:
                 segmentos.append("-&JWWTW¦.")
         self.transporte.Desegmentar(segmentos)
-        print(segmentos)
         
 
 if __name__ == "__main__":
