@@ -25,6 +25,7 @@ class Interfaz(object):
         self.ip = None
         self.lista = lista
         self.app = app
+        self.lblAlf = None
 
     def initVista1(self):
         self.vista1 = tk.Tk()
@@ -76,12 +77,16 @@ class Interfaz(object):
         self.txtMensaje.place(x=280, y=80, height = 50, width = 710)
         self.txtMensaje.config(state='disabled')
         #Etiqueta del encabezado de IP
-        self.lblIp = Label(self.vista2, text="IP de destino", borderwidth=2, relief="groove");
+        self.lblIp = Label(self.vista2, text="IP de destino", borderwidth=2, relief="groove")
         self.lblIp.config(bg="#ffffff",font=("Courier", 15, tkFont.BOLD), width=20, height=2)
         self.lblIp.place(x=10, y=150)
         #Text box de IP
         self.txtIp = Entry(self.vista2, textvariable=self.ip, borderwidth=3, relief="groove")
         self.txtIp.place(x=280, y=150, height = 50, width = 710)
+        #Label alfabeto
+        self.lblAlf = Label(self.vista2, text="", borderwidth=2, relief="groove")
+        self.lblAlf.config(bg="#ffffff", width=45, height=3)
+        self.lblAlf.place(x=10, y=690)
         #Boton para enviar el mensaje
         self.btnEnviar = Button(self.vista2, text="Enviar mensaje", font=("Courier", 14, "bold"), command=self.obtenerDatos)
         self.btnEnviar.config(bg="#ffffff", fg="#1d1d1d", width=24, height=2)
@@ -242,6 +247,7 @@ class Interfaz(object):
             self.msj.set(txt)
             txt = self.straux.get()
             self.straux.set(txt[0 : len(txt)-1])
+        self.lblAlf.configure(text=self.straux.get())
 
     def obtenerDatos(self):
         if(self.uso == 1):
@@ -275,6 +281,8 @@ class Interfaz(object):
             txt = self.straux.get()
             txt += msj[a]
             self.straux.set(txt)
+        self.lblAlf.configure(text=self.straux.get())
+        self.cambiarModo(1)
             
       
 
