@@ -4,6 +4,7 @@ import tkinter.font as tkFont
 import socket
 from random import randint
 from os import system
+import threading
 
 class Interfaz(object):
     def __init__(self, lista, app):
@@ -18,7 +19,7 @@ class Interfaz(object):
         self.txtIp = None
         self.btnEnviar = None
         self.uso = 0;
-        self.mayus = False
+        self.cambio = False
         self.msj = None
         self.straux = None
         self.ip = None
@@ -51,8 +52,16 @@ class Interfaz(object):
         if(uso == 1):
             self.mostrarVista2("Cliente")
         else:
+            cambio = True
             self.mostrarVista2("Servidor")
+            hilo = threading.Thread(target=self.initServidor)
+            hilo.start()
         self.vista2.mainloop();
+           
+
+    def initServidor(self):
+        print("Hola")
+        self.app.recibirMensaje()
 
     def mostrarVista2(self, texto):
         #Encabezado
@@ -240,7 +249,11 @@ class Interfaz(object):
         if(self.uso == 1):
             if(self.msj.get() != "" and self.ip.get() != ""):
                 if(messagebox.askyesno(message="Mensaje: "+self.msj.get()+"\nMensaje 2: "+self.straux.get()+"\nIP Destino: "+self.ip.get(), title="Confirmar")):
+                    self.cambiarModo(2)
                     app.iniciarComunicacion(self.straux.get(), self.ip.get())
+                    if(self.cambio == False):
+                        self.cambio = True
+                        app.recibirMensaje()
             else:
                 messagebox.showerror(title="Error", message="Debe llenar el campo de mensaje y el de ip de destino")
         else:
@@ -252,6 +265,13 @@ class Interfaz(object):
             self.lblTitulo.configure(text = "Cliente")
         else:
             self.lblTitulo.configure(text = "Servidor")
+    def recibirMsj(self, msj):
+        self.msj.set("")
+        for a in len(msj):
+            txt = self.msj.get()
+            txt += msj[a]
+            self.msj.set(txt)
+            
       
 
 class Aplicacion(object):
@@ -275,17 +295,30 @@ class Aplicacion(object):
         seg = self.transporte.getSegmentos()
         self.enlace.convBinario(seg)
         print(self.enlace.getTramas())
-        '''
         trama = ""
         for trama in self.enlace.getTramas():
             self.sesion.modoCliente(trama)
         self.enlace.clearTramas()
-        self.transporte.clearSegementos()'''
+        self.transporte.clearSegementos()
+    
+    def recibirMensaje(self):
+        hilo = threading.Thread(target=self.initServidor)
+        hilo.start()
+
+    def initServidor(self):
+        self.sesion.modoServidor()
+    
+    def mostraGui(self, msj):
+        self.gui.recibirMsj(msj)
     
 
 class Presentacion(object):
     def __init__(self):
         self.mensaje = ""
+        self.app = None
+
+    def setApp(self, app):
+        self.app = app
 
     def setMensaje(self, mensaje):
         self.mensaje = mensaje
@@ -312,6 +345,7 @@ class Presentacion(object):
             elif ord(carac) >= 161:
                 mensaje +=chr(ord(carac) - 5)
         print(mensaje)
+        app.mostraGui(mensaje)
         return mensaje
 
 class Sesion(object):
@@ -343,14 +377,17 @@ class Sesion(object):
             msg_rec = msg_rec.decode('ascii')
             msg = '\nConexión establecida con: ' + self.conexion.gethostname()
             c.send(msg.encode('utf8'))
+            self.enlace.recibirTrama(msg_rec)
             c.close()
-            return msg_rec
 
 class Transporte(object):
     def __init__(self):
         self.mensaje = ""
         self.segmentos = list()
-        self.hayPerdida = False
+        self.presentacion = None
+
+    def setPresentacion(self, presentacion):
+        self.presentacion = presentacion
 
     def getSegmentos(self):
         return self.segmentos
@@ -368,41 +405,12 @@ class Transporte(object):
         aux = ""
         for a in range(len(self.mensaje)):
             aux += self.mensaje[a]
-            if(a != 0 and a % 15 == 0):
+            if(a != 0 and a % 7 == 0):
                 self.segmentos.append(aux)
                 aux = ""
         if(aux != ""):
             self.segmentos.append(aux)
         print(self.segmentos)
-        """
-        aux = ""
-        aux2 = 0
-        perdida = randint(1, 2)
-        for a in range(len(self.mensaje)):
-            if(self.mensaje[a] != '%'):
-                aux += self.mensaje[a]
-            else:
-                if(perdida == 1):
-                    aux = "1"+aux
-                else:
-                    aux2 = randint(0, 1)
-                    aux = str(aux2)+aux
-                self.segmentos.append(aux)
-                aux = ""
-        if(perdida == 1):
-            aux = "1"+aux
-        else:
-            aux2 = randint(0, 1)
-            aux = str(aux2)+aux
-        self.segmentos.append(aux)
-        aux = ""
-        for a in range (len(self.segmentos)):
-            if(a == len(self.segmentos)-1):
-                aux += self.segmentos[a]
-            else:
-                aux += self.segmentos[a]+"%"
-        return aux;
-        """
 
     def Desegmentar(self, lista):
         aux = ""
@@ -410,32 +418,16 @@ class Transporte(object):
         for aux2 in lista:
             aux += aux2
         self.mensaje = aux
-        '''
-        aux2 = ""
-        for a in range(len(self.mensaje)):
-            if(self.mensaje[a] != '%'):
-                aux2 += self.mensaje[a]
-            else:
-                aux3 = aux2[0]
-                if(aux3 == "1"):
-                    aux2 = aux2[1:len(aux)]
-                    self.segmentos.append(aux2)
-                aux2 = ""
-        aux3 = aux2[0]
-        if(aux3 == "1"):
-            aux2 = aux2[1:len(aux)]
-            self.segmentos.append(aux2)
-        aux2 = ""
-        for a in range (len(self.segmentos)):
-            if(a == len(self.segmentos)-1):
-                aux2 += self.segmentos[a]
-            else:
-                aux2 += self.segmentos[a]+"%"
-        return aux2;'''
+        self.presentacion.setMensaje(self.mensaje)
+        self.presentacion.Decoficar()
 
 class Enlace(object):
     def __init__(self):
         self.tramas = []
+        self.transporte = None
+
+    def setTransporte(self, transporte):
+        self.transporte = transporte
     
     def stringTrama(self):
         return str(self.tramas)
@@ -471,7 +463,10 @@ class Enlace(object):
         print(self.tramas)
     
     def recibirTrama(self,trama):
-        self.tramas.append(trama)
+        if(trama != "000000000"):
+            self.tramas.append(trama)
+        else:
+            self.convDecimal()
 
     def dividirCaracter(self,trama):
         palabra = []
@@ -504,6 +499,7 @@ class Enlace(object):
                 palabra = ""
             else:
                 segmentos.append("-&JWWTW¦.")
+        self.transporte.Desegmentar(segmentos)
         print(segmentos)
         
 
@@ -527,5 +523,8 @@ if __name__ == "__main__":
     app = Aplicacion(Presentacion, Sesion, Transporte, Enlace)
     GUI = Interfaz(lista, app)
     app.setGui(GUI)
+    Presentacion.setApp(app)
+    Transporte.setPresentacion(Presentacion)
+    Enlace.setTransporte(Transporte)
     GUI.initVista1()
     
