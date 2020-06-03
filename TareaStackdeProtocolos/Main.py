@@ -320,6 +320,8 @@ class Aplicacion(object):
         self.sesion.modoServidor()
     
     def mostraGui(self, msj):
+        self.transporte.clearSegementos()
+        self.enlace.clearTramas()
         self.gui.recibirMsj(msj)
     
 
@@ -388,8 +390,8 @@ class Sesion(object):
             c.send(msg.encode('utf8'))
             msg_rec = c.recv(1024)
             msg_rec = msg_rec.decode('ascii')
-            self.enlace.recibirTrama(msg_rec)
             c.close()
+            self.enlace.recibirTrama(msg_rec)
             
 
 class Transporte(object):
