@@ -320,6 +320,8 @@ class Aplicacion(object):
         self.sesion.modoServidor()
     
     def mostraGui(self, msj):
+        self.transporte.clearSegementos()
+        self.enlace.clearTramas()
         self.gui.recibirMsj(msj)
     
 
