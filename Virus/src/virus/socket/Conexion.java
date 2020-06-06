@@ -63,7 +63,7 @@ public class Conexion {
         return String.copyValueOf(cadena);
     }
     
-    public void accionEnviar(String data){
+    public void accionEnviar(String id, String data){
         try{
             //Creamos la conexion con el servidor
             cliente = new Socket(ip, puerto);

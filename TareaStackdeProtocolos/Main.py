@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Button, Entry, Frame, Label, StringVar, messagebox
+from tkinter import Button, Entry, Frame, Label, Radiobutton, StringVar, messagebox
 import tkinter.font as tkFont
 import socket
 from random import randint
@@ -26,6 +26,9 @@ class Interfaz(object):
         self.lista = lista
         self.app = app
         self.lblAlf = None
+        self.rbError = None
+        self.rbNoerror = None
+        self.rbValue = None
 
     def initVista1(self):
         self.vista1 = tk.Tk()
@@ -50,6 +53,8 @@ class Interfaz(object):
         self.msj = StringVar(self.vista2)
         self.ip = StringVar(self.vista2)
         self.straux = StringVar(self.vista2)
+        self.rbValue = StringVar(self.vista2)
+        self.rbValue.set(True)
         if(uso == 1):
             self.mostrarVista2("Cliente")
         else:
@@ -234,6 +239,10 @@ class Interfaz(object):
         btnEsp.place(x=410, y=630)
         btnDel = Button(self.vista2, text="<-", command=lambda: self.escribirMensaje("<-"), height = 2, width = 10)
         btnDel.place(x=570, y=630)
+        self.rbError = Radiobutton(self.vista2, font=("Courier", 16), text="Con error", variable=self.rbValue, value=False)
+        self.rbError.place(x=650, y=710)
+        self.rbNoerror = Radiobutton(self.vista2, font=("Courier", 16), text="Sin error", variable=self.rbValue, value=True)
+        self.rbNoerror.place(x=650, y=670)
 
     def escribirMensaje(self, letra):
         if(letra != "<-"):
@@ -250,11 +259,12 @@ class Interfaz(object):
         self.lblAlf.configure(text=self.straux.get())
 
     def obtenerDatos(self):
+        print(self.rbValue.get())
         if(self.uso == 1):
             if(self.msj.get() != "" and self.ip.get() != ""):
                 if(messagebox.askyesno(message="Mensaje: "+self.msj.get()+"\nMensaje 2: "+self.straux.get()+"\nIP Destino: "+self.ip.get(), title="Confirmar")):
                     self.cambiarModo(2)
-                    app.iniciarComunicacion(self.straux.get(), self.ip.get())
+                    app.iniciarComunicacion(self.straux.get(), self.ip.get(), self.rbValue.get())
                     if(self.cambio == False):
                         self.cambio = True
                         self.app.recibirMensaje()
@@ -293,12 +303,13 @@ class Aplicacion(object):
         self.transporte = transporte
         self.enlace = enlace
         self.sesion.setEnlace(enlace)
+        self.enlace.setSesion(sesion)
         self.gui = None
 
     def setGui(self, gui):
         self.gui = gui
 
-    def iniciarComunicacion(self, mensaje, ip):
+    def iniciarComunicacion(self, mensaje, ip, perdida):
         self.sesion.setIpdestino(ip)
         self.presentacion.setMensaje(mensaje)
         mensaje = self.presentacion.Codificar()
@@ -308,7 +319,7 @@ class Aplicacion(object):
         self.enlace.convBinario(seg)
         trama = ""
         for trama in self.enlace.getTramas():
-            self.sesion.modoCliente(trama)
+            self.sesion.modoCliente(trama, True)
         self.enlace.clearTramas()
         self.transporte.clearSegementos()
     
@@ -364,6 +375,8 @@ class Sesion(object):
         self.conexion = None
         self.ipdestino = ""
         self.enlace = None
+        self.ipEmisor = ""
+        self.ultimoMensaje = []
 
     def setEnlace(self, enlace):
         self.enlace = enlace
@@ -371,13 +384,20 @@ class Sesion(object):
     def setIpdestino(self, ipdestino):
         self.ipdestino = ipdestino
 
-    def modoCliente(self, mensaje):
-        conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        conexion.connect((self.ipdestino, 44440))
-        msg_rec = conexion.recv(1024)
-        print(msg_rec.decode('utf8'))
-        conexion.send(mensaje.encode('ascii'))
-        conexion.close()
+    def modoCliente(self, mensaje, ip):
+        if(mensaje[0] != "0"):
+            conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            if(ip is True):
+                conexion.connect((self.ipdestino, 44440))
+            else:
+                conexion.connect((self.ipEmisor, 44440))
+            msg_rec = conexion.recv(1024)
+            print(msg_rec.decode('utf8'))
+            conexion.send(mensaje.encode('ascii'))
+            conexion.close()
+        else:
+            mensaje[0] = "1"
+        self.ultimoMensaje.append()
 
     def modoServidor(self):
         conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -386,12 +406,21 @@ class Sesion(object):
         while True:
             (c, addr) = conexion.accept()
             print("Se estableció conexión con: " + str(addr))
-            msg = '\nConexión establecida con: ' + socket.gethostname()
+            hostname = socket.gethostname()
+            ip = socket.gethostbyname(hostname)
+            self.ipEmisor = ip
+            msg = '\nConexión establecida con: ' + hostname + " " + ip
             c.send(msg.encode('utf8'))
             msg_rec = c.recv(1024)
             msg_rec = msg_rec.decode('ascii')
             c.close()
-            self.enlace.recibirTrama(msg_rec)
+            if(msg_rec != "ERROR"):
+                self.enlace.recibirTrama(msg_rec)
+            else:
+                for msj in self.ultimoMensaje:
+                    self.modoCliente(msj, True)
+                self.ultimoMensaje.clear()
+
             
 
 class Transporte(object):
@@ -415,7 +444,7 @@ class Transporte(object):
     def setMensaje(self, mensaje):
         self.mensaje = mensaje
 
-    def Segmentar(self):
+    def Segmentar(self, error):
         aux = ""
         for a in range(len(self.mensaje)):
             aux += self.mensaje[a]
@@ -424,6 +453,24 @@ class Transporte(object):
                 aux = ""
         if(aux != ""):
             self.segmentos.append(aux)
+        if(error):
+            for a in self.segmentos:
+                a = "1"+a;
+        else:
+            aux = 0
+            for a in self.segmentos:
+                aux = randint(0, 1)
+                a = str(aux)+a
+        print(self.segmentos)
+
+    def addTail(self):
+        for a in range(len(self.segmentos)):
+            if(a < 10):
+                self.segmentos[a]+="00"+str(a)
+            elif(a >= 10 and a < 100):
+                self.segmentos[a]+="0"+str(a)
+            elif(a >= 100):
+                self.segmentos[a]+=str(a)
         print(self.segmentos)
 
     def Desegmentar(self, lista):
@@ -440,6 +487,10 @@ class Enlace(object):
     def __init__(self):
         self.tramas = []
         self.transporte = None
+        self.sesion = None
+
+    def setSesion(self, sesion):
+        self.sesion = sesion
 
     def setTransporte(self, transporte):
         self.transporte = transporte
@@ -454,6 +505,20 @@ class Enlace(object):
         return self.tramas
 
     def convBinario(self,segmentos):
+        trama = ""
+        head = ""
+        tail = ""
+        segaux = ""
+        for segmento in segmentos:
+            head = segmento[0]
+            tail = segmento[len(segmento)-3:len(segmento)]
+            segaux = segmento[1:len(segmento)-3]
+            for carac in segaux:
+                trama += format(ord(carac),'08b')
+            trama = head + trama + tail
+            self.tramas.append(trama)
+            trama = ""
+        '''
         perdida = randint(1, 2)
         trama = ""
         if perdida == 1:
@@ -474,13 +539,37 @@ class Enlace(object):
                     trama = "0"+trama
                 self.tramas.append(trama)
                 trama = ""
+                '''
         self.tramas.append("000000000")
     
     def recibirTrama(self,trama):
         if(trama != "000000000"):
             self.tramas.append(trama)
         else:
+            self.detectarErrores()
+
+    def detectarErrores(self):
+        ordenes = []
+        index = []
+        hayError = False
+        for trama in self.tramas:
+            orden = int(trama[len(trama)-3:len(trama)])
+            ordenes.append(orden)
+            index.append(orden)
+        ordenes.sort()
+        for a in range(len(ordenes)):
+            if(a != ordenes[a]):
+                hayError = True
+                break
+        if(hayError):
+            messagebox.showerror(title="Se detecto un error en el mesaje", message="Se procedera a recuperar lo perdido")
+            self.sesion.modoCliente("EROOR", False)
+        else:
+            for trama in self.tramas:
+                trama + trama[0: len(trama)-3]
             self.convDecimal()
+        
+
 
     def dividirCaracter(self,trama):
         palabra = []
