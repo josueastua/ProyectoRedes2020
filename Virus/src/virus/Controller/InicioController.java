@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import virus.socket.Conexion;
+ import virus.socket.Conexion;
 
 
 public class InicioController extends Controller implements Initializable {
