@@ -119,7 +119,7 @@ def enviarRespuesta(clave, ip):
         for key in jugadores:
             if(key != ip):
                 for dato in datosJuego:
-                    initCliente(key, 44440, dato)
+                    initCliente(key, 44440, "4"+dato)
 
 def esperaInicio():
     global hilo
