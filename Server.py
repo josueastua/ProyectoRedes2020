@@ -2,6 +2,7 @@ import socket
 from random import randint
 import threading
 from time import sleep
+from os import system
 
 turno = 1
 jugadores = []
@@ -28,8 +29,8 @@ class Jugador:
         self.mano.append(carta)
 
     def toString(self):
-        aux = str(id)+":"+nombre
-        for a in mano:
+        aux = str(id)+":"+self.nombre
+        for a in self.mano:
             aux += ":"+a
         return aux
 
@@ -71,6 +72,7 @@ def iniciarServidor(host,puerto):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((host,puerto))
     s.listen(5)
+    system("cls")
     while True:
         (c, addr) = s.accept()
         print("Se estableció conexión con: " + str(addr))
@@ -132,13 +134,13 @@ def esperaInicio():
         jugadores[a].addMano(mazo.pop(0))
         jugadores[a].addMano(mazo.pop(0))
         jugadores[a].addMano(mazo.pop(0))
-        datos.append("4"+jugadores[a].toString())
+        datos.append("5"+jugadores[a].toString())
     aux = ""
     for a in mazo:
         aux += a + "-"
     aux = aux[0:len(aux)-1]
-    datos.append("4"+aux)
-    datos.append("4000000")
+    datos.append("5"+aux)
+    datos.append("5000000")
     for a in jugadores:
         for dato in datos:
             initCliente(a, 44440, dato)
@@ -146,4 +148,4 @@ def esperaInicio():
     
 
 if __name__ == "__main__":
-    print(str(cartas), sep="-")
+    iniciarServidor("", 44440)
