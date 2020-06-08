@@ -80,7 +80,7 @@ def iniciarServidor(host,puerto):
         hostname = socket.gethostname()
         msg_rec = c.recv(1024)
         msg_rec = msg_rec.decode('ascii')
-        c.send(procesarSolicitud(msg_rec[0], msg_rec, hostname).encode('utf8'))
+        c.send(procesarSolicitud(msg_rec[0], msg_rec, ip, hostname).encode('utf8'))
         print("\nMensaje decodificado: "+msg_rec+"\n")
         c.close()
         enviarRespuesta(msg_rec[0], ip, hostname)

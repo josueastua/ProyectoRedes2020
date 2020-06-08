@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
  import virus.socket.Conexion;
+import virus.util.FlowController;
 
 
 public class InicioController extends Controller implements Initializable {
@@ -30,13 +31,13 @@ public class InicioController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         addEvents();
-        con = new Conexion();
+        
     }    
 
     @FXML
     private void accionJugar(ActionEvent event) {
-        con.accionEnviar("C", "");
-        btn_Jugar.setDisable(true);
+        FlowController.getInstance().goViewInResizableWindow("Ingreso", 0, 600, 0, 500, Boolean.TRUE);
+        this.getStage().close();
     }
 
     @FXML

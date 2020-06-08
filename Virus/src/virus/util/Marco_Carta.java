@@ -7,7 +7,10 @@ package virus.util;
 
 
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 
 /**
@@ -23,6 +26,15 @@ public class Marco_Carta extends ImageView{
     }
     
     private void asignarEventos(){
+        
+        this.setOnDragDetected((MouseEvent t) -> {
+            Dragboard db = this.startDragAndDrop(TransferMode.MOVE);
+            ClipboardContent content = new ClipboardContent();
+            content.putString("MOV");
+            db.setContent(content);
+            t.consume();
+        });
+        
         this.setOnDragOver((DragEvent t1)-> {
             t1.acceptTransferModes(TransferMode.MOVE);
             t1.consume();

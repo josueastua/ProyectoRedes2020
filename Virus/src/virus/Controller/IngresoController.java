@@ -7,13 +7,19 @@ package virus.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import virus.socket.Conexion;
+import virus.util.AppContext;
+import virus.util.FlowController;
 
 /**
  * FXML Controller class
@@ -36,17 +42,26 @@ public class IngresoController extends Controller implements Initializable {
     private VBox vb_contenerdor;
     @FXML
     private Button btn_Ingresar;
+    Conexion con;
+    Timer timer = null;
+    @FXML
+    private TextField txt_Nickname;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        addEvents();
+        AppContext.getInstance().set("Conexion", con);
+        con = new Conexion();
+        
     }    
 
     @FXML
     private void accionIngresar(ActionEvent event) {
+        if(txt_Nickname.getText() != null)
+            con.accionEnviar("1", txt_Nickname.getText());
     }
     
     private void addEvents(){
@@ -78,10 +93,24 @@ public class IngresoController extends Controller implements Initializable {
         imv_ii.setLayoutY(l/2);
     }
     
+    public void hilo(){
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                con.accionRecibir();
+                timer.cancel();
+            }
+        }, 100, 100);
+    }
+    
     @Override
     public void initialize() {
         ajustarAltura();
         ajustarAncho();
+        AppContext.getInstance().set("Ingreso", FlowController.getInstance().getController("Ingreso"));
+        if(timer == null)
+            hilo();
     }
     
 }

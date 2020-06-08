@@ -2,15 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
+            <file>file:/D:/Proyectos/Redes2020/ProyectoRedes2020/Virus/src/virus/util/Marco_Carta.java</file>
             <file>file:/D:/Proyectos/Redes2020/ProyectoRedes2020/Virus/src/virus/socket/Conexion.java</file>
             <file>file:/D:/Proyectos/Redes2020/ProyectoRedes2020/Virus/src/virus/Controller/InicioController.java</file>
             <file>file:/D:/Proyectos/Redes2020/ProyectoRedes2020/Virus/src/virus/Controller/JuegoController.java</file>
+            <file>file:/D:/Proyectos/Redes2020/ProyectoRedes2020/Virus/src/virus/Controller/IngresoController.java</file>
             <file>file:/D:/Proyectos/Redes2020/ProyectoRedes2020/Virus/src/virus/Virus.java</file>
         </group>
->>>>>>> 6db818af0521265931ad1bb67b14062476a30b35
     </open-files>
 </project-private>
