@@ -63,6 +63,8 @@ public class IngresoController extends Controller implements Initializable {
     private void accionIngresar(ActionEvent event) {
         if(txt_Nickname.getText() != null){
             con.accionEnviar("1", txt_Nickname.getText());
+            if(timer == null)
+                hilo();
         }
     }
     
@@ -104,7 +106,7 @@ public class IngresoController extends Controller implements Initializable {
                 System.out.println("HILO");
                 con.accionEnviar((String)AppContext.getInstance().get("Clave"), (String)AppContext.getInstance().get("Mensaje"));
             }
-        }, 5000, 5000);
+        }, 10000, 10000);
     }
     
     @Override
@@ -121,6 +123,7 @@ public class IngresoController extends Controller implements Initializable {
                 exit(1);
             });
         }
+        
     }
     
 }

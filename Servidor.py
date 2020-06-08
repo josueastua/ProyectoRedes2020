@@ -46,9 +46,9 @@ class Jugador:
         self.mano.append(carta)
     
     def toString(self):
-        aux = str(id)+":"+self.nick
+        aux = str(self.id)+"_"+self.nick
         for a in self.mano:
-            aux += ":"+a
+            aux += "_"+a
         return aux
 
 def generarId():
@@ -69,37 +69,47 @@ def todosUsados(lista):
 def mezclarBaraja():
     asignados = []
     for a in range(len(var_cartas)):
-        asignados[a] = False
+        asignados.append(False)
     while(todosUsados(asignados)):
-        aux = randint(0, len(asignados))
+        aux = randint(0, len(asignados)-1)
+        print(aux, str(len(asignados)), sep = " - ")
         if(asignados[aux] == False):
             var_mazo.append(var_cartas[aux])
             asignados[aux] = True
 
+def metodoHilo():
+    esperaInicio()
+
 def esperaInicio():
+    print("Inicio Espera")
     global var_hilo, var_juegoIniciado
     cont = 0
     while(cont < 30):
         sleep(1)
         cont += 1
     var_juegoIniciado = True
+    try:
+        var_hilo = None
+    except ValueError:
+        print("Error cerrando el hilo")
 
 def infJugadoresYMazo():
     datos = []
     mezclarBaraja()
     for a in var_jugadores:
-        var_jugadores[a].addMano(var_mazo.pop(0))
-        var_jugadores[a].addMano(var_mazo.pop(0))
-        var_jugadores[a].addMano(var_mazo.pop(0))
-        datos.append(var_jugadores[a].toString())
+        a.addMano(var_mazo.pop(0))
+        a.addMano(var_mazo.pop(0))
+        a.addMano(var_mazo.pop(0))
+        datos.append(a.toString())
     aux = ""
     for a in var_mazo:
-        aux += a
-    aux = ""
+        aux += "_"+a
+    aux = aux[1: len(aux)]
     datos.append(aux)
+    aux = ""
     for a in datos:
-        aux += ":"+a
-    aux = aux[0: len(aux)-1]
+        aux += "/"+a
+    aux = aux[1: len(aux)]
     return aux
 
 def procesarSolicitud(clave, mensaje, hostname):
@@ -108,27 +118,27 @@ def procesarSolicitud(clave, mensaje, hostname):
         if(var_juegoIniciado is False):
             id = generarId()
             var_jugadores.append(Jugador(id, mensaje))
-            if(len(var_jugadores) >= 3 and var_hilo is None):
-                var_hilo = threading.Thread(target=esperaInicio())
+            if(len(var_jugadores) >= 2 and var_hilo is None):
+                var_hilo = threading.Thread(target=metodoHilo) 
                 var_hilo.start()
             return "1:"+str(id)+":"+str(len(var_jugadores))
         else:
             return "Conexion rechazada: Ya ha iniciado una partida"
     elif(clave == "2"):#Solicita la cantidad de jugadores conectados
-        if(var_juegoIniciado):
+        if(var_juegoIniciado is False):
             return "2:"+str(len(var_jugadores))
         else:
             return "3:"+infJugadoresYMazo()
-    elif(clave == "4"):#Para cuando un jugador hace una jugada
+    elif(clave == "3"):#Para cuando un jugador hace una jugada
         var_datosJuego = mensaje
         if(var_turno == len(var_jugadores)):
             var_turno = 1
         else:
             var_turno += 1
         return "Se estableció conexión con: "+hostname
-    elif(clave == "5"):#pedir actualizacion de los datos del juego
-        return "5:"+str(var_turno)+":"+var_datosJuego+":"+str(var_jugadorSalio)+":"+var_idSalio
-    elif(clave == "6"):
+    elif(clave == "4"):#pedir actualizacion de los datos del juego
+        return "4:"+str(var_turno)+":"+var_datosJuego+":"+str(var_jugadorSalio)+":"+var_idSalio
+    elif(clave == "5"):
         var_jugadorSalio = True
         var_idSalio = mensaje
         index = 0
@@ -149,7 +159,9 @@ def iniciarServidor(host,puerto):
         hostname = socket.gethostname()
         msg_rec = c.recv(1024)
         msg_rec = msg_rec.decode('ascii')
-        c.send(procesarSolicitud(msg_rec[0], msg_rec, hostname).encode('utf8'))
+        msg_env = procesarSolicitud(msg_rec[0], msg_rec, hostname)
+        print(msg_env)
+        c.send(msg_env.encode('utf8'))
         print("\nMensaje decodificado: "+msg_rec+"\n")
         c.close()
 
