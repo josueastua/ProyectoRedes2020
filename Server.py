@@ -5,15 +5,22 @@ from time import sleep
 from os import system
 
 turno = 1
-jugadores = []
+jugadores = dict()
+
 cartas = [
 "1:0:1", "1:0:1", "1:0:1", "1:0:1", "1:0:1", "1:0:2", "1:0:2", "1:0:2", "1:0:2", "1:0:2",
 "1:0:3", "1:0:3", "1:0:3", "1:0:3", "1:0:3", "1:0:4", "1:0:4", "1:0:4", "1:0:4", "1:0:4", 
-"1:0:5", "2:1:1", "2:2:1", "2:3:1", "2:4:1", "2:1:2", "2:2:2", "2:3:2", "2:4:2", "2:1:3", 
-"2:2:3", "2:3:3", "2:4:3", "2:1:4", "2:2:4", "2:3:4", "2:4:4", "2:5:5", "3:1:1", "3:2:1", 
-"3:3:1", "3:4:1", "3:1:2", "3:2:2", "3:3:2", "3:4:2", "3:1:3", "3:2:3", "3:3:3", "3:4:3", 
-"3:1:4", "3:2:4", "3:3:4", "3:4:4", "3:5:5", "4:0:1", "4:0:2", "4:0:3", "4:0:4", "4:0:5"
+"1:0:5", 
+
+"2:1:1", "2:2:1", "2:3:1", "2:4:1", "2:1:2", "2:2:2", "2:3:2", "2:4:2", "2:1:3",  "2:2:3", 
+"2:3:3", "2:4:3", "2:1:4", "2:2:4", "2:3:4", "2:4:4", "2:5:5", "2:5:5", "2:5:5", "2:5:5",
+
+"3:1:1", "3:2:1", "3:3:1", "3:4:1", "3:1:2", "3:2:2", "3:3:2", "3:4:2", "3:1:3", "3:2:3", 
+"3:3:3", "3:4:3", "3:1:4", "3:2:4", "3:3:4", "3:4:4", "3:5:5", 
+
+"4:0:1", "4:0:2", "4:0:3", "4:0:4", "4:0:5"
 ]
+
 mazo = []
 datosJuego = []
 hilo = None
@@ -83,7 +90,7 @@ def iniciarServidor(host,puerto):
         c.send(procesarSolicitud(msg_rec[0], msg_rec, ip, hostname).encode('utf8'))
         print("\nMensaje decodificado: "+msg_rec+"\n")
         c.close()
-        enviarRespuesta(msg_rec[0], ip, hostname)
+        enviarRespuesta(msg_rec[0], ip)
 
 def procesarSolicitud(clave, men_rec, ip, hostname):
     global turno, juegoiniciado
@@ -106,6 +113,8 @@ def procesarSolicitud(clave, men_rec, ip, hostname):
             return "Conexion establecida con: "+hostname
     elif(clave == '3'):
         jugadores.pop(ip)
+        return "Conexion establecida con: "+hostname
+    else:
         return "Conexion establecida con: "+hostname
 
 

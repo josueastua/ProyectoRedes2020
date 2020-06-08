@@ -5,6 +5,7 @@
  */
 package virus.Controller;
 
+import static java.lang.System.exit;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -60,8 +61,9 @@ public class IngresoController extends Controller implements Initializable {
 
     @FXML
     private void accionIngresar(ActionEvent event) {
-        if(txt_Nickname.getText() != null)
+        if(txt_Nickname.getText() != null){
             con.accionEnviar("1", txt_Nickname.getText());
+        }
     }
     
     private void addEvents(){
@@ -95,13 +97,14 @@ public class IngresoController extends Controller implements Initializable {
     
     public void hilo(){
         timer = new Timer();
+        AppContext.getInstance().set("Timer", timer);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                con.accionRecibir();
-                timer.cancel();
+                System.out.println("HILO");
+                con.accionEnviar((String)AppContext.getInstance().get("Clave"), (String)AppContext.getInstance().get("Mensaje"));
             }
-        }, 100, 100);
+        }, 5000, 5000);
     }
     
     @Override
@@ -109,8 +112,15 @@ public class IngresoController extends Controller implements Initializable {
         ajustarAltura();
         ajustarAncho();
         AppContext.getInstance().set("Ingreso", FlowController.getInstance().getController("Ingreso"));
-        if(timer == null)
-            hilo();
+        AppContext.getInstance().set("Clave", "2");
+        AppContext.getInstance().set("Mensaje", "");
+        if(this.getStage().getOnCloseRequest() == null){
+            System.out.println("OnCloseREQUEST");
+            this.getStage().setOnCloseRequest( close -> {
+                System.out.println("Ok");
+                exit(1);
+            });
+        }
     }
     
 }

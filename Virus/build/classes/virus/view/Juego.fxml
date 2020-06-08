@@ -11,19 +11,19 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="virus.Controller.JuegoController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="900.0" stylesheets="@../resources/Juego.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="virus.Controller.JuegoController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" smooth="false" />
+      <ImageView fx:id="imv_fondo" fitHeight="660.0" fitWidth="900.0" pickOnBounds="true" smooth="false" />
       <VBox fx:id="vb_contenedor_principal" alignment="CENTER" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox fx:id="hb_titulo" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="lblPlayer" prefHeight="71.0" prefWidth="751.0" text="Label">
+                  <Label fx:id="lblPlayer" alignment="CENTER" prefHeight="70.0" prefWidth="663.0" text="Label">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <Button fx:id="btnShow" mnemonicParsing="false" onAction="#accionShow" prefHeight="47.0" prefWidth="122.0" text="Ocultar Oponente">
+                  <Button fx:id="btnShow" mnemonicParsing="false" onAction="#accionShow" prefHeight="65.0" prefWidth="217.0" text="Ocultar Oponente">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
@@ -36,12 +36,12 @@
                      <children>
                         <VBox fx:id="vb_oponente" alignment="CENTER" prefHeight="600.0" prefWidth="320.0">
                            <children>
-                              <Label fx:id="lblOponente" prefHeight="50.0" prefWidth="333.0" text="Label">
+                              <Label fx:id="lblOponente" alignment="CENTER" prefHeight="47.0" prefWidth="310.0" text="Label">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <GridPane fx:id="gpCartasOponente" prefHeight="465.0" prefWidth="321.0">
+                              <GridPane fx:id="gpCartasOponente" alignment="CENTER" prefHeight="409.0" prefWidth="310.0">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -59,7 +59,7 @@
                                     <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                                  </VBox.margin>
                               </GridPane>
-                              <Button fx:id="btn_Oponente" mnemonicParsing="false" onAction="#accionSiguente" prefHeight="45.0" prefWidth="221.0" text="Siguiente Oponente">
+                              <Button fx:id="btn_Oponente" mnemonicParsing="false" onAction="#accionSiguente" prefHeight="65.0" prefWidth="260.0" text="Siguiente Oponente">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                                  </VBox.margin>
@@ -70,7 +70,7 @@
                   </VBox>
                   <VBox fx:id="vb_player" alignment="CENTER" prefHeight="600.0" prefWidth="580.0">
                      <children>
-                        <GridPane fx:id="gpCartas" prefHeight="381.0" prefWidth="579.0">
+                        <GridPane fx:id="gpCartas" alignment="CENTER" prefHeight="334.0" prefWidth="570.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -87,14 +87,21 @@
                               <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                            </VBox.margin>
                         </GridPane>
-                        <HBox fx:id="hbCartas" prefHeight="131.0" prefWidth="579.0">
+                        <GridPane fx:id="gpManoyMazo" alignment="CENTER" minHeight="81.0" prefHeight="120.0" prefWidth="570.0">
                            <VBox.margin>
                               <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                            </VBox.margin>
-                           <children>
-                              <HBox fx:id="hbMano" prefHeight="125.0" prefWidth="403.0" />
-                           </children>
-                        </HBox>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="142.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="142.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="142.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="142.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="142.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
                         <Button fx:id="btnJugada" mnemonicParsing="false" onAction="#accionJugada" prefHeight="47.0" prefWidth="283.0" text="Hacer Jugada">
                            <VBox.margin>
                               <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />

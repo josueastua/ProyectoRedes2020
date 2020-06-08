@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -32,8 +33,6 @@ import virus.util.Marco_Carta;
 public class JuegoController extends Controller implements Initializable {
     Conexion con;
     @FXML private GridPane gpCartas;
-    @FXML private HBox hbCartas;
-    @FXML private HBox hbMano;
     @FXML private Button btnJugada;
     @FXML private Label lblOponente;
     @FXML private GridPane gpCartasOponente;
@@ -49,6 +48,10 @@ public class JuegoController extends Controller implements Initializable {
     @FXML private HBox hb_contenedor_juego;
     @FXML private VBox vb_player;
     @FXML private AnchorPane root;
+    @FXML
+    private GridPane gpManoyMazo;
+    @FXML
+    private ImageView imv_fondo;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -56,13 +59,41 @@ public class JuegoController extends Controller implements Initializable {
         menu = Boolean.TRUE;
         cargarCartas();
         initTraslateTransition();
+        addEvents();
     }    
     
     /**
      * En este metodo se añadiran listener para ajustar la pantalla
      */
     public void addEvents(){
-        
+        root.widthProperty().addListener( w -> {
+            ajustarAncho(root.getWidth());
+        });
+        root.heightProperty().addListener( h -> {
+            ajustarLargo(root.getHeight());
+        });
+    }
+    
+    public void ajustarAncho(Double ancho){
+        imv_fondo.setFitWidth(ancho);
+        hb_titulo.setPrefWidth(ancho);
+        lblPlayer.setPrefWidth(ancho - 227);
+        if(menu){
+            vb_player.setPrefWidth(ancho - 320);
+        }else{
+            vb_player.setPrefWidth(ancho);
+        }
+    }
+    
+    public void ajustarLargo(Double largo){
+        imv_fondo.setFitHeight(largo);
+        vb_oponente.setPrefHeight(largo - 80);
+        hb_contenedor_juego.setPrefHeight(largo - 80);
+        vb_contenedor_principal.setPrefHeight(largo - 80);
+        vb_contenerdor_oponentes.setPrefHeight(largo - 80);
+        vb_player.setPrefHeight(largo - 80);
+        gpCartas.setPrefHeight(largo - 80 - (78) - (140));
+        gpCartasOponente.setPrefHeight(largo - 80 - (85) - (80));
     }
 
     public void cargarCartas(){
@@ -77,7 +108,7 @@ public class JuegoController extends Controller implements Initializable {
             }
         }
         for(int i = 0; i < 5; i++)
-            hbMano.getChildren().add(new Marco_Carta());
+            gpManoyMazo.getChildren().add(new Marco_Carta());
     }
     
     private void initTraslateTransition(){
@@ -89,7 +120,7 @@ public class JuegoController extends Controller implements Initializable {
             if(!menu){
                 vb_contenerdor_oponentes.setPrefWidth(0);
                 vb_contenerdor_oponentes.getChildren().clear();
-                vb_contenerdor_oponentes.setLayoutX(-320);
+                //vb_contenerdor_oponentes.setLayoutX(-320);
                 vb_player.setPrefWidth(root.getWidth());
                         
             }

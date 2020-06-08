@@ -12,6 +12,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 
 /**
  * Esta clase se usara para agregar a todos los
@@ -19,9 +20,12 @@ import javafx.scene.input.TransferMode;
  * @author IVAN
  */
 
-public class Marco_Carta extends ImageView{
+public class Marco_Carta extends Pane{
+    
+    ImageView image = new ImageView();
     
     public Marco_Carta(){
+        this.getChildren().add(image);
         asignarEventos();
     }
     
