@@ -335,7 +335,6 @@ class Aplicacion(object):
         self.enlace.clearTramas()
         self.gui.recibirMsj(msj)
     
-
 class Presentacion(object):
     def __init__(self):
         self.mensaje = ""
@@ -420,8 +419,6 @@ class Sesion(object):
                 for msj in self.ultimoMensaje:
                     self.modoCliente(msj, True)
                 self.ultimoMensaje.clear()
-
-            
 
 class Transporte(object):
     def __init__(self):
