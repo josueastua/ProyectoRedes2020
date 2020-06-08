@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Proyectos/Redes2020/ProyectoRedes2020/Virus/src/virus/socket/Conexion.java</file>
-            <file>file:/D:/Proyectos/Redes2020/ProyectoRedes2020/Virus/src/virus/Controller/JuegoController.java</file>
-            <file>file:/D:/Proyectos/Redes2020/ProyectoRedes2020/Virus/src/virus/Virus.java</file>
+            <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/Controller/InicioController.java</file>
+            <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/util/Jugador.java</file>
+            <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/util/Carta.java</file>
+            <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/util/Tratamiento.java</file>
         </group>
     </open-files>
 </project-private>

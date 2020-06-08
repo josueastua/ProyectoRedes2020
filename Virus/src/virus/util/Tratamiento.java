@@ -1,18 +1,19 @@
+
 package virus.util;
 
 public class Tratamiento {
-    private String tipo;
+    private int tipo;
     
     Tratamiento(){
-        this.tipo = "";
+        
     }
-
-    Tratamiento(String tipo) {
+    
+    Tratamiento(int tipo){
         this.tipo = tipo;
     }
 
-    public String getTipo() {
+    public Integer getTipo() {
         return tipo;
     }
-    
+   
 }

@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
  import virus.socket.Conexion;
 import virus.util.FlowController;
+import virus.util.Jugador;
 
 
 public class InicioController extends Controller implements Initializable {
@@ -31,7 +32,8 @@ public class InicioController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         addEvents();
-        
+        Jugador jug = new Jugador();
+        jug.prueba();
     }    
 
     @FXML
