@@ -18,51 +18,7 @@ public class Conexion {
     char msg[];
     
     public Conexion(){
-        msg = new char[500];
-    }
-    
-    private String Codificar(String data){
-        int iterj = 0, clave[] = {3, 5, 2};
-        char cadena[] = data.toCharArray();
-        char caracter;
-        for(int i = 0; i < data.length(); i++){
-            caracter = cadena[i];
-            if(caracter >= 65 && caracter <= 90){
-                caracter += clave[iterj];
-                if(caracter > 90)
-                    caracter = (char) (caracter + 64 - 90);
-            }else if(caracter == 32){
-                caracter = (char)126;
-            }
-            cadena[i] = caracter;
-            if(iterj < 2)
-                iterj++;
-            else
-                iterj = 0;
-        }
-        return String.copyValueOf(cadena);
-    }
-    
-    private String Decodificar(String data){
-        int iterj = 0, clave[] = {3, 5, 2};
-        char cadena[] = data.toCharArray();
-        char caracter;
-        for(int i = 0; i < data.length(); i++){
-            caracter = cadena[i];
-            if(caracter >= 65 && caracter <= 90){
-                caracter -= clave[iterj];
-                if(caracter < 65)
-                    caracter = (char) (caracter - 64 + 90);
-            }else if(caracter == 126){
-                caracter = (char)32;
-            }
-            cadena[i] = caracter;
-            if(iterj < 2)
-                iterj++;
-            else
-                iterj = 0;
-        }
-        return String.copyValueOf(cadena);
+        msg = new char[1000];
     }
     
     public void accionEnviar(String id, String data){
@@ -79,6 +35,7 @@ public class Conexion {
             respuesta.read(msg);
             System.out.println(String.copyValueOf(msg));
             cliente.close();
+            recibirRespuesta();
         }catch(IOException ex){
             System.out.println("Ha ocurrido un error: "+ex);
         }finally{
@@ -88,6 +45,17 @@ public class Conexion {
             } catch (IOException ex) {
                 System.out.println("Ha ocurrido un error: "+ex);
             }
+        }
+    }
+    
+    public void recibirRespuesta(){
+        String mensaje = String.copyValueOf(msg);
+        String clave = mensaje.substring(0, 1);
+        mensaje = mensaje.substring(2, mensaje.length());
+        System.out.println("Clave: "+clave+" Mensaje: "+mensaje);
+        if(clave.equals("1")){
+            String[] cont = mensaje.split(":");
+            System.out.println(cont[0]+":"+cont[1]);
         }
     }
 }

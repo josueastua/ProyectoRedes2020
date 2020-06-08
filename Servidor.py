@@ -107,9 +107,9 @@ def procesarSolicitud(clave, mensaje, hostname):
     if(clave == "1"):#Solicitud de conectarse
         if(var_juegoIniciado is False):
             id = generarId()
-            var_jugadores.append(id, mensaje)
+            var_jugadores.append(Jugador(id, mensaje))
             if(len(var_jugadores) >= 3 and var_hilo is None):
-                var_hilo = threading.Thread(targer=esperaInicio())
+                var_hilo = threading.Thread(target=esperaInicio())
                 var_hilo.start()
             return "1:"+str(id)+":"+str(len(var_jugadores))
         else:

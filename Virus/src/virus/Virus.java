@@ -17,7 +17,7 @@ public class Virus extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        FlowController.getInstance().goViewInResizableWindow("Juego", 0, 600, 0, 500, Boolean.TRUE);
+        FlowController.getInstance().goViewInResizableWindow("Inicio", 0, 600, 0, 500, Boolean.TRUE);
     }
 
     /**
