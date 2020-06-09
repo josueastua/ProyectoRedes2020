@@ -25,11 +25,22 @@ public class Marco_Carta extends Pane{
     ImageView image = new ImageView();
     
     public Marco_Carta(){
-        this.getChildren().add(image);
+        //this.getChildren().add(image);
+        asignarEventos();
+    }
+    
+    public Marco_Carta(String id){
+        this.setId(id);
+        //this.getChildren().add(image);
         asignarEventos();
     }
     
     private void asignarEventos(){
+        
+        this.setOnMouseClicked( click -> {
+            if(!this.getId().equals("Mazo") && !this.getId().equals("Descartes"))
+                this.setStyle("-fx-background-color: red");
+        });
         
         this.setOnDragDetected((MouseEvent t) -> {
             Dragboard db = this.startDragAndDrop(TransferMode.MOVE);

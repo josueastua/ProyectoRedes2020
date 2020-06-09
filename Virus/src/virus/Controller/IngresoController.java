@@ -10,10 +10,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +23,7 @@ import javafx.scene.layout.VBox;
 import virus.socket.Conexion;
 import virus.util.AppContext;
 import virus.util.FlowController;
+import virus.util.Jugador;
 
 /**
  * FXML Controller class
@@ -47,6 +50,8 @@ public class IngresoController extends Controller implements Initializable {
     Timer timer = null;
     @FXML
     private TextField txt_Nickname;
+    @FXML
+    private Label lblJugadores;
 
     /**
      * Initializes the controller class.
@@ -107,6 +112,17 @@ public class IngresoController extends Controller implements Initializable {
                 con.accionEnviar((String)AppContext.getInstance().get("Clave"), (String)AppContext.getInstance().get("Mensaje"));
             }
         }, 10000, 10000);
+    }
+    
+    public void actualizarJugadores(String jugadores){
+        Platform.runLater( () -> {
+            lblJugadores.setText("Jugadores: "+jugadores);
+        });
+    }
+    
+    public void crearJugadorPrincipal(String id, String turno){
+        
+        AppContext.getInstance().set("Jugador", new Jugador(id, turno, txt_Nickname.getText()));
     }
     
     @Override

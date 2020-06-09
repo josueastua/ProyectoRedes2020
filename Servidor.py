@@ -11,17 +11,17 @@ var_jugadores = []
 # Representacion de las cartas
 var_cartas = [
 #Cartas de organos
-"1:0:1", "1:0:1", "1:0:1", "1:0:1", "1:0:1", "1:0:2", "1:0:2", "1:0:2", "1:0:2", "1:0:2",
-"1:0:3", "1:0:3", "1:0:3", "1:0:3", "1:0:3", "1:0:4", "1:0:4", "1:0:4", "1:0:4", "1:0:4", 
-"1:0:5", 
+"1:1", "1:1", "1:1", "1:1", "1:1", "1:2", "1:2", "1:2", "1:2", "1:2",
+"1:3", "1:3", "1:3", "1:3", "1:3", "1:4", "1:4", "1:4", "1:4", "1:4", 
+"1:5", 
 #Cartas de medicina
-"2:4:1", "2:4:1", "2:4:1", "2:4:1", "2:2:2", "2:2:2", "2:2:2", "2:2:2", "2:3:3",  "2:3:3", 
-"2:3:3", "2:3:3", "2:1:4", "2:1:4", "2:1:4", "2:1:4", "2:5:5", "2:5:5", "2:5:5", "2:5:5",
+"2:1", "2:1", "2:1", "2:1", "2:2", "2:2", "2:2", "2:2", "2:3", "2:3", 
+"2:3", "2:3", "2:4", "2:4", "2:4", "2:4", "2:5", "2:5", "2:5", "2:5",
 #Cartas de virus
-"3:2:1", "3:2:1", "3:2:1", "3:2:1", "3:3:2", "3:3:2", "3:3:2", "3:3:2", "3:1:3", "3:1:3", 
-"3:1:3", "3:1:3", "3:4:4", "3:4:4", "3:4:4", "3:4:4", "3:5:5", 
+"3:1", "3:1", "3:1", "3:1", "3:2", "3:2", "3:2", "3:2", "3:3", "3:3", 
+"3:3", "3:3", "3:4", "3:4", "3:4", "3:4", "3:5", 
 #Cartas especiales
-"4:0:1", "4:0:2", "4:0:3", "4:0:4", "4:0:5"
+"4:1", "4:2", "4:3", "4:4", "4:5"
 ]
 #Aqui se guardaran las cartas pero mezcladas
 var_mazo = []
@@ -35,10 +35,13 @@ var_juegoIniciado = False
 var_jugadorSalio = False
 #id del jugador que migro
 var_idSalio = ""
+#var_turno auxiliar
+var_turno_aux = 1
 
 class Jugador:
-    def __init__(self, id, nick):
+    def __init__(self, id, nick, turno):
         self.id = id
+        self.turno = turno
         self.nick = nick
         self.mano = []
 
@@ -46,7 +49,7 @@ class Jugador:
         self.mano.append(carta)
     
     def toString(self):
-        aux = str(self.id)+"_"+self.nick
+        aux = str(self.id)+"_"+self.turno+"_"+self.nick
         for a in self.mano:
             aux += "_"+a
         return aux
@@ -113,11 +116,12 @@ def infJugadoresYMazo():
     return aux
 
 def procesarSolicitud(clave, mensaje, hostname):
-    global var_turno, var_datosJuego, var_juegoIniciado, var_jugadorSalio, var_idSalio, var_hilo
+    global var_turno, var_datosJuego, var_juegoIniciado, var_jugadorSalio, var_idSalio, var_hilo, var_turno_aux
     if(clave == "1"):#Solicitud de conectarse
         if(var_juegoIniciado is False):
             id = generarId()
-            var_jugadores.append(Jugador(id, mensaje))
+            var_jugadores.append(Jugador(id, mensaje, var_turno_aux))
+            var_turno_aux += 1
             if(len(var_jugadores) >= 2 and var_hilo is None):
                 var_hilo = threading.Thread(target=metodoHilo) 
                 var_hilo.start()

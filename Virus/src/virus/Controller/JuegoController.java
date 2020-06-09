@@ -98,18 +98,25 @@ public class JuegoController extends Controller implements Initializable {
 
     public void cargarCartas(){
         for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 5; j++){
-                gpCartasOponente.add(new Marco_Carta(), i, j);
+            for(int j = 1; j <= 5; j++){
+                gpCartasOponente.add(new Marco_Carta("Carta"+i+j), i, j);
             }
         }
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 3; j++){
-                gpCartas.add(new Marco_Carta(), i, j);
+                gpCartas.add(new Marco_Carta("Carta"+i+j), i, j);
             }
         }
         for(int i = 0; i < 5; i++)
-            gpManoyMazo.getChildren().add(new Marco_Carta());
+            if(i < 3)
+                gpManoyMazo.add(new Marco_Carta("Mano"+i), i, 0);
+            else if(i == 3)
+                gpManoyMazo.add(new Marco_Carta("Mazo"), i, 0);
+            else
+                gpManoyMazo.add(new Marco_Carta("Descartes"), i, 0);
     }
+    
+    
     
     private void initTraslateTransition(){
         tt.setAutoReverse(false);//Para que no se devuelva

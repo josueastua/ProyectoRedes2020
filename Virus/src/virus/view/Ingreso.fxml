@@ -31,6 +31,7 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </Button>
+            <Label fx:id="lblJugadores" prefHeight="94.0" prefWidth="522.0" />
          </children>
       </VBox>
    </children>

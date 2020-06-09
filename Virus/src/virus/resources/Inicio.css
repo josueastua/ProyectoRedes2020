@@ -51,7 +51,7 @@
 .label{
     -fx-text-fill: transparent;
     -fx-font: bold italic 55px "Harlow Solid Italic";
-    -fx-text-alignment: CENTER;
+    -fx-alignment: CENTER;
 }
 
 .label .text{

@@ -3,22 +3,36 @@ package virus.util;
 import java.util.ArrayList;
 
 public class Jugador {
-    private int ID;
+    private String ID;
+    private String nick;
+    private String turno;
     private ArrayList<Object> mano;
     private ArrayList<Object> tablero;
     
     public Jugador(){
-        this.ID = 0;
+        this.ID = "0";
+        this.turno = "0";
+        this.nick = " ";
         mano = new ArrayList();
         tablero = new ArrayList();
     }
     
-    Jugador(int ID){
+    public Jugador(String ID, String turno, String nick){
         this.ID = ID;
+        this.turno = turno;
+        this.nick = nick;
         mano = new ArrayList();
         tablero = new ArrayList();
     }
 
+    public String getId(){
+        return this.ID;
+    }
+    
+    public void addMano(Object obj){
+        mano.add(obj);
+    }
+    
     public ArrayList<Object> getMano() {
         return mano;
     }
