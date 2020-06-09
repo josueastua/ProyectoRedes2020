@@ -88,19 +88,19 @@ public class Conexion {
                             Jugador jug = new Jugador(datJug[0], datJug[1], datJug[2]);
                             String[] manaux = datJug[datJug.length - 1].split("_");
                             for(int k = 0; k < manaux.length; k++){
-                                player.addMano(AppContext.getInstance().getCarta(manaux[k]));
+                                player.addMano(manaux[k]);
                             }
                         }else{
                             String[] mano = datJug[datJug.length - 1].split("_");  
                             for(int k = 0; k < mano.length; k++){
-                                player.addMano(AppContext.getInstance().getCarta(mano[k]));
+                                player.addMano(mano[k]);
                             }
                         }
                     }else{
-                        ArrayList<Image> mazo = new ArrayList<>();
+                        ArrayList<String> mazo = new ArrayList<>();
                         String[] cartas = cont2[i].split("_");
                         for(int a = 0; a < cartas.length; a++){
-                            mazo.add(AppContext.getInstance().getCarta(cartas[a]));
+                            mazo.add(cartas[a]);
                         }
                         AppContext.getInstance().set("Mazo", mazo);
                     }
@@ -124,16 +124,16 @@ public class Conexion {
                             datosJugador(datosJuego[i].split("_"));
                         }else if(i == datosJuego.length - 2){
                             String[] cartas = datosJuego[i].split("-");
-                            ArrayList<Image> mazo = new ArrayList<>();
+                            ArrayList<String> mazo = new ArrayList<>();
                             for(int a = 0; a < cartas.length; a++){
-                                mazo.add(AppContext.getInstance().getCarta(cartas[a]));
+                                mazo.add(cartas[a]);
                             }
                             AppContext.getInstance().set("Mazo", mazo);
                         }else if(i == datosJuego.length - 1){
                             String[] cartas = datosJuego[i].split("-");
-                            ArrayList<Image> descartes = new ArrayList<>();
+                            ArrayList<String> descartes = new ArrayList<>();
                             for(int a = 0; a < cartas.length; a++){
-                                descartes.add(AppContext.getInstance().getCarta(cartas[a]));
+                                descartes.add(cartas[a]);
                             }
                             AppContext.getInstance().set("Descartes", descartes);
                         } 
@@ -153,13 +153,15 @@ public class Conexion {
         for(int i = 0; i < jugadores.size(); i++){
             if(jugadores.get(i).getId().equals(data[0])){
                 cartas = data[1].split("-");
+                jugadores.get(i).getMano().clear();
                 for(int card = 0; card < cartas.length; card++){
-                    jugadores.get(i).addMano(AppContext.getInstance().getCarta(cartas[card]));
+                    jugadores.get(i).addMano(cartas[card]);
                 }
                 if(!data[2].equals("0")){
+                    jugadores.get(i).getTablero().clear();
                     cartas = data[2].split("-");
                     for(int card = 0; card < cartas.length; card++){
-                        jugadores.get(i).addMano(AppContext.getInstance().getCarta(cartas[card]));
+                        jugadores.get(i).addTablero(cartas[card]);
                     }
                 }
             }
