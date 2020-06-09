@@ -49,7 +49,7 @@ class Jugador:
         self.mano.append(carta)
     
     def toString(self):
-        aux = str(self.id)+"_"+self.turno+"_"+self.nick
+        aux = str(self.id)+"_"+str(self.turno)+"_"+self.nick
         for a in self.mano:
             aux += "_"+a
         return aux
@@ -87,7 +87,7 @@ def esperaInicio():
     print("Inicio Espera")
     global var_hilo, var_juegoIniciado
     cont = 0
-    while(cont < 30):
+    while(cont < 15):
         sleep(1)
         cont += 1
     var_juegoIniciado = True
@@ -141,7 +141,7 @@ def procesarSolicitud(clave, mensaje, hostname):
             var_turno += 1
         return "Se estableció conexión con: "+hostname
     elif(clave == "4"):#pedir actualizacion de los datos del juego
-        return "4:"+str(var_turno)+":"+var_datosJuego+":"+str(var_jugadorSalio)+":"+var_idSalio
+        return "4:"+str(var_turno)+"_"+str(var_jugadorSalio)+"_"+var_idSalio+"_"+var_datosJuego
     elif(clave == "5"):
         var_jugadorSalio = True
         var_idSalio = mensaje
@@ -163,7 +163,7 @@ def iniciarServidor(host,puerto):
         hostname = socket.gethostname()
         msg_rec = c.recv(1024)
         msg_rec = msg_rec.decode('ascii')
-        msg_env = procesarSolicitud(msg_rec[0], msg_rec, hostname)
+        msg_env = procesarSolicitud(msg_rec[0], msg_rec[2: len(msg_rec)], hostname)
         print(msg_env)
         c.send(msg_env.encode('utf8'))
         print("\nMensaje decodificado: "+msg_rec+"\n")

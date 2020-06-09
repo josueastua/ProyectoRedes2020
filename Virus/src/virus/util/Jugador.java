@@ -33,6 +33,10 @@ public class Jugador {
         mano.add(obj);
     }
     
+    public void addTablero(Object obj){
+        tablero.add(obj);
+    }
+    
     public ArrayList<Object> getMano() {
         return mano;
     }
@@ -42,7 +46,7 @@ public class Jugador {
     }
     
     public String infoJugador(){
-        String info = String.valueOf(ID) + " ";
+        String info = String.valueOf(ID) + "_";
         for(int a=0;a<mano.size();a++){
             if(mano.get(a).getClass().equals(Carta.class)){
                 Carta aux = (Carta) mano.get(a);
