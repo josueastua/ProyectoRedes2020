@@ -194,9 +194,24 @@ public class JuegoController extends Controller implements Initializable {
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
         player = (Jugador) AppContext.getInstance().get("Jugador");
         ArrayList<Jugador> jug = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
-        
+        conseguirImagenes();
     }
 
+    private void conseguirImagenes(){
+        mazo = (ArrayList<String>) AppContext.getInstance().get("Mazo");
+        descartes = (ArrayList<String>) AppContext.getInstance().get("Mazo");
+        mazo_img.clear();
+        descartes_img.clear();
+        mazo.forEach((carta) -> {
+            mazo_img.add(AppContext.getInstance().getCarta(carta));
+        });
+        descartes.forEach((carta) -> {
+            descartes_img.add(AppContext.getInstance().getCarta(carta));
+        });
+    }
+    
+    
+    
     @FXML
     private void accionJugada(ActionEvent event) {
     }
