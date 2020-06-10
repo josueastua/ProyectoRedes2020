@@ -7,6 +7,7 @@ package virus.Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -25,8 +27,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import virus.socket.Conexion;
 import virus.util.AppContext;
+import virus.util.FlowController;
 import virus.util.Jugador;
 import virus.util.Marco_Carta;
 import virus.util.Mensaje;
@@ -58,6 +62,15 @@ public class JuegoController extends Controller implements Initializable {
     @FXML
     private ImageView imv_fondo;
     Mensaje men;
+    
+    ArrayList<Jugador> oponentes = new ArrayList<>(); 
+    ArrayList<String> mazo = new ArrayList<>();
+    ArrayList<Image> mazo_img = new ArrayList<>();
+    ArrayList<String> descartes = new ArrayList<>();
+    ArrayList<Image> descartes_img = new ArrayList<>();
+    Jugador player = null;
+    int turno = 1;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         con = new Conexion();
@@ -105,21 +118,21 @@ public class JuegoController extends Controller implements Initializable {
     public void cargarCartas(){
         for(int i = 0; i < 3; i++){
             for(int j = 1; j <= 5; j++){
-                gpCartasOponente.add(new Marco_Carta("Carta"+i+j), i, j);
+                gpCartasOponente.add(new Marco_Carta("Carta"+i+j, player), i, j);
             }
         }
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 3; j++){
-                gpCartas.add(new Marco_Carta("Carta"+i+j), i, j);
+                gpCartas.add(new Marco_Carta("Carta"+i+j, player), i, j);
             }
         }
         for(int i = 0; i < 5; i++)
             if(i < 3)
-                gpManoyMazo.add(new Marco_Carta("Mano"+i), i, 0);
+                gpManoyMazo.add(new Marco_Carta("Mano"+i, player), i, 0);
             else if(i == 3)
-                gpManoyMazo.add(new Marco_Carta("Mazo"), i, 0);
+                gpManoyMazo.add(new Marco_Carta("Mazo", player), i, 0);
             else
-                gpManoyMazo.add(new Marco_Carta("Descartes"), i, 0);
+                gpManoyMazo.add(new Marco_Carta("Descartes", player), i, 0);
     }
     
     
@@ -178,6 +191,10 @@ public class JuegoController extends Controller implements Initializable {
     
     @Override
     public void initialize() {
+        AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
+        player = (Jugador) AppContext.getInstance().get("Jugador");
+        ArrayList<Jugador> jug = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
+        
     }
 
     @FXML
@@ -205,5 +222,6 @@ public class JuegoController extends Controller implements Initializable {
         tt.play();
         menu = !menu;
     }
-
+    
+    
 }

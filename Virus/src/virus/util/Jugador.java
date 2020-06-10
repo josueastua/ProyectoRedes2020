@@ -5,19 +5,19 @@ import java.util.ArrayList;
 public class Jugador {
     private String ID;
     private String nick;
-    private String turno;
+    private int turno;
     private ArrayList<Object> mano;
-    private ArrayList<Object> tablero;
+    private ArrayList<Object> tablero;//1:1
     
     public Jugador(){
         this.ID = "0";
-        this.turno = "0";
+        this.turno = 1;
         this.nick = " ";
         mano = new ArrayList();
         tablero = new ArrayList();
     }
     
-    public Jugador(String ID, String turno, String nick){
+    public Jugador(String ID, int turno, String nick){
         this.ID = ID;
         this.turno = turno;
         this.nick = nick;
@@ -35,6 +35,10 @@ public class Jugador {
     
     public void addTablero(Object obj){
         tablero.add(obj);
+    }
+    
+    public int getTurno(){
+        return this.turno;
     }
     
     public ArrayList<Object> getMano() {

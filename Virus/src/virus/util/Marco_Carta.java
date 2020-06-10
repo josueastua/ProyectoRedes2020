@@ -6,12 +6,6 @@
 package virus.util;
 
 
-import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 
 /**
@@ -22,41 +16,26 @@ import javafx.scene.layout.Pane;
 
 public class Marco_Carta extends Pane{
     
-    ImageView image = new ImageView();
+    Jugador player;
     
     public Marco_Carta(){
-        //this.getChildren().add(image);
         asignarEventos();
     }
     
-    public Marco_Carta(String id){
+    public Marco_Carta(String id, Jugador player){
         this.setId(id);
-        //this.getChildren().add(image);
         asignarEventos();
+        this.player = player;
     }
     
     private void asignarEventos(){
         
         this.setOnMouseClicked( click -> {
-            if(!this.getId().equals("Mazo") && !this.getId().equals("Descartes"))
+            int turno = (int) AppContext.getInstance().get("Turno");
+            if(!this.getId().equals("Mazo") && !this.getId().equals("Descartes") && player.getTurno() == turno)
                 this.setStyle("-fx-background-color: red");
         });
         
-        this.setOnDragDetected((MouseEvent t) -> {
-            Dragboard db = this.startDragAndDrop(TransferMode.MOVE);
-            ClipboardContent content = new ClipboardContent();
-            content.putString("MOV");
-            db.setContent(content);
-            t.consume();
-        });
         
-        this.setOnDragOver((DragEvent t1)-> {
-            t1.acceptTransferModes(TransferMode.MOVE);
-            t1.consume();
-        });
-        
-        this.setOnDragDropped((DragEvent t2) -> {
-           //Pendiente
-        });
     }
 }

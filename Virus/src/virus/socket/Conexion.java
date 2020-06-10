@@ -85,7 +85,11 @@ public class Conexion {
                     if(i < (cont2.length - 1)){
                         String[] datJug = cont2[i].split("_");
                         if(player.getId().equals(datJug[0])){
-                            Jugador jug = new Jugador(datJug[0], datJug[1], datJug[2]);
+                            int turn = 0;
+                            try{
+                                turn = Integer.parseInt(datJug[1]);
+                            }catch(NumberFormatException ex){}
+                            Jugador jug = new Jugador(datJug[0], turn, datJug[2]);
                             String[] manaux = datJug[datJug.length - 1].split("_");
                             for(int k = 0; k < manaux.length; k++){
                                 player.addMano(manaux[k]);

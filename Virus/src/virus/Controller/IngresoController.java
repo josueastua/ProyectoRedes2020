@@ -130,10 +130,11 @@ public class IngresoController extends Controller implements Initializable {
         Platform.runLater( () -> {
             btn_Ingresar.setDisable(false);
             btn_Ingresar.setText("Iniciar Juego");
+            timer.cancel();
+            timer = null;
+            FlowController.getInstance().goViewInResizableWindow("Juego", 0, 900, 0, 660, Boolean.TRUE);
+            this.getStage().close();
         });
-        timer.cancel();
-        timer = null;
-        FlowController.getInstance().goViewInResizableWindow("Juego", 0, 900, 0, 660, Boolean.TRUE);
     }
     
     public void crearJugadorPrincipal(String id, String turno){
@@ -144,7 +145,7 @@ public class IngresoController extends Controller implements Initializable {
         }catch(NumberFormatException nfe){
             System.out.println("Error: "+nfe);
         }
-        AppContext.getInstance().set("Jugador", new Jugador(id, turno, txt_Nickname.getText()));
+        AppContext.getInstance().set("Jugador", new Jugador(id, turn, txt_Nickname.getText()));
     }
     
     @Override
