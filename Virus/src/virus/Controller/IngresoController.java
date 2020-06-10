@@ -130,10 +130,12 @@ public class IngresoController extends Controller implements Initializable {
         Platform.runLater( () -> {
             btn_Ingresar.setDisable(false);
             btn_Ingresar.setText("Iniciar Juego");
+            timer.cancel();
+            timer = null;
+            FlowController.getInstance().goViewInResizableWindow("Juego", 0, 900, 0, 660, Boolean.TRUE);
+            this.getStage().close();
         });
-        timer.cancel();
-        timer = null;
-        FlowController.getInstance().goViewInResizableWindow("Juego", 0, 900, 0, 660, Boolean.TRUE);
+        
     }
     
     public void crearJugadorPrincipal(String id, String turno){

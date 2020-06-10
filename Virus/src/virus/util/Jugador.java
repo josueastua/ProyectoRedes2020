@@ -1,6 +1,7 @@
 package virus.util;
 
 import java.util.ArrayList;
+import javafx.scene.image.Image;
 
 public class Jugador {
     private String ID;
@@ -90,16 +91,39 @@ public class Jugador {
         return info;
     }
     
-    public void prueba(){
-      
-        mano.add(new Carta(1,1));
-        mano.add(new Carta(4,2));
-        mano.add(new Carta(2,3));
+    public void convertirCarta(){
+        ArrayList<Object> lista = new ArrayList();
+        String dato = "";
+        Image imagen;
+        for (Object carta : tablero) {
+            dato = (String) carta;
+            char aux1 = dato.charAt(0);
+            char aux2 = dato.charAt(2);
+            imagen = AppContext.getInstance().getCarta(dato);
+            if(aux1 != 4){
+                lista.add(new Carta(Character.getNumericValue(aux1), Character.getNumericValue(aux2), imagen));
+            }else{
+                lista.add(new Tratamiento(Character.getNumericValue(aux2), imagen));
+            }
+        }
         
-        /*tablero.add(new Carta(1,1));
-        tablero.add(new Carta(3,1));
-        tablero.add(new Carta(2,4));
-        tablero.add(new Carta(1,5));*/
-        System.out.println(infoJugador());
+        tablero = lista;
     }
+    
+    /*public void Prueba(){
+        tablero.add("1:1");
+        tablero.add("2:4");
+        tablero.add("3:2");
+        tablero.add("4:4");
+        convertirCarta();
+        for (Object carta : tablero){
+            if (carta.getClass().equals(Carta.class)){
+                Carta aux = (Carta) carta;
+                aux.imprimirInfo();
+            }else{
+                Tratamiento aux = (Tratamiento) carta;
+                aux.imprimirInfo();
+            }
+        }
+    }*/
 }
