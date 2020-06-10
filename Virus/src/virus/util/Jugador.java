@@ -80,6 +80,9 @@ public class Jugador {
             }
         
         }
+        if(tablero.isEmpty()){
+            info += "0";
+        }
         return info;
     }
     
@@ -89,10 +92,10 @@ public class Jugador {
         mano.add(new Carta(4,2));
         mano.add(new Carta(2,3));
         
-        tablero.add(new Carta(1,1));
+        /*tablero.add(new Carta(1,1));
         tablero.add(new Carta(3,1));
         tablero.add(new Carta(2,4));
-        tablero.add(new Carta(1,5));
+        tablero.add(new Carta(1,5));*/
         System.out.println(infoJugador());
     }
 }
