@@ -285,6 +285,7 @@ class Interfaz(object):
 
     def recibirMsj(self, msj):
         self.msj.set("")
+        self.straux.set("")
         for a in range(len(msj)):
             aux = self.lista[msj[a]]
             txt = self.msj.get()
