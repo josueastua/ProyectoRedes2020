@@ -33,7 +33,7 @@ public class InicioController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         addEvents();
         Jugador jug = new Jugador();
-        jug.prueba();
+        //jug.Prueba();
     }    
 
     @FXML
