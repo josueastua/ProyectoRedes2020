@@ -11,9 +11,11 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -24,7 +26,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import virus.socket.Conexion;
+import virus.util.AppContext;
+import virus.util.Jugador;
 import virus.util.Marco_Carta;
+import virus.util.Mensaje;
 
 /**
  *
@@ -52,7 +57,7 @@ public class JuegoController extends Controller implements Initializable {
     private GridPane gpManoyMazo;
     @FXML
     private ImageView imv_fondo;
-    
+    Mensaje men;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         con = new Conexion();
@@ -60,6 +65,7 @@ public class JuegoController extends Controller implements Initializable {
         cargarCartas();
         initTraslateTransition();
         addEvents();
+        men = new Mensaje();
     }    
     
     /**
@@ -133,6 +139,41 @@ public class JuegoController extends Controller implements Initializable {
             }
         });
         
+    }
+    
+    public void informarCartaEspecial(String carta, String idPlayer){
+        Platform.runLater( () -> {
+            String mensaje = "Un jugador te aplico ";
+            Boolean mostrar = false;
+            switch(carta){
+                case "1":
+                    mensaje += "Ladron de Organos";
+                    break;
+                case "2":
+                    mensaje += "Trasplante de Organos";
+                    break;
+                case "3":
+                    mensaje += "Infeccion";
+                    break;
+                case "4":
+                    mensaje += "Guante de latex";
+                    mostrar = true;
+                    break;
+                case "5":
+                    mensaje += "Error medico";
+                    break;
+                default:
+                    break;
+            }
+            if(!mostrar){
+                Jugador player = (Jugador) AppContext.getInstance().get("Jugador");
+                mostrar = player.getId().equals(idPlayer);
+            }
+            if(mostrar){
+                Mensaje men = new Mensaje();
+                men.show(Alert.AlertType.INFORMATION, carta, mensaje);
+            }
+        });   
     }
     
     @Override

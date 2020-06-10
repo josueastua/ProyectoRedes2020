@@ -415,6 +415,7 @@ class Sesion(object):
             c.send(msg.encode('utf8'))
             msg_rec = c.recv(1024)
             msg_rec = msg_rec.decode('ascii')
+            print(msg_rec)
             c.close()
             if(msg_rec != "ERROR"):
                 self.enlace.recibirTrama(msg_rec)
@@ -532,28 +533,7 @@ class Enlace(object):
             self.tramas.append(trama)
             trama = ""
         self.tramas.append("100000000")
-        '''
-        perdida = randint(1, 2)
-        trama = ""
-        if perdida == 1:
-            for segmento in segmentos:
-                for carac in segmento:
-                    trama += format(ord(carac),'08b')
-                trama = "1"+trama
-                self.tramas.append(trama)
-                trama = ""
-        else:
-            for segmento in segmentos:
-                aux = randint(1, 2)
-                for carac in segmento:
-                    trama += format(ord(carac),'08b')
-                if aux == 1:
-                    trama = "1"+trama
-                else:
-                    trama = "0"+trama
-                self.tramas.append(trama)
-                trama = ""
-                '''
+       
         
     
     def recibirTrama(self,trama):
@@ -563,6 +543,7 @@ class Enlace(object):
             self.detectarErrores()
 
     def detectarErrores(self):
+        print(self.tramas)
         if(len(self.tramas) >= 1):
             ordenes = []
             index = []
@@ -579,6 +560,7 @@ class Enlace(object):
             if(hayError == 1):
                 messagebox.showerror(title="Se detecto un error en el mesaje", message="Se procedera a recuperar lo perdido")
                 self.sesion.modoCliente("ERROR", False, 0)
+                self.tramas.clear()
             else:
                 trama = ""  
                 for a in range(len(self.tramas)):
@@ -590,6 +572,7 @@ class Enlace(object):
         else:
             messagebox.showerror(title="Se detecto un error en el mesaje", message="Se procedera a recuperar lo perdido")
             self.sesion.modoCliente("ERROR", False, 0)
+            self.tramas.clear()
         
 
 

@@ -120,23 +120,29 @@ public class Conexion {
                 if(!message[1].equals("False")){
                     String[] datosJuego = message[3].split("/");
                     for(int i = 0; i < datosJuego.length; i++){
-                        if(i < datosJuego.length - 2){
+                        if(i < datosJuego.length - 4){
                             datosJugador(datosJuego[i].split("_"));
-                        }else if(i == datosJuego.length - 2){
+                        }else if(i == datosJuego.length - 4){
                             String[] cartas = datosJuego[i].split("-");
                             ArrayList<String> mazo = new ArrayList<>();
                             for(int a = 0; a < cartas.length; a++){
                                 mazo.add(cartas[a]);
                             }
                             AppContext.getInstance().set("Mazo", mazo);
-                        }else if(i == datosJuego.length - 1){
+                        }else if(i == datosJuego.length - 3){
                             String[] cartas = datosJuego[i].split("-");
                             ArrayList<String> descartes = new ArrayList<>();
                             for(int a = 0; a < cartas.length; a++){
                                 descartes.add(cartas[a]);
                             }
                             AppContext.getInstance().set("Descartes", descartes);
-                        } 
+                        }else{
+                            break;
+                        }
+                    }
+                    String especial = datosJuego[datosJuego.length-2];
+                    if(!especial.equals("0")){
+                        
                     }
                 }else{
                     String id = message[2];
