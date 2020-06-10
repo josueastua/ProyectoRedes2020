@@ -40,6 +40,7 @@ public class InicioController extends Controller implements Initializable {
     private void accionJugar(ActionEvent event) {
         FlowController.getInstance().goViewInResizableWindow("Ingreso", 0, 600, 0, 500, Boolean.TRUE);
         this.getStage().close();
+        
     }
 
     @FXML

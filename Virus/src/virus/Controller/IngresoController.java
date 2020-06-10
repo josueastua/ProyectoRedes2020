@@ -66,10 +66,13 @@ public class IngresoController extends Controller implements Initializable {
 
     @FXML
     private void accionIngresar(ActionEvent event) {
-        if(txt_Nickname.getText() != null){
+        if(txt_Nickname.getText() != null || !txt_Nickname.getText().isEmpty()){
             con.accionEnviar("1", txt_Nickname.getText());
+            btn_Ingresar.setDisable(true);
+            btn_Ingresar.setText("En espera...");
             if(timer == null)
                 hilo();
+            
         }
     }
     
@@ -110,6 +113,9 @@ public class IngresoController extends Controller implements Initializable {
             public void run() {
                 System.out.println("HILO");
                 con.accionEnviar((String)AppContext.getInstance().get("Clave"), (String)AppContext.getInstance().get("Mensaje"));
+                if((Boolean)AppContext.getInstance().get("Iniciar")){
+                    accionEntrar();
+                }
             }
         }, 10000, 10000);
     }
@@ -120,13 +126,30 @@ public class IngresoController extends Controller implements Initializable {
         });
     }
     
+    private void accionEntrar(){
+        Platform.runLater( () -> {
+            btn_Ingresar.setDisable(false);
+            btn_Ingresar.setText("Iniciar Juego");
+        });
+        timer.cancel();
+        timer = null;
+        FlowController.getInstance().goViewInResizableWindow("Juego", 0, 900, 0, 660, Boolean.TRUE);
+    }
+    
     public void crearJugadorPrincipal(String id, String turno){
-        
+        int turn = 0;
+        System.out.println(turno.length());
+        try{
+            turn = Integer.parseInt(turno);
+        }catch(NumberFormatException nfe){
+            System.out.println("Error: "+nfe);
+        }
         AppContext.getInstance().set("Jugador", new Jugador(id, turno, txt_Nickname.getText()));
     }
     
     @Override
     public void initialize() {
+        AppContext.getInstance().set("Iniciar", true);
         ajustarAltura();
         ajustarAncho();
         AppContext.getInstance().set("Ingreso", FlowController.getInstance().getController("Ingreso"));

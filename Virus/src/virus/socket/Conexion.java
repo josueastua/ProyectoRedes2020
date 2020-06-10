@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import javafx.scene.image.Image;
 import virus.Controller.IngresoController;
 import virus.util.AppContext;
 import virus.util.Jugador;
@@ -28,6 +29,9 @@ public class Conexion {
     public void accionEnviar(String id, String data){
         try{
             msg = new char[1000];
+            for(int i = 0; i < 1000; i++){
+                msg[i] = '*';
+            }
             //Creamos la conexion con el servidor
             cliente = new Socket(ip, puerto);
             //Para recibir respuesta del servidor
@@ -54,7 +58,13 @@ public class Conexion {
     
     public void recibirRespuesta(){
         IngresoController aux = (IngresoController) AppContext.getInstance().get("Ingreso");
-        String mensaje = String.copyValueOf(msg);
+        String mensaje = "";
+        for(int i = 0; i < 1000; i++){
+            if(msg[i] != '*')
+                mensaje += msg[i];
+            else
+                break;
+        }
         msg = null;
         String clave = mensaje.substring(0, 1);
         mensaje = mensaje.substring(2, mensaje.length());
@@ -78,20 +88,83 @@ public class Conexion {
                             Jugador jug = new Jugador(datJug[0], datJug[1], datJug[2]);
                             String[] manaux = datJug[datJug.length - 1].split("_");
                             for(int k = 0; k < manaux.length; k++){
-                                player.addMano(AppContext.getInstance().getCarta(manaux[k]));
+                                player.addMano(manaux[k]);
                             }
                         }else{
                             String[] mano = datJug[datJug.length - 1].split("_");  
                             for(int k = 0; k < mano.length; k++){
-                                player.addMano(AppContext.getInstance().getCarta(mano[k]));
+                                player.addMano(mano[k]);
                             }
                         }
+                    }else{
+                        ArrayList<String> mazo = new ArrayList<>();
+                        String[] cartas = cont2[i].split("_");
+                        for(int a = 0; a < cartas.length; a++){
+                            mazo.add(cartas[a]);
+                        }
+                        AppContext.getInstance().set("Mazo", mazo);
                     }
                 }
-                AppContext.getInstance().set("Juagdores", jugadores);
+                AppContext.getInstance().set("Jugadores", jugadores);
+                AppContext.getInstance().set("Iniciar", true);
+                break;
+            case "4":
+                String[] message = mensaje.split("_");
+                int turno = 0;
+                try{
+                    turno = Integer.parseInt(message[0]);
+                }catch(NumberFormatException ex){
+                    
+                }
+                AppContext.getInstance().set("Turno", turno);
+                if(!message[1].equals("False")){
+                    String[] datosJuego = message[3].split("/");
+                    for(int i = 0; i < datosJuego.length; i++){
+                        if(i < datosJuego.length - 2){
+                            datosJugador(datosJuego[i].split("_"));
+                        }else if(i == datosJuego.length - 2){
+                            String[] cartas = datosJuego[i].split("-");
+                            ArrayList<String> mazo = new ArrayList<>();
+                            for(int a = 0; a < cartas.length; a++){
+                                mazo.add(cartas[a]);
+                            }
+                            AppContext.getInstance().set("Mazo", mazo);
+                        }else if(i == datosJuego.length - 1){
+                            String[] cartas = datosJuego[i].split("-");
+                            ArrayList<String> descartes = new ArrayList<>();
+                            for(int a = 0; a < cartas.length; a++){
+                                descartes.add(cartas[a]);
+                            }
+                            AppContext.getInstance().set("Descartes", descartes);
+                        } 
+                    }
+                }else{
+                    String id = message[2];
+                }
                 break;
             default:
                 break;
+        }
+    }
+    
+    private void datosJugador(String[] data){
+        ArrayList<Jugador> jugadores = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
+        String[] cartas;
+        for(int i = 0; i < jugadores.size(); i++){
+            if(jugadores.get(i).getId().equals(data[0])){
+                cartas = data[1].split("-");
+                jugadores.get(i).getMano().clear();
+                for(int card = 0; card < cartas.length; card++){
+                    jugadores.get(i).addMano(cartas[card]);
+                }
+                if(!data[2].equals("0")){
+                    jugadores.get(i).getTablero().clear();
+                    cartas = data[2].split("-");
+                    for(int card = 0; card < cartas.length; card++){
+                        jugadores.get(i).addTablero(cartas[card]);
+                    }
+                }
+            }
         }
     }
 }
