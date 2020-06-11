@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -70,6 +71,7 @@ public class JuegoController extends Controller implements Initializable {
     ArrayList<Image> descartes_img = new ArrayList<>();
     Jugador player = null;
     int turno = 1;
+    int oponente = 0;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -194,20 +196,15 @@ public class JuegoController extends Controller implements Initializable {
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
         player = (Jugador) AppContext.getInstance().get("Jugador");
         ArrayList<Jugador> jug = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
-        //conseguirImagenes();
+        conseguirImagenes();
         lblPlayer.setText(player.getId());
     }
 
     private void conseguirImagenes(){
         mazo = (ArrayList<String>) AppContext.getInstance().get("Mazo");
-        descartes = (ArrayList<String>) AppContext.getInstance().get("Mazo");
         mazo_img.clear();
-        descartes_img.clear();
         mazo.forEach((carta) -> {
             mazo_img.add(AppContext.getInstance().getCarta(carta));
-        });
-        descartes.forEach((carta) -> {
-            descartes_img.add(AppContext.getInstance().getCarta(carta));
         });
     }
     
@@ -237,6 +234,18 @@ public class JuegoController extends Controller implements Initializable {
         }
         tt.play();
         menu = !menu;
+    }
+
+    @FXML
+    private void accionGridPaneOponente(MouseEvent event) {
+    }
+
+    @FXML
+    private void accionGripPanePlayer(MouseEvent event) {
+    }
+
+    @FXML
+    private void accionManoMazoDescartes(MouseEvent event) {
     }
     
     
