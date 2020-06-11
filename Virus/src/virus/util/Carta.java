@@ -10,7 +10,7 @@ public class Carta {
         
     }
     
-    Carta(int tipo, int color, Image imagen){
+    public Carta(int tipo, int color, Image imagen){
         this.tipo = tipo;
         this.color = color;
         this.imagen = imagen;

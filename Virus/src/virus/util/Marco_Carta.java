@@ -19,6 +19,7 @@ import javafx.scene.layout.Pane;
 public class Marco_Carta extends Pane{
     
     Jugador player;
+    Carta carta;
     
     public Marco_Carta(){
         asignarEventos();
@@ -40,6 +41,14 @@ public class Marco_Carta extends Pane{
         imv.smoothProperty().set(Boolean.FALSE);
         this.getChildren().clear();
         this.getChildren().add(imv);
+    }
+    
+    public Carta getCarta(){
+        return carta;
+    }
+    
+    public void setCarta(Carta carta){
+        this.carta = carta;
     }
     
     private void asignarEventos(){
