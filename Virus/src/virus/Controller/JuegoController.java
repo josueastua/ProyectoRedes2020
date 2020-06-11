@@ -81,19 +81,19 @@ public class JuegoController extends Controller implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        con = new Conexion();
+        System.out.println(infoGridPane());
+        /*con = new Conexion();
         menu = Boolean.TRUE;
         cargarCartas();
         initTraslateTransition();
         addEvents();
-        men = new Mensaje();
+        men = new Mensaje();*/
     }    
     
     /**
      * En este metodo se añadiran listener para ajustar la pantalla
      */
     public void addEvents(){
-        player = (Jugador) AppContext.getInstance().get("Jugador");
         root.widthProperty().addListener( w -> {
             ajustarAncho(root.getWidth());
         });
@@ -125,6 +125,7 @@ public class JuegoController extends Controller implements Initializable {
     }
 
     public void cargarCartas(){
+        player = (Jugador) AppContext.getInstance().get("Jugador");
         for(int i = 0; i < 3; i++){
             for(int j = 1; j <= 5; j++){
                 gpCartasOponente.add(new Marco_Carta("Carta"+i+j, player), i, j);
@@ -201,9 +202,10 @@ public class JuegoController extends Controller implements Initializable {
             }
         });   
     }
-    
+   
     @Override
     public void initialize() {
+        /*
         if(player == null)
             player = (Jugador) AppContext.getInstance().get("Jugador");
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
@@ -211,7 +213,7 @@ public class JuegoController extends Controller implements Initializable {
         jug.forEach( (jugador) -> {
             jugador.convertirCarta();
         });
-        conseguirImagenes();
+        conseguirImagenes();*/
         
     }
 
@@ -239,7 +241,36 @@ public class JuegoController extends Controller implements Initializable {
         System.out.println(index);
     }
     
-    
+    public String infoGridPane(){
+        
+        String info = "";
+        Marco_Carta aux;
+        int cont = 0;
+        int total = 0;
+        for (Node nodo : gpCartasOponente.getChildren()){
+            aux = (Marco_Carta) nodo;
+            if(aux.getCarta() != null){
+                info += String.valueOf(aux.getCarta().getTipo()) + ":" + String.valueOf(aux.getCarta().getColor());
+                cont++;
+                total++;
+            }else{
+                info += "0";
+                cont++;
+                total++;
+            }
+            
+            if(cont == 5 && total < 15){
+                info += " ";
+                cont = 0;
+            }
+            
+            if(cont > 0 && cont < 5 && total < 15){
+                info += "-";
+            }
+            
+        }
+        return info;
+    }
     
     @FXML
     private void accionJugada(ActionEvent event) {
