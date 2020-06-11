@@ -67,7 +67,6 @@ public class Conexion {
         }
         msg = null;
         String clave = mensaje.substring(0, 1);
-        System.out.println("Clave: "+clave);
         mensaje = mensaje.substring(2, mensaje.length());
         switch(clave){
             case "1":
@@ -110,6 +109,7 @@ public class Conexion {
                         AppContext.getInstance().set("Mazo", mazo);
                     }
                 }
+                AppContext.getInstance().set("Turno", 1);
                 AppContext.getInstance().set("Jugadores", jugadores);
                 AppContext.getInstance().set("Iniciar", true);
                 break;

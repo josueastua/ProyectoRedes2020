@@ -34,10 +34,12 @@ import javafx.util.Duration;
 import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import virus.socket.Conexion;
 import virus.util.AppContext;
+import virus.util.Carta;
 import virus.util.FlowController;
 import virus.util.Jugador;
 import virus.util.Marco_Carta;
 import virus.util.Mensaje;
+import virus.util.Tratamiento;
 
 /**
  *
@@ -91,6 +93,7 @@ public class JuegoController extends Controller implements Initializable {
      * En este metodo se añadiran listener para ajustar la pantalla
      */
     public void addEvents(){
+        player = (Jugador) AppContext.getInstance().get("Jugador");
         root.widthProperty().addListener( w -> {
             ajustarAncho(root.getWidth());
         });
@@ -201,8 +204,9 @@ public class JuegoController extends Controller implements Initializable {
     
     @Override
     public void initialize() {
+        if(player == null)
+            player = (Jugador) AppContext.getInstance().get("Jugador");
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
-        player = (Jugador) AppContext.getInstance().get("Jugador");
         ArrayList<Jugador> jug = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
         jug.forEach( (jugador) -> {
             jugador.convertirCarta();
@@ -220,12 +224,19 @@ public class JuegoController extends Controller implements Initializable {
         lblPlayer.setText("ID: "+player.getId()+" Nick: "+player.getNick());
         int index = 0;
         ObservableList<Node> mano = gpManoyMazo.getChildren();
+        System.out.println(player.getMano().size());
         for (Object mano1 : player.getMano()) {
-            Image img = (Image) mano1;
-            Marco_Carta aux = (Marco_Carta) mano.get(index);
-            aux.setImage(img);
+            Marco_Carta aux = (Marco_Carta)mano.get(index);
+            if(mano1.getClass().equals(Carta.class)){
+                Carta carta = (Carta)mano1;
+                aux.setImage(carta.getImagen());
+            }else{
+                Tratamiento carta = (Tratamiento)mano1;
+                aux.setImage(carta.getImagen());
+            }
             index++;
         }
+        System.out.println(index);
     }
     
     

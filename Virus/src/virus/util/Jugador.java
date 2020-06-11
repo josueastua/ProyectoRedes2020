@@ -106,6 +106,7 @@ public class Jugador {
     }
     
     public void convertirCarta(){
+        System.out.println("Tamano: "+mano.size());
         ArrayList<Object> lista = new ArrayList();
         String dato = "";
         Image imagen;
