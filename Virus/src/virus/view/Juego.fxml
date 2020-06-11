@@ -41,7 +41,7 @@
                                     <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <GridPane fx:id="gpCartasOponente" alignment="CENTER" prefHeight="398.0" prefWidth="310.0">
+                              <GridPane fx:id="gpCartasOponente" alignment="CENTER" onMouseClicked="#accionGridPaneOponente" prefHeight="398.0" prefWidth="310.0">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -70,7 +70,7 @@
                   </VBox>
                   <VBox fx:id="vb_player" alignment="CENTER" prefHeight="600.0" prefWidth="580.0">
                      <children>
-                        <GridPane fx:id="gpCartas" alignment="CENTER" prefHeight="334.0" prefWidth="570.0">
+                        <GridPane fx:id="gpCartas" alignment="CENTER" onMouseClicked="#accionGripPanePlayer" prefHeight="334.0" prefWidth="570.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -87,7 +87,7 @@
                               <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                            </VBox.margin>
                         </GridPane>
-                        <GridPane fx:id="gpManoyMazo" alignment="CENTER" minHeight="81.0" prefHeight="120.0" prefWidth="570.0">
+                        <GridPane fx:id="gpManoyMazo" alignment="CENTER" minHeight="81.0" onMouseClicked="#accionManoMazoDescartes" prefHeight="120.0" prefWidth="570.0">
                            <VBox.margin>
                               <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                            </VBox.margin>

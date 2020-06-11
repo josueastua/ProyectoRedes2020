@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -70,6 +71,8 @@ public class JuegoController extends Controller implements Initializable {
     ArrayList<Image> descartes_img = new ArrayList<>();
     Jugador player = null;
     int turno = 1;
+    int oponente = 0;
+    Marco_Carta carta1, carta2, mazo2, descartes2;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -129,10 +132,14 @@ public class JuegoController extends Controller implements Initializable {
         for(int i = 0; i < 5; i++)
             if(i < 3)
                 gpManoyMazo.add(new Marco_Carta("Mano"+i, player), i, 0);
-            else if(i == 3)
-                gpManoyMazo.add(new Marco_Carta("Mazo", player), i, 0);
-            else
-                gpManoyMazo.add(new Marco_Carta("Descartes", player), i, 0);
+            else if(i == 3){
+                mazo2 = new Marco_Carta("Mazo", player);
+                mazo2.setImage(new Image("virus/resources/Dorso.jpg"));
+                gpManoyMazo.add(mazo2, i, 0);
+            }else{
+                descartes2 = new Marco_Carta("Descartes", player);
+                gpManoyMazo.add(descartes2, i, 0);
+            }
     }
     
     
@@ -195,7 +202,7 @@ public class JuegoController extends Controller implements Initializable {
         player = (Jugador) AppContext.getInstance().get("Jugador");
         ArrayList<Jugador> jug = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
         conseguirImagenes();
-        lblPlayer.setText(player.getId());
+        lblPlayer.setText("ID: "+player.getId()+" Nick: "+player.getNick());
     }
 
     private void conseguirImagenes(){
@@ -232,6 +239,18 @@ public class JuegoController extends Controller implements Initializable {
         }
         tt.play();
         menu = !menu;
+    }
+
+    @FXML
+    private void accionGridPaneOponente(MouseEvent event) {
+    }
+
+    @FXML
+    private void accionGripPanePlayer(MouseEvent event) {
+    }
+
+    @FXML
+    private void accionManoMazoDescartes(MouseEvent event) {
     }
     
     
