@@ -194,7 +194,7 @@ public class JuegoController extends Controller implements Initializable {
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
         player = (Jugador) AppContext.getInstance().get("Jugador");
         ArrayList<Jugador> jug = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
-        conseguirImagenes();
+        //conseguirImagenes();
         lblPlayer.setText(player.getId());
     }
 

@@ -67,6 +67,7 @@ public class Conexion {
         }
         msg = null;
         String clave = mensaje.substring(0, 1);
+        System.out.println("Clave: "+clave);
         mensaje = mensaje.substring(2, mensaje.length());
         switch(clave){
             case "1":

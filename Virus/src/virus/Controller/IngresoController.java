@@ -150,7 +150,7 @@ public class IngresoController extends Controller implements Initializable {
     
     @Override
     public void initialize() {
-        AppContext.getInstance().set("Iniciar", true);
+        AppContext.getInstance().set("Iniciar", false);
         ajustarAltura();
         ajustarAncho();
         AppContext.getInstance().set("Ingreso", FlowController.getInstance().getController("Ingreso"));
