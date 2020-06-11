@@ -92,11 +92,13 @@ public class Conexion {
                             Jugador jug = new Jugador(datJug[0], turn, datJug[2]);
                             String[] manaux = datJug[datJug.length - 1].split("-");
                             for(int k = 0; k < manaux.length; k++){
-                                player.addMano(manaux[k]);
+                                jug.addMano(manaux[k]);
                             }
                         }else{
                             String[] mano = datJug[datJug.length - 1].split("-");  
+                            
                             for(int k = 0; k < mano.length; k++){
+                                System.out.println(mano[k]);
                                 player.addMano(mano[k]);
                             }
                         }
