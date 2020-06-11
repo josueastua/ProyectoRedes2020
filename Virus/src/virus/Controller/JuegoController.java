@@ -167,6 +167,12 @@ public class JuegoController extends Controller implements Initializable {
         
     }
     
+    public void actualizarJuego(){
+        Platform.runLater( () -> {
+            conseguirImagenes();
+        });
+    }
+    
     public void informarCartaEspecial(String carta, String idPlayer){
         Platform.runLater( () -> {
             String mensaje = "Un jugador te aplico ";
@@ -210,6 +216,8 @@ public class JuegoController extends Controller implements Initializable {
         ArrayList<Jugador> jug = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
         jug.forEach( (jugador) -> {
             jugador.convertirCarta();
+            if(!jugador.getId().equals(player.getId()))
+                oponentes.add(jugador);
         });
         conseguirImagenes();
         
@@ -247,6 +255,11 @@ public class JuegoController extends Controller implements Initializable {
 
     @FXML
     private void accionSiguente(ActionEvent event) {
+        if(oponente == oponentes.size() - 1){
+            oponente = 0;
+        }else{
+            oponente++;
+        }
     }
 
     @FXML
@@ -278,6 +291,5 @@ public class JuegoController extends Controller implements Initializable {
     @FXML
     private void accionManoMazoDescartes(MouseEvent event) {
     }
-    
     
 }

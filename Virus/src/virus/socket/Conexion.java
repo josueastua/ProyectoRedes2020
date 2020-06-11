@@ -149,10 +149,11 @@ public class Conexion {
                         }
                     }
                     String especial = datosJuego[datosJuego.length-2];
+                    JuegoController juego = (JuegoController) AppContext.getInstance().get("Juego");
                     if(!especial.equals("0")){
-                        JuegoController juego = (JuegoController) AppContext.getInstance().get("Juego");
                         juego.informarCartaEspecial(especial, datosJuego[datosJuego.length-1]);
                     }
+                    juego.actualizarJuego();
                 }else{
                     String id = message[2];
                 }
