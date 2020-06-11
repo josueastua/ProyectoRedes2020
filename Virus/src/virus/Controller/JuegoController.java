@@ -87,6 +87,8 @@ public class JuegoController extends Controller implements Initializable {
         initTraslateTransition();
         addEvents();
         men = new Mensaje();
+        AppContext.getInstance().set("Primer", null);
+        AppContext.getInstance().set("Segundo", null);
     }    
     
     /**
@@ -251,6 +253,17 @@ public class JuegoController extends Controller implements Initializable {
     
     @FXML
     private void accionJugada(ActionEvent event) {
+        String mensaje = player.infoJugador();
+        for(Jugador opo: oponentes) 
+            mensaje += "/"+opo.infoJugador();
+        for(String carta: mazo){
+            mensaje += "/"+carta;
+        }
+        if(!descartes.isEmpty()){
+            for(String carta: descartes)
+                mensaje += "/"+carta;
+        }
+        mensaje += "/"+AppContext.getInstance().get("Especial")+"/"+AppContext.getInstance().get("ID");
     }
 
     @FXML
@@ -282,14 +295,26 @@ public class JuegoController extends Controller implements Initializable {
 
     @FXML
     private void accionGridPaneOponente(MouseEvent event) {
+        System.out.println("GPO");
+        if(AppContext.getInstance().get("Segundo") != null){
+            
+        }
     }
 
     @FXML
     private void accionGripPanePlayer(MouseEvent event) {
+        System.out.println("GPP");
+        if(AppContext.getInstance().get("Segundo") != null){
+            
+        }
     }
 
     @FXML
     private void accionManoMazoDescartes(MouseEvent event) {
+        System.out.println("GPMD");
+        if(AppContext.getInstance().get("Segundo") != null){
+            
+        }
     }
     
 }

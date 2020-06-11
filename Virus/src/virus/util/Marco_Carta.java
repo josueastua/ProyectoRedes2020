@@ -30,7 +30,7 @@ public class Marco_Carta extends Pane{
         this.setId(id);
         asignarEventos();
         this.player = player;
-    }
+    }                                                   
     
     public void setImage(Image image){
         ImageView imv = new ImageView(image);
@@ -46,8 +46,15 @@ public class Marco_Carta extends Pane{
         
         this.setOnMouseClicked( click -> {
             int turno = (int) AppContext.getInstance().get("Turno");
-            if(!this.getId().equals("Mazo") && !this.getId().equals("Descartes") && player.getTurno() == turno)
+            if(!this.getId().equals("Mazo") && !this.getId().equals("Descartes") && player.getTurno() == turno){
                 this.setStyle("-fx-background-color: red");
+                if(AppContext.getInstance().get("Primero") == null){
+                    AppContext.getInstance().set("Primero", this);
+                }else{
+                    AppContext.getInstance().set("Segundo", this);
+                }
+            }
+            
         });
         
         
