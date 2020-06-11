@@ -106,8 +106,9 @@ public class Jugador {
     }
     
     public void convertirCarta(){
+        System.out.println("Tamaño de la mano " + mano.size());
         ArrayList<Object> lista = new ArrayList();
-        String dato = "";
+        String dato;
         Image imagen;
         for (Object carta : tablero) {
             dato = (String) carta;
@@ -123,6 +124,7 @@ public class Jugador {
         
         tablero.clear();
         tablero.addAll(lista);
+        System.out.println(tablero.size());
         lista.clear();
         
         for (Object carta: mano){
@@ -139,15 +141,19 @@ public class Jugador {
         
         mano.clear();
         mano.addAll(lista);
+        System.out.println(mano.size());
         lista.clear();
         
     }
     
-    /*public void Prueba(){
+    public void Prueba(){
         tablero.add("1:1");
         tablero.add("2:4");
         tablero.add("3:2");
         tablero.add("4:4");
+        mano.add("4:1");
+        mano.add("3:4");
+        mano.add("1:5");
         convertirCarta();
         for (Object carta : tablero){
             if (carta.getClass().equals(Carta.class)){
@@ -158,5 +164,5 @@ public class Jugador {
                 aux.imprimirInfo();
             }
         }
-    }*/
+    }
 }
