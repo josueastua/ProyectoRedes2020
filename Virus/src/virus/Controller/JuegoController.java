@@ -72,6 +72,7 @@ public class JuegoController extends Controller implements Initializable {
     Jugador player = null;
     int turno = 1;
     int oponente = 0;
+    Marco_Carta carta1, carta2;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
