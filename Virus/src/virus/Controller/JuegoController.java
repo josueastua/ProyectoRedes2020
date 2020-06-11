@@ -93,7 +93,6 @@ public class JuegoController extends Controller implements Initializable {
      * En este metodo se añadiran listener para ajustar la pantalla
      */
     public void addEvents(){
-        player = (Jugador) AppContext.getInstance().get("Jugador");
         root.widthProperty().addListener( w -> {
             ajustarAncho(root.getWidth());
         });
@@ -125,6 +124,7 @@ public class JuegoController extends Controller implements Initializable {
     }
 
     public void cargarCartas(){
+        player = (Jugador) AppContext.getInstance().get("Jugador");
         for(int i = 0; i < 3; i++){
             for(int j = 1; j <= 5; j++){
                 gpCartasOponente.add(new Marco_Carta("Carta"+i+j, player), i, j);

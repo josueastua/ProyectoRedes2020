@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
 import virus.Controller.IngresoController;
+import virus.Controller.JuegoController;
 import virus.util.AppContext;
 import virus.util.Jugador;
 
@@ -149,7 +150,8 @@ public class Conexion {
                     }
                     String especial = datosJuego[datosJuego.length-2];
                     if(!especial.equals("0")){
-                        
+                        JuegoController juego = (JuegoController) AppContext.getInstance().get("Juego");
+                        juego.informarCartaEspecial(especial, datosJuego[datosJuego.length-1]);
                     }
                 }else{
                     String id = message[2];
