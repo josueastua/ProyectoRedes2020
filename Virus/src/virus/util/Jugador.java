@@ -121,7 +121,26 @@ public class Jugador {
             }
         }
         
-        tablero = lista;
+        tablero.clear();
+        tablero.addAll(lista);
+        lista.clear();
+        
+        for (Object carta: mano){
+            dato = (String) carta;
+            char aux1 = dato.charAt(0);
+            char aux2 = dato.charAt(2);
+            imagen = AppContext.getInstance().getCarta(dato);
+            if (aux1 != 4){
+                lista.add(new Carta(Character.getNumericValue(aux1), Character.getNumericValue(aux2), imagen));
+            }else{
+                lista.add(new Tratamiento(Character.getNumericValue(aux2), imagen));
+            }
+        }
+        
+        mano.clear();
+        mano.addAll(lista);
+        lista.clear();
+        
     }
     
     /*public void Prueba(){

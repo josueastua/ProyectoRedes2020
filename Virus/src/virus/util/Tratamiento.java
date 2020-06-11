@@ -20,6 +20,10 @@ public class Tratamiento {
         return tipo;
     }
     
+    public Image getImagen(){
+        return imagen;
+    }
+    
     public void imprimirInfo(){
         System.out.println("Tipo: " + tipo);
     }

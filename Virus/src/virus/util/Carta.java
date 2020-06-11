@@ -24,6 +24,10 @@ public class Carta {
         return color;
     }
     
+    public Image getImagen(){
+        return imagen;
+    }
+    
     public void imprimirInfo(){
         System.out.println("Color :" + color + ", Tipo: " + tipo);
     }
