@@ -146,7 +146,7 @@ public class Jugador {
         
     }
     
-    public void Prueba(){
+    /*public void Prueba(){
         tablero.add("1:1");
         tablero.add("2:4");
         tablero.add("3:2");
@@ -164,5 +164,5 @@ public class Jugador {
                 aux.imprimirInfo();
             }
         }
-    }
+    }*/
 }
