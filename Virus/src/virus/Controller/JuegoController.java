@@ -13,9 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,6 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
@@ -201,8 +204,11 @@ public class JuegoController extends Controller implements Initializable {
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
         player = (Jugador) AppContext.getInstance().get("Jugador");
         ArrayList<Jugador> jug = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
+        jug.forEach( (jugador) -> {
+            jugador.convertirCarta();
+        });
         conseguirImagenes();
-        lblPlayer.setText("ID: "+player.getId()+" Nick: "+player.getNick());
+        
     }
 
     private void conseguirImagenes(){
@@ -211,6 +217,15 @@ public class JuegoController extends Controller implements Initializable {
         mazo.forEach((carta) -> {
             mazo_img.add(AppContext.getInstance().getCarta(carta));
         });
+        lblPlayer.setText("ID: "+player.getId()+" Nick: "+player.getNick());
+        int index = 0;
+        ObservableList<Node> mano = gpManoyMazo.getChildren();
+        for (Object mano1 : player.getMano()) {
+            Image img = (Image) mano1;
+            Marco_Carta aux = (Marco_Carta) mano.get(index);
+            aux.setImage(img);
+            index++;
+        }
     }
     
     
