@@ -26,8 +26,18 @@ public class Jugador {
         tablero = new ArrayList();
     }
 
+    
+    
     public String getId(){
         return this.ID;
+    }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
     }
     
     public void addMano(Object obj){
