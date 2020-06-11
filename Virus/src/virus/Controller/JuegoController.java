@@ -195,6 +195,7 @@ public class JuegoController extends Controller implements Initializable {
         player = (Jugador) AppContext.getInstance().get("Jugador");
         ArrayList<Jugador> jug = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
         conseguirImagenes();
+        lblPlayer.setText(player.getId());
     }
 
     private void conseguirImagenes(){
