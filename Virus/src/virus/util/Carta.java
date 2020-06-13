@@ -6,6 +6,8 @@ public class Carta {
     private int tipo;
     private int color;
     private Image imagen;
+    private String representacion;
+    
     Carta(){
         
     }
@@ -31,9 +33,35 @@ public class Carta {
     public void setImagen(Image imagen) {
         this.imagen = imagen;
     }
+
+    public String getRepresentacion() {
+        return representacion;
+    }
+    
+    
+    
+    public static Carta crearCarta(String info){
+        if(info.equals("0")){
+            return null;
+        }else{
+            char tipo = info.charAt(0);
+            char color = info.charAt(2);
+            Carta carta = new Carta(Character.getNumericValue(tipo),Character.getNumericValue(color),AppContext.getInstance().getCarta(info));
+            return carta;
+        }
+    }
+    
+    public void representacionCarta(){
+        representacion = String.valueOf(tipo)+":"+String.valueOf(color);
+    }
     
     public void imprimirInfo(){
         System.out.println("Color :" + color + ", Tipo: " + tipo);
+    }
+    
+    @Override
+    public String toString(){
+        return "Tipo: " + tipo + ", Color: " + color;
     }
     
 }
