@@ -319,6 +319,13 @@ public class JuegoController extends Controller implements Initializable {
     }
 
     private void conseguirImagenes(){
+        for(int i =0; i < 3; i++){
+            if(player.getMano().get(i).getClass().equals(Carta.class))
+                mano[i].setCarta((Carta)player.getMano().get(i));
+            else
+                mano[i].setCarta((Tratamiento)player.getMano().get(i));
+        }
+        /*
         mazo = (ArrayList<String>) AppContext.getInstance().get("Mazo");
         mazo_img.clear();
         mazo.forEach((carta) -> {
@@ -349,7 +356,7 @@ public class JuegoController extends Controller implements Initializable {
             }
             index++;
         }
-        System.out.println(index);
+        System.out.println(index);*/
     }
     
     public String infoGridPane(){

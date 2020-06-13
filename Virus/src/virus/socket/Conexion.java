@@ -10,7 +10,9 @@ import javafx.scene.image.Image;
 import virus.Controller.IngresoController;
 import virus.Controller.JuegoController;
 import virus.util.AppContext;
+import virus.util.Carta;
 import virus.util.Jugador;
+import virus.util.Tratamiento;
 
 
 public class Conexion {
@@ -104,12 +106,14 @@ public class Conexion {
                             }
                         }
                     }else{
+                        crearMazo(cont2[i].split("_"));
+                        /*
                         ArrayList<String> mazo = new ArrayList<>();
                         String[] cartas = cont2[i].split("_");
                         for(int a = 0; a < cartas.length; a++){
                             mazo.add(cartas[a]);
                         }
-                        AppContext.getInstance().set("Mazo", mazo);
+                        AppContext.getInstance().set("Mazo", mazo);*/
                     }
                 }
                 AppContext.getInstance().set("Turno", 1);
@@ -180,7 +184,7 @@ public class Conexion {
                     for(String carta: cartas){
                         jug.addMano(carta);
                     }
-                    //jug.infodatosMatriz(jugador[2]);
+                    jug.datosMatriz(jugador[2]);
                 }
             }
         }
@@ -209,16 +213,25 @@ public class Conexion {
         for(String carta: mazo){
             char prima = carta.charAt(0);
             if(prima != '4'){
-                
+                Mazo.add(new Carta(Character.getNumericValue(prima), Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
+            }else{
+                Mazo.add(new Tratamiento(Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
             }
         }
         AppContext.getInstance().set("Mazo", Mazo);
     }
     
     private void crearDescartes(String[] descartes){
+        ArrayList<Object> Descartes = new ArrayList<>();
         for(String carta: descartes){
-            
+            char prima = carta.charAt(0);
+            if(prima != '4'){
+                Descartes.add(new Carta(Character.getNumericValue(prima), Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
+            }else{
+                Descartes.add(new Tratamiento(Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
+            }
         }
+        AppContext.getInstance().set("Descartes", Descartes);
     }
     
     private void usoTratamienro(String[] tratamiento){
