@@ -6,6 +6,7 @@
 package virus.util;
 
 
+import java.util.ArrayList;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -122,7 +123,19 @@ public class Marco_Carta extends Pane{
                     for(Object obj: player.getMano()){
                         aux = (Marco_Carta)obj;
                         if(aux.getCarta() == null){
-                            
+                            ArrayList<Object> mazo = (ArrayList<Object>) AppContext.getInstance().get("Mazo");
+                            if(mazo.get(0).getClass().equals(Carta.class)){
+                                aux.setCarta((Carta)mazo.get(0));
+                                mazo.remove(mazo.get(0));
+                                break;
+                            }
+                        }else if(aux.getTratamiento() == null){
+                            ArrayList<Object> mazo = (ArrayList<Object>) AppContext.getInstance().get("Mazo");
+                            if(mazo.get(0).getClass().equals(Tratamiento.class)){
+                                aux.setCarta((Carta)mazo.get(0));
+                                mazo.remove(mazo.get(0));
+                                break;
+                            }
                         }
                     }
                 }else if(this.getId().equals("Descartes")){
