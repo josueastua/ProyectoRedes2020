@@ -1,4 +1,4 @@
-package virus.socket;
+ package virus.socket;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -117,15 +117,15 @@ public class Conexion {
                 AppContext.getInstance().set("Iniciar", true);
                 break;
             case "4":
-                String[] message = mensaje.split("_");
+                String[] message = mensaje.split("/");
                 int turno = 0;
                 try{
                     turno = Integer.parseInt(message[0]);
                 }catch(NumberFormatException ex){
                     
                 }
-                AppContext.getInstance().set("Turno", turno);
-                if(!message[1].equals("False")){
+                AppContext.getInstance().set("Turno", turno);/*
+                if(!message[1].equals("0")){
                     String[] datosJuego = message[3].split("/");
                     for(int i = 0; i < datosJuego.length; i++){
                         if(i < datosJuego.length - 4){
@@ -156,7 +156,7 @@ public class Conexion {
                     juego.actualizarJuego();
                 }else{
                     String id = message[2];
-                }
+                }*/
                 break;
             default:
                 break;
