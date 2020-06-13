@@ -205,9 +205,14 @@ public class Conexion {
     }
     
     private void crearMazo(String[] mazo){
+        ArrayList<Object> Mazo = new ArrayList<>();
         for(String carta: mazo){
-            
+            char prima = carta.charAt(0);
+            if(prima != '4'){
+                
+            }
         }
+        AppContext.getInstance().set("Mazo", Mazo);
     }
     
     private void crearDescartes(String[] descartes){

@@ -16,6 +16,7 @@ public class Carta {
         this.tipo = tipo;
         this.color = color;
         this.imagen = imagen;
+        representacionCarta();
     }
 
     public int getTipo() {
