@@ -11,7 +11,7 @@ public class Tratamiento {
         
     }
     
-    Tratamiento(int tipo, Image imagen){
+    public Tratamiento(int tipo, Image imagen){
         this.tipo = tipo;
         this.imagen = imagen;
     }
