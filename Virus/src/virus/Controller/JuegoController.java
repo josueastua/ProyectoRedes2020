@@ -251,23 +251,34 @@ public class JuegoController extends Controller implements Initializable {
         });
     }
     
-    public void informarCartaEspecial(String carta, String idPlayer){
+    public void informarCartaEspecial(String carta, String id1, String id2){
         Platform.runLater( () -> {
             String mensaje = "Un jugador te aplico ";
             Boolean mostrar = false;
             switch(carta){
                 case "1":
                     mensaje += "Ladron de Organos";
+                    if(player.getId().equals(id2) || player.getId().equals(id1)){
+                        men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
+                        mostrar = true;
+                    }
                     break;
                 case "2":
                     mensaje += "Trasplante de Organos";
                     break;
                 case "3":
                     mensaje += "Infeccion";
+                    if(player.getId().equals(id2) || player.getId().equals(id1)){
+                        men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
+                        mostrar = true;
+                    }
                     break;
                 case "4":
                     mensaje += "Guante de latex";
-                    mostrar = true;
+                    if(player.getId().equals(id2) || player.getId().equals(id1)){
+                        men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
+                        mostrar = true;
+                    }
                     break;
                 case "5":
                     mensaje += "Error medico";
@@ -276,12 +287,9 @@ public class JuegoController extends Controller implements Initializable {
                     break;
             }
             if(!mostrar){
-                Jugador player = (Jugador) AppContext.getInstance().get("Jugador");
-                mostrar = player.getId().equals(idPlayer);
-            }
-            if(mostrar){
-                Mensaje men = new Mensaje();
-                men.show(Alert.AlertType.INFORMATION, carta, mensaje);
+                if(player.getId().equals(id2)){
+                    men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
+                }
             }
         });   
     }

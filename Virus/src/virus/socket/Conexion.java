@@ -124,9 +124,15 @@ public class Conexion {
                 }catch(NumberFormatException ex){
                     
                 }
-                AppContext.getInstance().set("Turno", turno);/*
+                AppContext.getInstance().set("Turno", turno);
                 if(!message[1].equals("0")){
-                    String[] datosJuego = message[3].split("/");
+                    datosJugador(message[2].split(":"));
+                    crearMazo(message[3].split("-"));
+                    crearDescartes(message[4].split("-"));
+                    usoTratamienro(message[2].split("-"));
+                }
+                    /*
+                    String[] datosJuego = message[2].split("/");
                     for(int i = 0; i < datosJuego.length; i++){
                         if(i < datosJuego.length - 4){
                             datosJugador(datosJuego[i].split("_"));
@@ -165,9 +171,23 @@ public class Conexion {
     
     private void datosJugador(String[] data){
         ArrayList<Jugador> jugadores = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
-        String[] cartas;
+        String[] jugador, cartas;
+        for(String player: data){
+            jugador = player.split("_");
+            for(Jugador jug: jugadores){
+                if(jug.getId().equals(jugador[0])){
+                    cartas = jugador[1].split("-");
+                    for(String carta: cartas){
+                        jug.addMano(carta);
+                    }
+                    //jug.infodatosMatriz(jugador[2]);
+                }
+            }
+        }
+        /*
         for(int i = 0; i < jugadores.size(); i++){
-            if(jugadores.get(i).getId().equals(data[0])){
+            jugador = data[0].split("_");
+            if(jugadores.get(i).getId().equals(jugador[0])){
                 cartas = data[1].split("-");
                 jugadores.get(i).getMano().clear();
                 for(int card = 0; card < cartas.length; card++){
@@ -181,6 +201,25 @@ public class Conexion {
                     }
                 }
             }
+        }*/
+    }
+    
+    private void crearMazo(String[] mazo){
+        for(String carta: mazo){
+            
+        }
+    }
+    
+    private void crearDescartes(String[] descartes){
+        for(String carta: descartes){
+            
+        }
+    }
+    
+    private void usoTratamienro(String[] tratamiento){
+        if(!tratamiento[0].equals("0")){
+            JuegoController juego = (JuegoController) AppContext.getInstance().get("Juego");
+            juego.informarCartaEspecial(tratamiento[0], tratamiento[1], tratamiento[2]);
         }
     }
 }
