@@ -35,6 +35,7 @@ import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import virus.socket.Conexion;
 import virus.util.AppContext;
 import virus.util.Carta;
+import virus.util.Cuerpo;
 import virus.util.FlowController;
 import virus.util.Jugador;
 import virus.util.Marco_Carta;
@@ -69,7 +70,6 @@ public class JuegoController extends Controller implements Initializable {
     @FXML
     private ImageView imv_fondo;
     Mensaje men;
-    
     ArrayList<Jugador> oponentes = new ArrayList<>(); 
     ArrayList<String> mazo = new ArrayList<>();
     ArrayList<Object> mazo_img = new ArrayList<>();
@@ -79,6 +79,7 @@ public class JuegoController extends Controller implements Initializable {
     int turno = 1;
     int oponente = 0;
     Marco_Carta carta1, carta2, mazo2, descartes2;
+    Cuerpo[][] tableroJugador = new Cuerpo[3][5];
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -373,11 +374,18 @@ public class JuegoController extends Controller implements Initializable {
     
     public void cartaTratamiento(){
         Marco_Carta trata = (Marco_Carta) AppContext.getInstance().get("Tratamiento");
+        Tratamiento tra = trata.getTratamiento();
+        String especial = "";
+        switch(tra.getTipo()){
+            case 1:
+                break;
+        }
         ttrat.setAutoReverse(false);//Para que no se devuelva
         ttrat.setCycleCount(1);
         ttrat.setDelay(Duration.ONE);
         ttrat.setNode(trata);
-        ttrat.setByX(-320);
-        ttrat.setToX(0);
+        ttrat.setByX(400);
+        ttrat.setToX(trata.getLayoutY());
+        ttrat.play();
     }
 }
