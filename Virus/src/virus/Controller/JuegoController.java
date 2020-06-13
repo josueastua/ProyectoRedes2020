@@ -82,7 +82,7 @@ public class JuegoController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println(infoGridPane());
-        /*con = new Conexion();
+        con = new Conexion();
         menu = Boolean.TRUE;
         cargarCartas();
         initTraslateTransition();
@@ -90,7 +90,7 @@ public class JuegoController extends Controller implements Initializable {
         men = new Mensaje();
         AppContext.getInstance().set("Primer", null);
         AppContext.getInstance().set("Segundo", null);
-        men = new Mensaje();*/
+        men = new Mensaje();
     }    
     
     /**
@@ -214,7 +214,6 @@ public class JuegoController extends Controller implements Initializable {
    
     @Override
     public void initialize() {
-        /*
         if(player == null)
             player = (Jugador) AppContext.getInstance().get("Jugador");
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
@@ -224,7 +223,7 @@ public class JuegoController extends Controller implements Initializable {
             if(!jugador.getId().equals(player.getId()))
                 oponentes.add(jugador);
         });
-        conseguirImagenes();*/
+        conseguirImagenes();
         
     }
 
@@ -359,4 +358,51 @@ public class JuegoController extends Controller implements Initializable {
         }
     }
     
+    public void hacerJugada(){
+        Marco_Carta marco1 = (Marco_Carta) AppContext.getInstance().get("Primero");
+        Marco_Carta marco2 = (Marco_Carta) AppContext.getInstance().get("Segundo");
+        switch(marco1.getCarta().getTipo()){
+            //La carta es un organo
+            case 1:{
+                if(gpCartas.getChildren().contains(marco2)){
+                   if(GridPane.getRowIndex(marco2) == 0){
+                       if(verificarOrganoRepetido(marco1)){
+                           marco2.setCarta(marco1.getCarta());
+                           marco2.setImage(marco1.getCarta().getImagen());
+                           marco1.setCarta(null);
+                       }
+                    }
+                }
+                break;
+            }
+            case 2:{
+                if(gpCartas.getChildren().contains(marco2)){
+                   if(GridPane.getRowIndex(marco2) == 1){
+                       if(verificarOrganoRepetido(marco1)){
+                           marco2.setCarta(marco1.getCarta());
+                           marco2.setImage(marco1.getCarta().getImagen());
+                           marco1.setCarta(null);
+                       }
+                    }
+                }
+                break;
+            }
+            case 3:{
+                break;
+            }
+        }
+    }
+    
+    public boolean verificarOrganoRepetido(Marco_Carta carta){
+        Marco_Carta aux;
+        for(Node nodo: gpCartas.getChildren()){
+            aux = (Marco_Carta) nodo;
+            if(aux.getCarta() != null){
+                if(aux.getCarta().getColor() == carta.getCarta().getColor() && aux.getCarta().getTipo() == carta.getCarta().getTipo()){
+                    return false;
+                } 
+            }
+        }
+        return true;
+    }
 }
