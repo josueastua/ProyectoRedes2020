@@ -40,3 +40,43 @@ and open the template in the editor.
 #imv_fondo{
     -fx-image:url('../resources/fondo.jpg')
 }
+
+.combo-box{
+    -fx-border-radius: 0 15 0 15;
+    -fx-border-insets: 0 0 -1 -1;
+    -fx-background-radius: 0 15 0 15;
+    -fx-font: bold 22px "Harlow Solid Italic";
+    -fx-background-color: #017001;
+    -fx-border-color: #0db30d;
+    -fx-border-width: 0 0 5 5; 
+    -fx-opacity: 0.9;
+} 
+
+.combo-box .arrow-button{
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow-button .arrow{
+    -fx-background-color: #0db30d;
+}
+
+.combo-box:focused .arrow-button .arrow{
+    -fx-background-color: royalblue;
+}
+
+.combo-box:focused{
+    -fx-border-color: royalblue;
+}
+
+.combo-box .list-cell{
+    -fx-prompt-text-fill: white;
+    -fx-background-color: #017001;
+    -fx-background-radius: 0 15 0 15;
+    -fx-text-fill: white;
+    -fx-font: bold 18px "Bodoni MT";
+}
+
+.combo-box .list-cell:hover{
+    -fx-background-color: #d3d3d3;
+    -fx-text-fill: #003366;
+}

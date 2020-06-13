@@ -158,7 +158,6 @@ public class JuegoController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         crearMatrices();
-        System.out.println(infoGridPane());
         con = new Conexion();
         menu = Boolean.TRUE;
         initTraslateTransition();
