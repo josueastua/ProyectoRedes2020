@@ -57,6 +57,7 @@ public class JuegoController extends Controller implements Initializable {
     @FXML private VBox vb_contenerdor_oponentes;
     @FXML private VBox vb_oponente;
     private TranslateTransition tt = new TranslateTransition(Duration.seconds(0.6));
+    private TranslateTransition ttrat = new TranslateTransition(Duration.seconds(0.6));
     private Boolean menu; 
     @FXML private VBox vb_contenedor_principal;
     @FXML private HBox hb_titulo;
@@ -86,46 +87,11 @@ public class JuegoController extends Controller implements Initializable {
         menu = Boolean.TRUE;
         cargarCartas();
         initTraslateTransition();
-        addEvents();
         men = new Mensaje();
         AppContext.getInstance().set("Primer", null);
         AppContext.getInstance().set("Segundo", null);
         men = new Mensaje();
     }    
-    
-    /**
-     * En este metodo se añadiran listener para ajustar la pantalla
-     */
-    public void addEvents(){
-        root.widthProperty().addListener( w -> {
-            ajustarAncho(root.getWidth());
-        });
-        root.heightProperty().addListener( h -> {
-            ajustarLargo(root.getHeight());
-        });
-    }
-    
-    public void ajustarAncho(Double ancho){
-        imv_fondo.setFitWidth(ancho);
-        hb_titulo.setPrefWidth(ancho);
-        lblPlayer.setPrefWidth(ancho - 227);
-        if(menu){
-            vb_player.setPrefWidth(ancho - 320);
-        }else{
-            vb_player.setPrefWidth(ancho);
-        }
-    }
-    
-    public void ajustarLargo(Double largo){
-        imv_fondo.setFitHeight(largo);
-        vb_oponente.setPrefHeight(largo - 80);
-        hb_contenedor_juego.setPrefHeight(largo - 80);
-        vb_contenedor_principal.setPrefHeight(largo - 80);
-        vb_contenerdor_oponentes.setPrefHeight(largo - 80);
-        vb_player.setPrefHeight(largo - 80);
-        gpCartas.setPrefHeight(largo - 80 - (78) - (140));
-        gpCartasOponente.setPrefHeight(largo - 80 - (85) - (80));
-    }
 
     public void cargarCartas(){
         player = (Jugador) AppContext.getInstance().get("Jugador");
@@ -165,7 +131,6 @@ public class JuegoController extends Controller implements Initializable {
                 vb_contenerdor_oponentes.getChildren().clear();
                 //vb_contenerdor_oponentes.setLayoutX(-320);
                 vb_player.setPrefWidth(root.getWidth());
-                        
             }
         });
         
@@ -322,12 +287,12 @@ public class JuegoController extends Controller implements Initializable {
             vb_contenerdor_oponentes.setPrefWidth(320);
             vb_contenerdor_oponentes.getChildren().add(vb_oponente);
             vb_player.setPrefWidth(root.getWidth()-320);
-            tt.setByX(-320);
+            tt.setByX(-450);
             tt.setToX(0);
             btnShow.setText("Ocultar Oponente");
         }else{
             tt.setByX(0);
-            tt.setToX(-320);
+            tt.setToX(-450);
             btnShow.setText("Mostrar Oponente");
         }
         tt.play();
@@ -404,5 +369,15 @@ public class JuegoController extends Controller implements Initializable {
             }
         }
         return true;
+    }
+    
+    public void cartaTratamiento(){
+        Marco_Carta trata = (Marco_Carta) AppContext.getInstance().get("Tratamiento");
+        ttrat.setAutoReverse(false);//Para que no se devuelva
+        ttrat.setCycleCount(1);
+        ttrat.setDelay(Duration.ONE);
+        ttrat.setNode(trata);
+        ttrat.setByX(-320);
+        ttrat.setToX(0);
     }
 }
