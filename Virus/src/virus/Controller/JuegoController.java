@@ -82,7 +82,7 @@ public class JuegoController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println(infoGridPane());
-        /*con = new Conexion();
+        con = new Conexion();
         menu = Boolean.TRUE;
         cargarCartas();
         initTraslateTransition();
@@ -90,7 +90,7 @@ public class JuegoController extends Controller implements Initializable {
         men = new Mensaje();
         AppContext.getInstance().set("Primer", null);
         AppContext.getInstance().set("Segundo", null);
-        men = new Mensaje();*/
+        men = new Mensaje();
     }    
     
     /**
@@ -214,7 +214,6 @@ public class JuegoController extends Controller implements Initializable {
    
     @Override
     public void initialize() {
-        /*
         if(player == null)
             player = (Jugador) AppContext.getInstance().get("Jugador");
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
@@ -224,7 +223,7 @@ public class JuegoController extends Controller implements Initializable {
             if(!jugador.getId().equals(player.getId()))
                 oponentes.add(jugador);
         });
-        conseguirImagenes();*/
+        conseguirImagenes();
         
     }
 
