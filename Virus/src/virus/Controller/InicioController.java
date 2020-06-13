@@ -31,8 +31,6 @@ public class InicioController extends Controller implements Initializable {
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Jugador jug = new Jugador();
-        jug.datosMatriz("1:2-2:3-3:2,3:5-1:4-2:2,0-0-0,0-0-0,0-0-0");
         addEvents();
         
     }    
