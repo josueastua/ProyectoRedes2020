@@ -36,6 +36,7 @@ import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import virus.socket.Conexion;
 import virus.util.AppContext;
 import virus.util.Carta;
+import virus.util.Cuerpo;
 import virus.util.FlowController;
 import virus.util.Jugador;
 import virus.util.Marco_Carta;
@@ -151,14 +152,15 @@ public class JuegoController extends Controller implements Initializable {
     @FXML
     private ImageView ivMano04;
     @FXML
-    private ComboBox<?> cbDescartar;
-    
+    private ComboBox<String> cbDescartar;
+    Cuerpo[][] tablero, tabOponente;
+    Cuerpo[] mano;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        crearMatrices();
         System.out.println(infoGridPane());
         con = new Conexion();
         menu = Boolean.TRUE;
-        cargarCartas();
         initTraslateTransition();
         addEvents();
         men = new Mensaje();
@@ -166,6 +168,29 @@ public class JuegoController extends Controller implements Initializable {
         AppContext.getInstance().set("Segundo", null);
         men = new Mensaje();
     }    
+    
+    public void crearMatrices(){
+        tablero = new Cuerpo[3][5];
+        tabOponente = new Cuerpo[5][3];
+        mano = new Cuerpo[5];
+        
+        tablero[0][0] = new Cuerpo(null, ivTab00); tablero[0][1] = new Cuerpo(null, ivTab01); tablero[0][2] = new Cuerpo(null, ivTab02); tablero[0][3] = new Cuerpo(null, ivTab03); tablero[0][4] = new Cuerpo(null, ivTab04); 
+        tablero[1][0] = new Cuerpo(null, ivTab10); tablero[1][1] = new Cuerpo(null, ivTab11); tablero[1][2] = new Cuerpo(null, ivTab12); tablero[1][3] = new Cuerpo(null, ivTab13); tablero[1][4] = new Cuerpo(null, ivTab14);
+        tablero[2][0] = new Cuerpo(null, ivTab20); tablero[2][1] = new Cuerpo(null, ivTab21); tablero[2][2] = new Cuerpo(null, ivTab22); tablero[2][3] = new Cuerpo(null, ivTab23); tablero[2][4] = new Cuerpo(null, ivTab24);
+
+        tabOponente[0][0] = new Cuerpo(null, ivOP00); tabOponente[0][1] = new Cuerpo(null, ivOP01); tabOponente[0][2] = new Cuerpo(null, ivOP02);
+        tabOponente[1][0] = new Cuerpo(null, ivOP10); tabOponente[1][1] = new Cuerpo(null, ivOP11); tabOponente[1][2] = new Cuerpo(null, ivOP12);
+        tabOponente[2][0] = new Cuerpo(null, ivOP20); tabOponente[2][1] = new Cuerpo(null, ivOP21); tabOponente[2][2] = new Cuerpo(null, ivOP22);
+        tabOponente[3][0] = new Cuerpo(null, ivOP30); tabOponente[3][1] = new Cuerpo(null, ivOP31); tabOponente[3][2] = new Cuerpo(null, ivOP32);
+        tabOponente[4][0] = new Cuerpo(null, ivOP40); tabOponente[4][1] = new Cuerpo(null, ivOP41); tabOponente[4][2] = new Cuerpo(null, ivOP42);
+        
+        mano[0] = new Cuerpo(null, ivMano00);
+        mano[1] = new Cuerpo(null, ivMano01);
+        mano[2] = new Cuerpo(null, ivMano02);
+        mano[3] = new Cuerpo(null, ivMano03);
+        mano[4] = new Cuerpo(null, ivMano04);
+        
+    }
     
     /**
      * En este metodo se añadiran listener para ajustar la pantalla
@@ -201,32 +226,6 @@ public class JuegoController extends Controller implements Initializable {
         gpCartasOponente.setPrefHeight(largo - 80 - (85) - (80));
     }
 
-    public void cargarCartas(){
-        player = (Jugador) AppContext.getInstance().get("Jugador");
-        for(int i = 0; i < 3; i++){
-            for(int j = 1; j <= 5; j++){
-                gpCartasOponente.add(new Marco_Carta("Carta"+i+j, player,i,j), i, j);
-            }
-        }
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 3; j++){
-                gpCartas.add(new Marco_Carta("Carta"+i+j, player,i,j), i, j);
-            }
-        }
-        for(int i = 0; i < 5; i++)
-            if(i < 3)
-                gpManoyMazo.add(new Marco_Carta("Mano"+i, player,0,i), i, 0);
-            else if(i == 3){
-                mazo2 = new Marco_Carta("Mazo", player,0,i);
-                mazo2.setImage(new Image("virus/resources/Dorso.jpg"));
-                gpManoyMazo.add(mazo2, i, 0);
-            }else{
-                descartes2 = new Marco_Carta("Descartes", player,0,i);
-                gpManoyMazo.add(descartes2, i, 0);
-            }
-    }
-    
-    
     
     private void initTraslateTransition(){
         tt.setAutoReverse(false);//Para que no se devuelva
@@ -296,6 +295,14 @@ public class JuegoController extends Controller implements Initializable {
    
     @Override
     public void initialize() {
+        cbDescartar.getItems().clear();
+        cbDescartar.getItems().add("Las tres cartas");
+        cbDescartar.getItems().add("La carta 1 y la carta 2");
+        cbDescartar.getItems().add("La carta 1 y la carta 3");
+        cbDescartar.getItems().add("La carta 2 y la carta 3");
+        cbDescartar.getItems().add("La carta 1");
+        cbDescartar.getItems().add("La carta 2");
+        cbDescartar.getItems().add("La carta 3");
         if(player == null)
             player = (Jugador) AppContext.getInstance().get("Jugador");
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
@@ -305,7 +312,7 @@ public class JuegoController extends Controller implements Initializable {
             if(!jugador.getId().equals(player.getId()))
                 oponentes.add(jugador);
         });
-        conseguirImagenes();
+        //conseguirImagenes();
         
     }
 
