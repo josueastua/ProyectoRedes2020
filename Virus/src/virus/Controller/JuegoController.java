@@ -5,12 +5,9 @@
  */
 package virus.Controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -20,18 +17,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import virus.socket.Conexion;
 import virus.util.AppContext;
 import virus.util.Carta;
@@ -57,6 +52,7 @@ public class JuegoController extends Controller implements Initializable {
     @FXML private VBox vb_contenerdor_oponentes;
     @FXML private VBox vb_oponente;
     private TranslateTransition tt = new TranslateTransition(Duration.seconds(0.6));
+    private TranslateTransition ttrat = new TranslateTransition(Duration.seconds(0.6));
     private Boolean menu; 
     @FXML private VBox vb_contenedor_principal;
     @FXML private HBox hb_titulo;
@@ -78,6 +74,8 @@ public class JuegoController extends Controller implements Initializable {
     int turno = 1;
     int oponente = 0;
     Marco_Carta carta1, carta2, mazo2, descartes2;
+    @FXML
+    private ComboBox<String> cbDescartar;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -90,6 +88,7 @@ public class JuegoController extends Controller implements Initializable {
         men = new Mensaje();
         AppContext.getInstance().set("Primer", null);
         AppContext.getInstance().set("Segundo", null);
+        AppContext.getInstance().set("Tratamiento", null);
         men = new Mensaje();
     }    
     
@@ -165,7 +164,6 @@ public class JuegoController extends Controller implements Initializable {
                 vb_contenerdor_oponentes.getChildren().clear();
                 //vb_contenerdor_oponentes.setLayoutX(-320);
                 vb_player.setPrefWidth(root.getWidth());
-                        
             }
         });
         
@@ -214,6 +212,14 @@ public class JuegoController extends Controller implements Initializable {
    
     @Override
     public void initialize() {
+        cbDescartar.getItems().clear();
+        cbDescartar.getItems().add("Las tres cartas");
+        cbDescartar.getItems().add("La carta 1 y la carta 2");
+        cbDescartar.getItems().add("La carta 1 y la carta 3");
+        cbDescartar.getItems().add("La carta 2 y la carta 3");
+        cbDescartar.getItems().add("La carta 1");
+        cbDescartar.getItems().add("La carta 2");
+        cbDescartar.getItems().add("La carta 3");
         if(player == null)
             player = (Jugador) AppContext.getInstance().get("Jugador");
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
@@ -224,7 +230,6 @@ public class JuegoController extends Controller implements Initializable {
                 oponentes.add(jugador);
         });
         conseguirImagenes();
-        
     }
 
     private void conseguirImagenes(){
@@ -356,6 +361,14 @@ public class JuegoController extends Controller implements Initializable {
         if(AppContext.getInstance().get("Segundo") != null){
             
         }
+    }
+    
+    public void cartaTratamiento(){
+        Marco_Carta trata = (Marco_Carta) AppContext.getInstance().get("Tratamiento");
+        ttrat.setAutoReverse(false);//Para que no se devuelva
+        ttrat.setCycleCount(1);
+        ttrat.setDelay(Duration.ONE);
+        ttrat.setNode(trata);
     }
     
 }

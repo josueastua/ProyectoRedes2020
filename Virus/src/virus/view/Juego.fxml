@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -102,11 +103,23 @@
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
-                        <Button fx:id="btnJugada" mnemonicParsing="false" onAction="#accionJugada" prefHeight="47.0" prefWidth="283.0" text="Hacer Jugada">
+                        <HBox>
                            <VBox.margin>
                               <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                            </VBox.margin>
-                        </Button>
+                           <children>
+                              <ComboBox fx:id="cbDescartar" prefHeight="58.0" prefWidth="275.0" promptText="Cambiar Mano">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                              <Button fx:id="btnJugada" mnemonicParsing="false" onAction="#accionJugada" prefHeight="52.0" prefWidth="275.0" text="Hacer Jugada">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children>

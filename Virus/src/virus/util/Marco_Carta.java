@@ -95,7 +95,7 @@ public class Marco_Carta extends Pane{
         this.setOnMouseClicked( click -> {
             int turno = (int) AppContext.getInstance().get("Turno");
             if(player.getTurno() == turno){
-                if(!this.getId().equals("Mazo") && !this.getId().equals("Descartes") && this.carta.getClass().equals(Carta.class)){
+                if(!this.getId().equals("Mazo") && !this.getId().equals("Descartes") && this.carta != null){
                     //this.setStyle("-fx-background-color: red");
                     if(AppContext.getInstance().get("Primero") == null){
                         Marco_Carta aux;
@@ -109,12 +109,12 @@ public class Marco_Carta extends Pane{
                         Marco_Carta aux;
                         for(Object obj: oponent.getChildren()){
                             aux = (Marco_Carta)obj;
-                            if(aux == this)
+                            if(aux == this && aux.getCarta() == null)
                                 AppContext.getInstance().set("Segundo", this);
                         }
                         for(Object obj: tablero.getChildren()){
                             aux = (Marco_Carta)obj;
-                            if(aux == this)
+                            if(aux == this && aux.getCarta() == null)
                                 AppContext.getInstance().set("Segundo", this);
                         }
                     }
@@ -136,10 +136,8 @@ public class Marco_Carta extends Pane{
                             }
                         }
                     }
-                }else if(this.getId().equals("Descartes")){
-
-                }else if(this.carta.getClass().equals(Tratamiento.class)){
-
+                }else if(this.tratamiento != null){
+                    AppContext.getInstance().set("Tratamiento", null);
                 }
             }else{
                 men.show(Alert.AlertType.ERROR, "JUGAR", "Aun no es su turno");
