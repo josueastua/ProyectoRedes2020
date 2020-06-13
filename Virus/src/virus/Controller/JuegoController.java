@@ -71,9 +71,9 @@ public class JuegoController extends Controller implements Initializable {
     
     ArrayList<Jugador> oponentes = new ArrayList<>(); 
     ArrayList<String> mazo = new ArrayList<>();
-    ArrayList<Image> mazo_img = new ArrayList<>();
+    ArrayList<Object> mazo_img = new ArrayList<>();
     ArrayList<String> descartes = new ArrayList<>();
-    ArrayList<Image> descartes_img = new ArrayList<>();
+    ArrayList<Object> descartes_img = new ArrayList<>();
     Jugador player = null;
     int turno = 1;
     int oponente = 0;
@@ -87,6 +87,9 @@ public class JuegoController extends Controller implements Initializable {
         cargarCartas();
         initTraslateTransition();
         addEvents();
+        men = new Mensaje();
+        AppContext.getInstance().set("Primer", null);
+        AppContext.getInstance().set("Segundo", null);
         men = new Mensaje();*/
     }    
     
@@ -229,7 +232,15 @@ public class JuegoController extends Controller implements Initializable {
         mazo = (ArrayList<String>) AppContext.getInstance().get("Mazo");
         mazo_img.clear();
         mazo.forEach((carta) -> {
-            mazo_img.add(AppContext.getInstance().getCarta(carta));
+            String dato = (String) carta;
+            char aux1 = dato.charAt(0);
+            char aux2 = dato.charAt(2);
+            Image imagen = AppContext.getInstance().getCarta(dato);
+            if(aux1 != 4){
+                mazo_img.add(new Carta(Character.getNumericValue(aux1), Character.getNumericValue(aux2), imagen));
+            }else{
+                mazo_img.add(new Tratamiento(Character.getNumericValue(aux2), imagen));
+            }
         });
         lblPlayer.setText("ID: "+player.getId()+" Nick: "+player.getNick());
         int index = 0;
@@ -239,9 +250,11 @@ public class JuegoController extends Controller implements Initializable {
             Marco_Carta aux = (Marco_Carta)mano.get(index);
             if(mano1.getClass().equals(Carta.class)){
                 Carta carta = (Carta)mano1;
+                aux.setCarta(carta);
                 aux.setImage(carta.getImagen());
             }else{
                 Tratamiento carta = (Tratamiento)mano1;
+                aux.setTratamiento(carta);
                 aux.setImage(carta.getImagen());
             }
             index++;
@@ -282,6 +295,17 @@ public class JuegoController extends Controller implements Initializable {
     
     @FXML
     private void accionJugada(ActionEvent event) {
+        String mensaje = player.infoJugador();
+        for(Jugador opo: oponentes) 
+            mensaje += "/"+opo.infoJugador();
+        for(String carta: mazo){
+            mensaje += "/"+carta;
+        }
+        if(!descartes.isEmpty()){
+            for(String carta: descartes)
+                mensaje += "/"+carta;
+        }
+        mensaje += "/"+AppContext.getInstance().get("Especial")+"/"+AppContext.getInstance().get("ID");
     }
 
     @FXML
@@ -313,14 +337,26 @@ public class JuegoController extends Controller implements Initializable {
 
     @FXML
     private void accionGridPaneOponente(MouseEvent event) {
+        System.out.println("GPO");
+        if(AppContext.getInstance().get("Segundo") != null){
+            
+        }
     }
 
     @FXML
     private void accionGripPanePlayer(MouseEvent event) {
+        System.out.println("GPP");
+        if(AppContext.getInstance().get("Segundo") != null){
+            
+        }
     }
 
     @FXML
     private void accionManoMazoDescartes(MouseEvent event) {
+        System.out.println("GPMD");
+        if(AppContext.getInstance().get("Segundo") != null){
+            
+        }
     }
     
 }

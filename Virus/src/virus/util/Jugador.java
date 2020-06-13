@@ -26,8 +26,6 @@ public class Jugador {
         tablero = new ArrayList();
     }
 
-    
-    
     public String getId(){
         return this.ID;
     }

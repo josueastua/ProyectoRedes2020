@@ -6,8 +6,10 @@
 package virus.util;
 
 
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 /**
@@ -20,18 +22,22 @@ public class Marco_Carta extends Pane{
     
     Jugador player;
     Carta carta;
+    Tratamiento tratamiento;
+    GridPane oponent, tablero;
+    Mensaje men;
     
     public Marco_Carta(){
         asignarEventos();
     }
     
     public Marco_Carta(String id, Jugador player){
+        men = new Mensaje();
         this.setPrefHeight(120);
         this.setPrefWidth(110);
         this.setId(id);
         asignarEventos();
         this.player = player;
-    }
+    }                                                   
     
     public void setImage(Image image){
         ImageView imv = new ImageView(image);
@@ -50,13 +56,83 @@ public class Marco_Carta extends Pane{
     public void setCarta(Carta carta){
         this.carta = carta;
     }
+
+    public Tratamiento getTratamiento() {
+        return tratamiento;
+    }
+
+    public void setTratamiento(Tratamiento tratamiento) {
+        this.tratamiento = tratamiento;
+    }
+
+    public Jugador getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Jugador player) {
+        this.player = player;
+    }
+
+    public GridPane getOponent() {
+        return oponent;
+    }
+
+    public void setOponent(GridPane oponent) {
+        this.oponent = oponent;
+    }
+
+    public GridPane getTablero() {
+        return tablero;
+    }
+
+    public void setTablero(GridPane tablero) {
+        this.tablero = tablero;
+    }
     
     private void asignarEventos(){
         
         this.setOnMouseClicked( click -> {
             int turno = (int) AppContext.getInstance().get("Turno");
-            if(!this.getId().equals("Mazo") && !this.getId().equals("Descartes") && player.getTurno() == turno)
-                this.setStyle("-fx-background-color: red");
+            if(player.getTurno() == turno){
+                if(!this.getId().equals("Mazo") && !this.getId().equals("Descartes") && this.carta.getClass().equals(Carta.class)){
+                    //this.setStyle("-fx-background-color: red");
+                    if(AppContext.getInstance().get("Primero") == null){
+                        Marco_Carta aux;
+                        for(Object obj: player.getMano()){
+                            aux = (Marco_Carta)obj;
+                            if(aux == this){
+                                AppContext.getInstance().set("Primero", this);
+                            }
+                        }
+                    }else{
+                        Marco_Carta aux;
+                        for(Object obj: oponent.getChildren()){
+                            aux = (Marco_Carta)obj;
+                            if(aux == this)
+                                AppContext.getInstance().set("Segundo", this);
+                        }
+                        for(Object obj: tablero.getChildren()){
+                            aux = (Marco_Carta)obj;
+                            if(aux == this)
+                                AppContext.getInstance().set("Segundo", this);
+                        }
+                    }
+                }else if(this.getId().equals("Mazo")){
+                    Marco_Carta aux;
+                    for(Object obj: player.getMano()){
+                        aux = (Marco_Carta)obj;
+                        if(aux.getCarta() == null){
+                            
+                        }
+                    }
+                }else if(this.getId().equals("Descartes")){
+
+                }else if(this.carta.getClass().equals(Tratamiento.class)){
+
+                }
+            }else{
+                men.show(Alert.AlertType.ERROR, "JUGAR", "Aun no es su turno");
+            }
         });
         
         
