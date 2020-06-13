@@ -95,7 +95,7 @@ public class Marco_Carta extends Pane{
         this.setOnMouseClicked( click -> {
             int turno = (int) AppContext.getInstance().get("Turno");
             if(player.getTurno() == turno){
-                if(!this.getId().equals("Mazo") && !this.getId().equals("Descartes") && this.carta.getClass().equals(Carta.class)){
+                if(!this.getId().equals("Mazo") && !this.getId().equals("Descartes") && this.carta != null){
                     //this.setStyle("-fx-background-color: red");
                     if(AppContext.getInstance().get("Primero") == null){
                         Marco_Carta aux;
@@ -109,39 +109,35 @@ public class Marco_Carta extends Pane{
                         Marco_Carta aux;
                         for(Object obj: oponent.getChildren()){
                             aux = (Marco_Carta)obj;
-                            if(aux == this)
+                            if(aux == this && aux.getCarta() == null)
                                 AppContext.getInstance().set("Segundo", this);
                         }
                         for(Object obj: tablero.getChildren()){
                             aux = (Marco_Carta)obj;
-                            if(aux == this)
+                            if(aux == this && aux.getCarta() == null)
                                 AppContext.getInstance().set("Segundo", this);
                         }
                     }
                 }else if(this.getId().equals("Mazo")){
-                    Marco_Carta aux;
+                    Carta aux, aux2;
+                    Tratamiento aux3;
                     for(Object obj: player.getMano()){
-                        aux = (Marco_Carta)obj;
-                        if(aux.getCarta() == null){
+                        aux = (Carta)obj;
+                        if(aux.getImagen()== null){
                             ArrayList<Object> mazo = (ArrayList<Object>) AppContext.getInstance().get("Mazo");
                             if(mazo.get(0).getClass().equals(Carta.class)){
-                                aux.setCarta((Carta)mazo.get(0));
+                                aux2 = (Carta)mazo.get(0);
+                                aux.setImagen(aux2.getImagen());
                                 mazo.remove(mazo.get(0));
-                                break;
-                            }
-                        }else if(aux.getTratamiento() == null){
-                            ArrayList<Object> mazo = (ArrayList<Object>) AppContext.getInstance().get("Mazo");
-                            if(mazo.get(0).getClass().equals(Tratamiento.class)){
-                                aux.setCarta((Carta)mazo.get(0));
+                            }else if(mazo.get(0).getClass().equals(Tratamiento.class)){
+                                aux3 = (Tratamiento)mazo.get(0);
+                                aux.setImagen(aux3.getImagen());
                                 mazo.remove(mazo.get(0));
-                                break;
                             }
                         }
                     }
-                }else if(this.getId().equals("Descartes")){
-
-                }else if(this.carta.getClass().equals(Tratamiento.class)){
-
+                }else if(this.tratamiento != null){
+                    AppContext.getInstance().set("Tratamiento", null);
                 }
             }else{
                 men.show(Alert.AlertType.ERROR, "JUGAR", "Aun no es su turno");
