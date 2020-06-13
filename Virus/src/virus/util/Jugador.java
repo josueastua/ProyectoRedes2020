@@ -1,6 +1,7 @@
 package virus.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import javafx.scene.image.Image;
 
 public class Jugador {
@@ -8,7 +9,8 @@ public class Jugador {
     private String nick;
     private int turno;
     private ArrayList<Object> mano;
-    private ArrayList<Object> tablero;//1:1
+    private ArrayList<Object> tablero;
+    private Carta matTablero[][];
     
     public Jugador(){
         this.ID = "0";
@@ -16,6 +18,7 @@ public class Jugador {
         this.nick = " ";
         mano = new ArrayList();
         tablero = new ArrayList();
+        matTablero = new Carta[5][3];
     }
     
     public Jugador(String ID, int turno, String nick){
@@ -24,6 +27,7 @@ public class Jugador {
         this.nick = nick;
         mano = new ArrayList();
         tablero = new ArrayList();
+        matTablero = new Carta[5][3];
     }
 
     public String getId(){
@@ -56,6 +60,34 @@ public class Jugador {
 
     public ArrayList<Object> getTablero() {
         return tablero;
+    }
+    
+    public void datosMatriz(String info){
+        String[] filas = info.split(",");
+        ArrayList<String> lista = new ArrayList();
+        int pos = 0;
+        for(String fila: filas){
+            String[] segmentos = fila.split("-");
+            lista.addAll(Arrays.asList(segmentos));
+        }
+        
+        for(int a=0;a<5;a++){
+            for(int b=0;b<3;b++){
+                matTablero[a][b] = Carta.crearCarta(lista.get(pos));
+                pos++;
+            }
+        }
+        
+        for(int a=0;a<5;a++){
+            for(int b=0;b<3;b++){
+                if(matTablero[a][b] != null){
+                    System.out.print("("+matTablero[a][b].getTipo()+","+matTablero[a][b].getColor()+")");
+                }else{
+                    System.out.print("(0)");
+                }
+            }
+            System.out.println();
+        }
     }
     
     public String infoJugador(){
