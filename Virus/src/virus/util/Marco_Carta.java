@@ -157,7 +157,7 @@ public class Marco_Carta extends Pane{
                         }
                     }
                 }else if(this.tratamiento != null){
-                    AppContext.getInstance().set("Tratamiento", null);
+                    AppContext.getInstance().set("Tratamiento", this);
                 }
             }else{
                 men.show(Alert.AlertType.ERROR, "JUGAR", "Aun no es su turno");
