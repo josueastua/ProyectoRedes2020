@@ -81,6 +81,7 @@ public class JuegoController extends Controller implements Initializable {
     int oponente = 0;
     Marco_Carta carta1, carta2, mazo2, descartes2;
     
+    
     @FXML
     private ImageView ivOP00;
     @FXML
@@ -445,105 +446,6 @@ public class JuegoController extends Controller implements Initializable {
         }
     }
     
-    public void hacerJugada(){
-        Marco_Carta marco1 = (Marco_Carta) AppContext.getInstance().get("Primero");
-        Marco_Carta marco2 = (Marco_Carta) AppContext.getInstance().get("Segundo");
-        switch(marco1.getCarta().getTipo()){
-            //La carta es un organo
-            case 1:{
-                if(gpCartas.getChildren().contains(marco2)){
-                   if(GridPane.getRowIndex(marco2) == 0){
-                       if(verificarOrganoRepetido(marco1)){
-                           marco2.setCarta(marco1.getCarta());
-                           marco2.setImage(marco1.getCarta().getImagen());
-                           marco1.setCarta(null);
-                           marco1.setImage(null);
-                        }
-                    }
-                }
-                break;
-            }
-            //La carta es una medicina
-            case 2:{
-                if(gpCartas.getChildren().contains(marco2)){
-                   if(GridPane.getRowIndex(marco2) == 1){
-                       if(verificarMedicina(marco1)){
-                           marco2.setCarta(marco1.getCarta());
-                           marco2.setImage(marco1.getCarta().getImagen());
-                           marco1.setCarta(null);
-                           marco1.setImage(null);
-                       }
-                    }
-                }
-                break;
-            }
-            //La carta es un virus
-            case 3:{
-                if(gpCartasOponente.getChildren().contains(marco2))
-                    if(GridPane.getColumnIndex(marco2) == 2){
-                        if(verificarVirus(marco1)){
-                            marco2.setCarta(marco1.getCarta());
-                            marco2.setImage(marco1.getCarta().getImagen());
-                            marco1.setCarta(null);
-                            marco1.setImage(null);
-                        }
-                    }
-                break;
-            }
-        }
-        
-        marco1 = null;
-        marco2 = null;
-    }
-    
-    public boolean verificarOrganoRepetido(Marco_Carta carta){
-        Marco_Carta aux;
-        for(Node nodo: gpCartas.getChildren()){
-            aux = (Marco_Carta) nodo;
-            if(aux.getCarta() != null){
-                if(aux.getCarta().getColor() == carta.getCarta().getColor() && aux.getCarta().getTipo() == carta.getCarta().getTipo()){
-                    return false;
-                } 
-            }
-        }
-        return true;
-    }
-    
-    public boolean verificarMedicina(Marco_Carta carta){
-        if(carta.getCarta().getColor() == 5){
-            return true;
-        }
-        Marco_Carta aux;
-        for(Node nodo: gpCartas.getChildren()){
-            aux = (Marco_Carta) nodo;
-            if(aux.getCarta() != null){
-                if(aux.getFila() == 0 && aux.getColumna() == carta.getColumna()){
-                    if(aux.getCarta().getColor() == carta.getCarta().getColor()){
-                        return true;
-                    }
-                } 
-            }
-        }
-        return false;
-    }
-    
-    public boolean verificarVirus(Marco_Carta carta){
-        if(carta.getCarta().getColor() == 5){
-            return true;
-        }
-        Marco_Carta aux;
-        for(Node nodo: gpCartasOponente.getChildren()){
-            aux = (Marco_Carta) nodo;
-            if(aux.getCarta() != null){
-                if(aux.getColumna() == 0 && aux.getFila() == carta.getFila()){
-                    if(aux.getCarta().getColor() == carta.getCarta().getColor()){
-                        return true;
-                    }
-                } 
-            }
-        }
-        return false;
-    }
 
     @FXML
     private void accionTableroOponente(MouseEvent event) {
@@ -555,6 +457,7 @@ public class JuegoController extends Controller implements Initializable {
 
     @FXML
     private void accionManoJugador(MouseEvent event) {
+        
     }
 
     @FXML
