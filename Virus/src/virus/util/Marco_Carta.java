@@ -26,18 +26,22 @@ public class Marco_Carta extends Pane{
     Tratamiento tratamiento;
     GridPane oponent, tablero;
     Mensaje men;
+    int fila;
+    int columna;
     
     public Marco_Carta(){
         asignarEventos();
     }
     
-    public Marco_Carta(String id, Jugador player){
+    public Marco_Carta(String id, Jugador player, int fila, int columna){
         men = new Mensaje();
         this.setPrefHeight(120);
         this.setPrefWidth(110);
         this.setId(id);
         asignarEventos();
         this.player = player;
+        this.fila = fila;
+        this.columna = columna;
     }                                                   
     
     public void setImage(Image image){
@@ -88,6 +92,22 @@ public class Marco_Carta extends Pane{
 
     public void setTablero(GridPane tablero) {
         this.tablero = tablero;
+    }
+
+    public int getFila() {
+        return fila;
+    }
+
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public void setColumna(int columna) {
+        this.columna = columna;
     }
     
     private void asignarEventos(){

@@ -54,11 +54,27 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                                  </VBox.margin>
+                                 <children>
+                                    <ImageView id="00" fx:id="ivOP00" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView id="01" fx:id="ivOP01" fitHeight="83.0" fitWidth="104.0" layoutX="10.0" layoutY="9.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                                    <ImageView id="02" fx:id="ivOP02" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                                    <ImageView id="10" fx:id="ivOP10" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                                    <ImageView id="11" fx:id="ivOP11" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <ImageView id="12" fx:id="ivOP12" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <ImageView id="20" fx:id="ivOP20" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+                                    <ImageView id="21" fx:id="ivOP21" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <ImageView id="22" fx:id="ivOP22" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <ImageView id="30" fx:id="ivOP30" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
+                                    <ImageView id="31" fx:id="ivOP31" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <ImageView id="32" fx:id="ivOP32" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <ImageView id="40" fx:id="ivOP40" fitHeight="67.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
+                                    <ImageView id="41" fx:id="ivOP41" fitHeight="68.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <ImageView id="42" fx:id="ivOP42" fitHeight="71.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                 </children>
                               </GridPane>
                               <Button fx:id="btn_Oponente" mnemonicParsing="false" onAction="#accionSiguente" prefHeight="65.0" prefWidth="260.0" text="Siguiente Oponente">
                                  <VBox.margin>
@@ -71,7 +87,7 @@
                   </VBox>
                   <VBox fx:id="vb_player" alignment="CENTER" prefHeight="600.0" prefWidth="580.0">
                      <children>
-                        <GridPane fx:id="gpCartas" alignment="CENTER" onMouseClicked="#accionGripPanePlayer" prefHeight="334.0" prefWidth="570.0">
+                        <GridPane fx:id="gpCartas" alignment="CENTER" prefHeight="334.0" prefWidth="570.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -87,6 +103,23 @@
                            <VBox.margin>
                               <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                            </VBox.margin>
+                           <children>
+                              <ImageView id="00" fx:id="ivTab00" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView id="01" fx:id="ivTab01" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                              <ImageView id="02" fx:id="ivTab02" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                              <ImageView id="03" fx:id="ivTab03" fitHeight="113.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                              <ImageView id="04" fx:id="ivTab04" fitHeight="113.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
+                              <ImageView id="10" fx:id="ivTab10" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                              <ImageView id="11" fx:id="ivTab11" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ImageView id="12" fx:id="ivTab12" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <ImageView id="13" fx:id="ivTab13" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <ImageView id="14" fx:id="ivTab14" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <ImageView id="20" fx:id="ivTab20" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+                              <ImageView id="21" fx:id="ivTab21" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <ImageView id="22" fx:id="ivTab22" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <ImageView id="23" fx:id="ivTab23" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <ImageView id="24" fx:id="ivTab24" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                           </children>
                         </GridPane>
                         <GridPane fx:id="gpManoyMazo" alignment="CENTER" minHeight="81.0" onMouseClicked="#accionManoMazoDescartes" prefHeight="120.0" prefWidth="570.0">
                            <VBox.margin>
@@ -102,6 +135,13 @@
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                            </rowConstraints>
+                           <children>
+                              <ImageView id="00" fx:id="ivMano00" fitHeight="117.0" fitWidth="114.0" onMouseClicked="#accionManoJugador" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView id="01" fx:id="ivMano01" fitHeight="122.0" fitWidth="114.0" onMouseClicked="#accionManoJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                              <ImageView id="02" fx:id="ivMano02" fitHeight="122.0" fitWidth="114.0" onMouseClicked="#accionManoJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                              <ImageView id="03" fx:id="ivMano03" fitHeight="122.0" fitWidth="114.0" onMouseClicked="#accionMazos" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                              <ImageView id="04" fx:id="ivMano04" fitHeight="122.0" fitWidth="114.0" onMouseClicked="#accionMazos" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
+                           </children>
                         </GridPane>
                         <HBox>
                            <VBox.margin>

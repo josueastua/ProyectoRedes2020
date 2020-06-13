@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -79,6 +80,79 @@ public class JuegoController extends Controller implements Initializable {
     int oponente = 0;
     Marco_Carta carta1, carta2, mazo2, descartes2;
     
+    @FXML
+    private ImageView ivOP00;
+    @FXML
+    private ImageView ivOP01;
+    @FXML
+    private ImageView ivOP02;
+    @FXML
+    private ImageView ivOP10;
+    @FXML
+    private ImageView ivOP11;
+    @FXML
+    private ImageView ivOP12;
+    @FXML
+    private ImageView ivOP20;
+    @FXML
+    private ImageView ivOP21;
+    @FXML
+    private ImageView ivOP22;
+    @FXML
+    private ImageView ivOP30;
+    @FXML
+    private ImageView ivOP31;
+    @FXML
+    private ImageView ivOP32;
+    @FXML
+    private ImageView ivOP40;
+    @FXML
+    private ImageView ivOP41;
+    @FXML
+    private ImageView ivOP42;
+    @FXML
+    private ImageView ivTab00;
+    @FXML
+    private ImageView ivTab01;
+    @FXML
+    private ImageView ivTab02;
+    @FXML
+    private ImageView ivTab03;
+    @FXML
+    private ImageView ivTab04;
+    @FXML
+    private ImageView ivTab10;
+    @FXML
+    private ImageView ivTab11;
+    @FXML
+    private ImageView ivTab12;
+    @FXML
+    private ImageView ivTab13;
+    @FXML
+    private ImageView ivTab14;
+    @FXML
+    private ImageView ivTab20;
+    @FXML
+    private ImageView ivTab21;
+    @FXML
+    private ImageView ivTab22;
+    @FXML
+    private ImageView ivTab23;
+    @FXML
+    private ImageView ivTab24;
+    @FXML
+    private ImageView ivMano00;
+    @FXML
+    private ImageView ivMano01;
+    @FXML
+    private ImageView ivMano02;
+    @FXML
+    private ImageView ivMano03;
+    @FXML
+    private ImageView ivMano04;
+    @FXML
+    private ComboBox<?> cbDescartar;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println(infoGridPane());
@@ -131,23 +205,23 @@ public class JuegoController extends Controller implements Initializable {
         player = (Jugador) AppContext.getInstance().get("Jugador");
         for(int i = 0; i < 3; i++){
             for(int j = 1; j <= 5; j++){
-                gpCartasOponente.add(new Marco_Carta("Carta"+i+j, player), i, j);
+                gpCartasOponente.add(new Marco_Carta("Carta"+i+j, player,i,j), i, j);
             }
         }
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 3; j++){
-                gpCartas.add(new Marco_Carta("Carta"+i+j, player), i, j);
+                gpCartas.add(new Marco_Carta("Carta"+i+j, player,i,j), i, j);
             }
         }
         for(int i = 0; i < 5; i++)
             if(i < 3)
-                gpManoyMazo.add(new Marco_Carta("Mano"+i, player), i, 0);
+                gpManoyMazo.add(new Marco_Carta("Mano"+i, player,0,i), i, 0);
             else if(i == 3){
-                mazo2 = new Marco_Carta("Mazo", player);
+                mazo2 = new Marco_Carta("Mazo", player,0,i);
                 mazo2.setImage(new Image("virus/resources/Dorso.jpg"));
                 gpManoyMazo.add(mazo2, i, 0);
             }else{
-                descartes2 = new Marco_Carta("Descartes", player);
+                descartes2 = new Marco_Carta("Descartes", player,0,i);
                 gpManoyMazo.add(descartes2, i, 0);
             }
     }
@@ -342,7 +416,6 @@ public class JuegoController extends Controller implements Initializable {
         }
     }
 
-    @FXML
     private void accionGripPanePlayer(MouseEvent event) {
         System.out.println("GPP");
         if(AppContext.getInstance().get("Segundo") != null){
@@ -370,27 +443,43 @@ public class JuegoController extends Controller implements Initializable {
                            marco2.setCarta(marco1.getCarta());
                            marco2.setImage(marco1.getCarta().getImagen());
                            marco1.setCarta(null);
-                       }
+                           marco1.setImage(null);
+                        }
                     }
                 }
                 break;
             }
+            //La carta es una medicina
             case 2:{
                 if(gpCartas.getChildren().contains(marco2)){
                    if(GridPane.getRowIndex(marco2) == 1){
-                       if(verificarOrganoRepetido(marco1)){
+                       if(verificarMedicina(marco1)){
                            marco2.setCarta(marco1.getCarta());
                            marco2.setImage(marco1.getCarta().getImagen());
                            marco1.setCarta(null);
+                           marco1.setImage(null);
                        }
                     }
                 }
                 break;
             }
+            //La carta es un virus
             case 3:{
+                if(gpCartasOponente.getChildren().contains(marco2))
+                    if(GridPane.getColumnIndex(marco2) == 2){
+                        if(verificarVirus(marco1)){
+                            marco2.setCarta(marco1.getCarta());
+                            marco2.setImage(marco1.getCarta().getImagen());
+                            marco1.setCarta(null);
+                            marco1.setImage(null);
+                        }
+                    }
                 break;
             }
         }
+        
+        marco1 = null;
+        marco2 = null;
     }
     
     public boolean verificarOrganoRepetido(Marco_Carta carta){
@@ -404,5 +493,57 @@ public class JuegoController extends Controller implements Initializable {
             }
         }
         return true;
+    }
+    
+    public boolean verificarMedicina(Marco_Carta carta){
+        if(carta.getCarta().getColor() == 5){
+            return true;
+        }
+        Marco_Carta aux;
+        for(Node nodo: gpCartas.getChildren()){
+            aux = (Marco_Carta) nodo;
+            if(aux.getCarta() != null){
+                if(aux.getFila() == 0 && aux.getColumna() == carta.getColumna()){
+                    if(aux.getCarta().getColor() == carta.getCarta().getColor()){
+                        return true;
+                    }
+                } 
+            }
+        }
+        return false;
+    }
+    
+    public boolean verificarVirus(Marco_Carta carta){
+        if(carta.getCarta().getColor() == 5){
+            return true;
+        }
+        Marco_Carta aux;
+        for(Node nodo: gpCartasOponente.getChildren()){
+            aux = (Marco_Carta) nodo;
+            if(aux.getCarta() != null){
+                if(aux.getColumna() == 0 && aux.getFila() == carta.getFila()){
+                    if(aux.getCarta().getColor() == carta.getCarta().getColor()){
+                        return true;
+                    }
+                } 
+            }
+        }
+        return false;
+    }
+
+    @FXML
+    private void accionTableroOponente(MouseEvent event) {
+    }
+
+    @FXML
+    private void accionTableroJugador(MouseEvent event) {
+    }
+
+    @FXML
+    private void accionManoJugador(MouseEvent event) {
+    }
+
+    @FXML
+    private void accionMazos(MouseEvent event) {
     }
 }
