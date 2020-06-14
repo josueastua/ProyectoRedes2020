@@ -30,6 +30,24 @@ public class Jugador {
         matTablero = new Carta[5][3];
     }
 
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public Carta[][] getMatTablero() {
+        return matTablero;
+    }
+
+    public void setMatTablero(Carta[][] matTablero) {
+        this.matTablero = matTablero;
+    }
+
+    
+    
     public String getId(){
         return this.ID;
     }
