@@ -5,6 +5,7 @@
  */
 package virus.util;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -32,8 +33,8 @@ public class Cuerpo {
         return image;
     }
 
-    public void setImage(ImageView image) {
-        this.image = image;
+    public void setImage(Image image) {
+        this.image.setImage(image);
     }
     
     

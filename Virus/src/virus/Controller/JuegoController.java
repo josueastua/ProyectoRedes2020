@@ -312,16 +312,23 @@ public class JuegoController extends Controller implements Initializable {
             if(!jugador.getId().equals(player.getId()))
                 oponentes.add(jugador);
         });
-        //conseguirImagenes();
+        conseguirImagenes();
         
     }
 
     private void conseguirImagenes(){
+        Carta car;
+        Tratamiento tra;
         for(int i =0; i < 3; i++){
-            if(player.getMano().get(i).getClass().equals(Carta.class))
-                mano[i].setCarta((Carta)player.getMano().get(i));
-            else
-                mano[i].setCarta((Tratamiento)player.getMano().get(i));
+            if(player.getMano().get(i).getClass().equals(Carta.class)){
+                car = (Carta)player.getMano().get(i);
+                mano[i].setCarta(car);
+                mano[i].setImage(car.getImagen());
+            }else{
+                tra = (Tratamiento)player.getMano().get(i);
+                mano[i].setCarta(tra);
+                mano[i].setImage(tra.getImagen());
+            }
         }
         /*
         mazo = (ArrayList<String>) AppContext.getInstance().get("Mazo");
