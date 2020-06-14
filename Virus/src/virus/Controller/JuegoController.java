@@ -77,8 +77,8 @@ public class JuegoController extends Controller implements Initializable {
     Jugador player = null;
     int turno = 1;
     int oponente = 0;
-    ImageView primero;
-    ImageView segundo;
+    ImageView primero = null;
+    ImageView segundo = null;
     
     
     @FXML
@@ -453,31 +453,36 @@ public class JuegoController extends Controller implements Initializable {
 
     @FXML
     private void accionTableroJugador(MouseEvent event) {
-        //Coordenada de la carta seleccionada en la mano del jugador
-        primero = (ImageView) event.getSource();
-        int pos = Integer.valueOf(primero.getId());
-        Carta carta1 = mano[pos].getCarta();
-        //Coordenas de la carta en el tablero del jugador
-        segundo = (ImageView) event.getSource();
-        char f = segundo.getId().charAt(0);
-        char c= segundo.getId().charAt(1);
-        int fila = Character.getNumericValue(f);
-        int columna = Character.getNumericValue(c);
-        Carta carta2 = tablero[fila][columna].getCarta();
-        //La carta es un organo
-        if(carta1.getTipo() == 1){
-            if(columna == 0){
-                if(verificarOrganoRepetido(carta1)){
-                    primero.setImage(null);
-                    mano[pos].setCarta(null);
-                    mano[pos].setImage(null);
-                    player.getMano().remove(carta1);
-                    tablero[fila][columna].setCarta(carta1);
-                    tablero[fila][columna].setImage(carta1.getImagen());
-                    segundo.setImage(carta1.getImagen());
+        if(primero!= null){
+            //Coordenada de la carta seleccionada en la mano del jugador
+            int pos = Integer.valueOf(primero.getId());
+            Carta carta1 = mano[pos].getCarta();
+            //Coordenas de la carta en el tablero del jugador
+            if(carta1 != null){
+                segundo = (ImageView) event.getSource();
+                char f = segundo.getId().charAt(0);
+                char c= segundo.getId().charAt(1);
+                int fila = Character.getNumericValue(f);
+                int columna = Character.getNumericValue(c);
+                Carta carta2 = tablero[fila][columna].getCarta();
+                //La carta es un organo
+                if(carta1.getTipo() == 1){
+                    if(columna == 0){
+                        if(verificarOrganoRepetido(carta1)){
+                            primero.setImage(null);
+                            mano[pos].setCarta(null);
+                            mano[pos].setImage(null);
+                            player.getMano().remove(carta1);
+                            tablero[fila][columna].setCarta(carta1);
+                            tablero[fila][columna].setImage(carta1.getImagen());
+                            segundo.setImage(carta1.getImagen());
+                        }
+                    }
                 }
             }
         }
+        
+        
         
         primero = null;
         segundo = null;
