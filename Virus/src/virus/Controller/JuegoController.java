@@ -467,7 +467,7 @@ public class JuegoController extends Controller implements Initializable {
                 Carta carta2 = tablero[fila][columna].getCarta();
                 //La carta es un organo
                 if(carta1.getTipo() == 1){
-                    if(columna == 0){
+                    if(fila == 0){
                         if(verificarOrganoRepetido(carta1)){
                             primero.setImage(null);
                             mano[pos].setCarta(null);
@@ -478,6 +478,51 @@ public class JuegoController extends Controller implements Initializable {
                             segundo.setImage(carta1.getImagen());
                         }
                     }
+                    //La carta es una medicina
+                }else{
+                    if(fila != 0){
+                        if(tablero[0][columna].getCarta() != null){
+                            if(tablero[fila][columna].getCarta() == null){
+                                if(tablero[0][columna].getCarta().getColor() == carta1.getColor() || carta1.getColor() == 5){
+                                    switch(verificarEstadoOrgano(columna)){
+                                        //El organo esta sano
+                                        case 1:{
+                                            primero.setImage(null);
+                                            mano[pos].setCarta(null);
+                                            mano[pos].setImage(null);
+                                            player.getMano().remove(carta1);
+                                            tablero[fila][columna].setCarta(carta1);
+                                            tablero[fila][columna].setImage(carta1.getImagen());
+                                            segundo.setImage(carta1.getImagen());
+                                            break;
+                                        }
+                                        case 2:{
+                                            ArrayList<Carta> lista = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
+                                            primero.setImage(null);
+                                            mano[pos].setCarta(null);
+                                            mano[pos].setImage(null);
+                                            player.getMano().remove(carta1);
+                                            lista.add(carta1);
+                                            lista.add(tablero[3-fila][columna].getCarta());
+                                            tablero[3-fila][columna].setCarta(null);
+                                            tablero[3-fila][columna].setImage(null);
+                                            segundo.setImage(null);
+                                            break;
+                                        }
+                                        case 3:{
+                                            primero.setImage(null);
+                                            mano[pos].setCarta(null);
+                                            mano[pos].setImage(null);
+                                            player.getMano().remove(carta1);
+                                            tablero[fila][columna].setCarta(carta1);
+                                            tablero[fila][columna].setImage(carta1.getImagen());
+                                            segundo.setImage(carta1.getImagen());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -486,6 +531,15 @@ public class JuegoController extends Controller implements Initializable {
         
         primero = null;
         segundo = null;
+    }
+
+    @FXML
+    private void accionManoJugador(MouseEvent event) {
+        primero = (ImageView) event.getSource();
+    }
+
+    @FXML
+    private void accionMazos(MouseEvent event) {
     }
     
     private boolean verificarOrganoRepetido(Carta organo){
@@ -501,13 +555,20 @@ public class JuegoController extends Controller implements Initializable {
         }
         return true;
     }
-
-    @FXML
-    private void accionManoJugador(MouseEvent event) {
-        primero = (ImageView) event.getSource();
-    }
-
-    @FXML
-    private void accionMazos(MouseEvent event) {
+    
+    private int verificarEstadoOrgano(int columna){
+        //El organo esta sano
+        if(tablero[1][columna].getCarta() == null && tablero[2][columna].getCarta() == null){
+            return 1;
+        //El organo esta enfermo
+        }
+        if(tablero[1][columna].getCarta().getTipo() == 3 || tablero[2][columna].getCarta().getTipo() == 3){
+            return 2;
+        }
+        //El organo esta vacunado
+        if(tablero[1][columna].getCarta().getTipo() == 2 || tablero[2][columna].getCarta().getTipo() == 2){
+            return 3;
+        }
+        return 0;
     }
 }
