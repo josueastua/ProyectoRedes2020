@@ -39,9 +39,7 @@ import virus.util.Carta;
 import virus.util.Cuerpo;
 import virus.util.FlowController;
 import virus.util.Jugador;
-import virus.util.Marco_Carta;
 import virus.util.Mensaje;
-import virus.util.Tratamiento;
 
 /**
  *
@@ -79,7 +77,6 @@ public class JuegoController extends Controller implements Initializable {
     Jugador player = null;
     int turno = 1;
     int oponente = 0;
-    Marco_Carta carta1, carta2, mazo2, descartes2;
     ImageView primero;
     ImageView segundo;
     
@@ -319,13 +316,15 @@ public class JuegoController extends Controller implements Initializable {
     }
 
     private void conseguirImagenes(){
+        /*
+        
         for(int i =0; i < 3; i++){
             if(player.getMano().get(i).getClass().equals(Carta.class))
                 mano[i].setCarta((Carta)player.getMano().get(i));
             else
                 mano[i].setCarta((Tratamiento)player.getMano().get(i));
         }
-        /*
+        
         mazo = (ArrayList<String>) AppContext.getInstance().get("Mazo");
         mazo_img.clear();
         mazo.forEach((carta) -> {
@@ -359,7 +358,7 @@ public class JuegoController extends Controller implements Initializable {
         System.out.println(index);*/
     }
     
-    public String infoGridPane(){
+    /*public String infoGridPane(){
         
         String info = "";
         Marco_Carta aux;
@@ -388,10 +387,12 @@ public class JuegoController extends Controller implements Initializable {
             
         }
         return info;
-    }
+    }*/
+    
     
     @FXML
     private void accionJugada(ActionEvent event) {
+        /*
         String mensaje = player.infoJugador();
         for(Jugador opo: oponentes) 
             mensaje += "/"+opo.infoJugador();
@@ -403,6 +404,7 @@ public class JuegoController extends Controller implements Initializable {
                 mensaje += "/"+carta;
         }
         mensaje += "/"+AppContext.getInstance().get("Especial")+"/"+AppContext.getInstance().get("ID");
+        */
     }
 
     @FXML
@@ -464,16 +466,16 @@ public class JuegoController extends Controller implements Initializable {
     private void accionTableroJugador(MouseEvent event) {
         //Coordenada de la carta seleccionada en la mano del jugador
         primero = (ImageView) event.getSource();
-        char c1= segundo.getId().charAt(0);
-        char f1 = segundo.getId().charAt(1);
-        int fila1 = Character.getNumericValue(f1);
-        int columna1 = Character.getNumericValue(c1);
+        int pos = Integer.valueOf(primero.getId());
+        Carta carta1 = (Carta) mano[pos].getCarta();
         //Coordenas de la carta en el tablero del jugador
         segundo = (ImageView) event.getSource();
-        char c2= segundo.getId().charAt(0);
-        char f2 = segundo.getId().charAt(1);
-        int fila2 = Character.getNumericValue(f2);
-        int columna2 = Character.getNumericValue(c2);
+        char f = segundo.getId().charAt(0);
+        char c= segundo.getId().charAt(1);
+        int fila = Character.getNumericValue(f);
+        int columna = Character.getNumericValue(c);
+        Carta carta2 = (Carta) tablero[fila][columna].getCarta();
+        //La carta es un organo
     }
 
     @FXML

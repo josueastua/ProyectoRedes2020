@@ -12,7 +12,6 @@ import virus.Controller.JuegoController;
 import virus.util.AppContext;
 import virus.util.Carta;
 import virus.util.Jugador;
-import virus.util.Tratamiento;
 
 
 public class Conexion {
@@ -95,14 +94,14 @@ public class Conexion {
                             Jugador jug = new Jugador(datJug[0], turn, datJug[2]);
                             String[] manaux = datJug[datJug.length - 1].split("-");
                             for(int k = 0; k < manaux.length; k++){
-                                jug.addMano(manaux[k]);
+                                jug.addMano(new Carta(Character.getNumericValue(manaux[k].charAt(0)),Character.getNumericValue(manaux[k].charAt(2)),AppContext.getInstance().getCarta(manaux[k])));
                             }
                         }else{
                             String[] mano = datJug[datJug.length - 1].split("-");  
                             
                             for(int k = 0; k < mano.length; k++){
                                 System.out.println(mano[k]);
-                                player.addMano(mano[k]);
+                                player.addMano(new Carta(Character.getNumericValue(mano[k].charAt(0)),Character.getNumericValue(mano[k].charAt(2)),AppContext.getInstance().getCarta(mano[k])));
                             }
                         }
                     }else{
@@ -182,7 +181,7 @@ public class Conexion {
                 if(jug.getId().equals(jugador[0])){
                     cartas = jugador[1].split("-");
                     for(String carta: cartas){
-                        jug.addMano(carta);
+                        jug.addMano(new Carta(Character.getNumericValue(carta.charAt(0)),Character.getNumericValue(carta.charAt(2)),AppContext.getInstance().getCarta(carta)));
                     }
                     jug.datosMatriz(jugador[2]);
                 }
@@ -212,11 +211,7 @@ public class Conexion {
         ArrayList<Object> Mazo = new ArrayList<>();
         for(String carta: mazo){
             char prima = carta.charAt(0);
-            if(prima != '4'){
-                Mazo.add(new Carta(Character.getNumericValue(prima), Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
-            }else{
-                Mazo.add(new Tratamiento(Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
-            }
+            Mazo.add(new Carta(Character.getNumericValue(prima), Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
         }
         AppContext.getInstance().set("Mazo", Mazo);
     }
@@ -225,11 +220,7 @@ public class Conexion {
         ArrayList<Object> Descartes = new ArrayList<>();
         for(String carta: descartes){
             char prima = carta.charAt(0);
-            if(prima != '4'){
-                Descartes.add(new Carta(Character.getNumericValue(prima), Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
-            }else{
-                Descartes.add(new Tratamiento(Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
-            }
+            Descartes.add(new Carta(Character.getNumericValue(prima), Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
         }
         AppContext.getInstance().set("Descartes", Descartes);
     }

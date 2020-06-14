@@ -8,8 +8,8 @@ public class Jugador {
     private String ID;
     private String nick;
     private int turno;
-    private ArrayList<Object> mano;
-    private ArrayList<Object> tablero;
+    private ArrayList<Carta> mano;
+    private ArrayList<Carta> tablero;
     private Carta matTablero[][];
     
     public Jugador(){
@@ -42,11 +42,11 @@ public class Jugador {
         this.nick = nick;
     }
     
-    public void addMano(Object obj){
+    public void addMano(Carta obj){
         mano.add(obj);
     }
     
-    public void addTablero(Object obj){
+    public void addTablero(Carta obj){
         tablero.add(obj);
     }
     
@@ -54,11 +54,11 @@ public class Jugador {
         return this.turno;
     }
     
-    public ArrayList<Object> getMano() {
+    public ArrayList<Carta> getMano() {
         return mano;
     }
 
-    public ArrayList<Object> getTablero() {
+    public ArrayList<Carta> getTablero() {
         return tablero;
     }
     
@@ -90,6 +90,7 @@ public class Jugador {
         }
     }
     
+    /*
     public String infoJugador(){
         String info = String.valueOf(ID) + "_";
         for(int a=0;a<mano.size();a++){
@@ -134,10 +135,10 @@ public class Jugador {
         }
         return info;
     }
-    
+    */
     public void convertirCarta(){
         System.out.println("Tamaño de la mano " + mano.size());
-        ArrayList<Object> lista = new ArrayList();
+        ArrayList<Carta> lista = new ArrayList();
         String dato;
         Image imagen;
         for (Object carta : tablero) {
@@ -145,13 +146,8 @@ public class Jugador {
             char aux1 = dato.charAt(0);
             char aux2 = dato.charAt(2);
             imagen = AppContext.getInstance().getCarta(dato);
-            if(aux1 != 4){
-                lista.add(new Carta(Character.getNumericValue(aux1), Character.getNumericValue(aux2), imagen));
-            }else{
-                lista.add(new Tratamiento(Character.getNumericValue(aux2), imagen));
-            }
+            lista.add(new Carta(Character.getNumericValue(aux1), Character.getNumericValue(aux2), imagen));
         }
-        
         tablero.clear();
         tablero.addAll(lista);
         System.out.println(tablero.size());
@@ -162,11 +158,7 @@ public class Jugador {
             char aux1 = dato.charAt(0);
             char aux2 = dato.charAt(2);
             imagen = AppContext.getInstance().getCarta(dato);
-            if (aux1 != 4){
-                lista.add(new Carta(Character.getNumericValue(aux1), Character.getNumericValue(aux2), imagen));
-            }else{
-                lista.add(new Tratamiento(Character.getNumericValue(aux2), imagen));
-            }
+            lista.add(new Carta(Character.getNumericValue(aux1), Character.getNumericValue(aux2), imagen));
         }
         
         mano.clear();
