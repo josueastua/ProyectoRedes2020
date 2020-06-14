@@ -249,6 +249,8 @@ public class JuegoController extends Controller implements Initializable {
     public void actualizarJuego(){
         Platform.runLater( () -> {
             conseguirImagenes();
+            mostrarOponente();
+            mostrarTablero();
         });
     }
     
