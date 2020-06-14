@@ -306,16 +306,21 @@ public class JuegoController extends Controller implements Initializable {
             player = (Jugador) AppContext.getInstance().get("Jugador");
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
         ArrayList<Jugador> jug = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
-        /*jug.forEach( (jugador) -> {
-            jugador.convertirCarta();
-            if(!jugador.getId().equals(player.getId()))
-                oponentes.add(jugador);
-        });*/
+        jug.forEach( (j) -> {
+            if(!j.getId().equals(player.getId()))
+                oponentes.add(j);
+        });
+        lblPlayer.setText("ID: "+player.getId()+" Nick: "+player.getNick());
+        lblOponente.setText("ID: "+oponentes.get(oponente).getId()+" Nick: "+oponentes.get(oponente).getNick());
         conseguirImagenes();
         
     }
 
     private void conseguirImagenes(){
+        mano[3].setImage(new Image("/virus/resources/Dorso.jpg"));
+        for(int i =0; i < 3; i++){
+            mano[i].setImage(player.getMano().get(i).getImagen());
+        }
         /*
         
         Carta car;
@@ -440,30 +445,6 @@ public class JuegoController extends Controller implements Initializable {
         tt.play();
         menu = !menu;
     }
-
-    @FXML
-    private void accionGridPaneOponente(MouseEvent event) {
-        System.out.println("GPO");
-        if(AppContext.getInstance().get("Segundo") != null){
-            
-        }
-    }
-
-    private void accionGripPanePlayer(MouseEvent event) {
-        System.out.println("GPP");
-        if(AppContext.getInstance().get("Segundo") != null){
-            
-        }
-    }
-
-    @FXML
-    private void accionManoMazoDescartes(MouseEvent event) {
-        System.out.println("GPMD");
-        if(AppContext.getInstance().get("Segundo") != null){
-            
-        }
-    }
-    
 
     @FXML
     private void accionTableroOponente(MouseEvent event) {
