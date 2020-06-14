@@ -135,6 +135,8 @@ public class Conexion {
                     crearMazo(message[3].split("-"));
                     crearDescartes(message[4].split("-"));
                     usoTratamienro(message[2].split("-"));
+                    JuegoController juego = (JuegoController) AppContext.getInstance().get("Juego");
+                    juego.actualizarJuego();
                 }
                     /*
                     String[] datosJuego = message[2].split("/");

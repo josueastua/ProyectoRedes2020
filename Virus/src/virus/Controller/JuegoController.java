@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
@@ -155,6 +157,7 @@ public class JuegoController extends Controller implements Initializable {
     private ComboBox<String> cbDescartar;
     Cuerpo[][] tablero, tabOponente;
     Cuerpo[] mano;
+    private Timer timer;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         crearMatrices();
@@ -246,6 +249,8 @@ public class JuegoController extends Controller implements Initializable {
     public void actualizarJuego(){
         Platform.runLater( () -> {
             conseguirImagenes();
+            mostrarOponente();
+            mostrarTablero();
         });
     }
     
@@ -312,6 +317,8 @@ public class JuegoController extends Controller implements Initializable {
         });
         lblPlayer.setText("ID: "+player.getId()+" Nick: "+player.getNick());
         lblOponente.setText("ID: "+oponentes.get(oponente).getId()+" Nick: "+oponentes.get(oponente).getNick());
+        if(player.getTurno() > 1)
+            hilo();
         conseguirImagenes();
         
     }
@@ -401,23 +408,38 @@ public class JuegoController extends Controller implements Initializable {
         }
         return info;
     }*/
+    private void mostrarOponente(){
+        Carta[][] tab = oponentes.get(oponente).getMatTablero();
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 3; j++){
+                tabOponente[i][j].setCarta(null);
+                tabOponente[i][j].setImage(null);
+                if(tab[i][j].getImagen() != null){
+                    tabOponente[i][j].setCarta(tab[i][j]);
+                    tabOponente[i][j].setImage(tab[i][j].getImagen());
+                }
+            }
+        }
+    }
     
+    private void mostrarTablero(){
+        Carta[][] tab = player.getMatTablero();
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 3; j++){
+                tablero[j][i].setCarta(null);
+                tablero[j][i].setImage(null);
+                if(tab[i][j].getImagen() != null){
+                    tablero[j][i].setCarta(tab[i][j]);
+                    tablero[j][i].setImage(tab[i][j].getImagen());
+                }
+            }
+        }
+    }
     
     @FXML
     private void accionJugada(ActionEvent event) {
-        /*
-        String mensaje = player.infoJugador();
-        for(Jugador opo: oponentes) 
-            mensaje += "/"+opo.infoJugador();
-        for(String carta: mazo){
-            mensaje += "/"+carta;
-        }
-        if(!descartes.isEmpty()){
-            for(String carta: descartes)
-                mensaje += "/"+carta;
-        }
-        mensaje += "/"+AppContext.getInstance().get("Especial")+"/"+AppContext.getInstance().get("ID");
-        */
+        if(player.getTurno() == 1 && timer == null)
+            hilo();
     }
 
     @FXML
@@ -427,6 +449,7 @@ public class JuegoController extends Controller implements Initializable {
         }else{
             oponente++;
         }
+        mostrarOponente();
     }
 
     @FXML
@@ -664,5 +687,16 @@ public class JuegoController extends Controller implements Initializable {
             return 3;
         }
         return 0;
+
+     public void hilo(){
+        timer = new Timer();
+        AppContext.getInstance().set("Timer", timer);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("HILO");
+                con.accionEnviar("4", "");
+            }
+        }, 10000, 10000);
     }
 }
