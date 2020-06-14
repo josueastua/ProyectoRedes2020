@@ -80,6 +80,8 @@ public class JuegoController extends Controller implements Initializable {
     int turno = 1;
     int oponente = 0;
     Marco_Carta carta1, carta2, mazo2, descartes2;
+    ImageView primero;
+    ImageView segundo;
     
     
     @FXML
@@ -467,11 +469,23 @@ public class JuegoController extends Controller implements Initializable {
 
     @FXML
     private void accionTableroJugador(MouseEvent event) {
+        //Coordenada de la carta seleccionada en la mano del jugador
+        primero = (ImageView) event.getSource();
+        char c1= segundo.getId().charAt(0);
+        char f1 = segundo.getId().charAt(1);
+        int fila1 = Character.getNumericValue(f1);
+        int columna1 = Character.getNumericValue(c1);
+        //Coordenas de la carta en el tablero del jugador
+        segundo = (ImageView) event.getSource();
+        char c2= segundo.getId().charAt(0);
+        char f2 = segundo.getId().charAt(1);
+        int fila2 = Character.getNumericValue(f2);
+        int columna2 = Character.getNumericValue(c2);
     }
 
     @FXML
     private void accionManoJugador(MouseEvent event) {
-        
+        primero = (ImageView) event.getSource();
     }
 
     @FXML
