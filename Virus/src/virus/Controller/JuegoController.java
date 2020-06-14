@@ -474,15 +474,42 @@ public class JuegoController extends Controller implements Initializable {
         //Coordenada de la carta seleccionada en la mano del jugador
         primero = (ImageView) event.getSource();
         int pos = Integer.valueOf(primero.getId());
-        Carta carta1 = (Carta) mano[pos].getCarta();
+        Carta carta1 = mano[pos].getCarta();
         //Coordenas de la carta en el tablero del jugador
         segundo = (ImageView) event.getSource();
         char f = segundo.getId().charAt(0);
         char c= segundo.getId().charAt(1);
         int fila = Character.getNumericValue(f);
         int columna = Character.getNumericValue(c);
-        Carta carta2 = (Carta) tablero[fila][columna].getCarta();
+        Carta carta2 = tablero[fila][columna].getCarta();
         //La carta es un organo
+        if(carta1.getTipo() == 1){
+            if(columna == 0){
+                if(verificarOrganoRepetido(carta1)){
+                    primero.setImage(null);
+                    mano[pos].setCarta(null);
+                    mano[pos].setImage(null);
+                    player.getMano().remove(carta1);
+                    tablero[fila][columna].setCarta(carta1);
+                    tablero[fila][columna].setImage(carta1.getImagen());
+                    segundo.setImage(carta1.getImagen());
+                }
+            }
+        }
+    }
+    
+    private boolean verificarOrganoRepetido(Carta organo){
+        if(organo.getColor() == 5){
+            return true;
+        }
+        for(int a=0;a<5;a++){
+            if(tablero[a][0].getCarta() != null){
+                if(tablero[a][0].getCarta().getColor() == organo.getColor()){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @FXML
