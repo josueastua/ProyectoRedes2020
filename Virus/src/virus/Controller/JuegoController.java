@@ -688,6 +688,7 @@ public class JuegoController extends Controller implements Initializable {
             return 3;
         }
         return 0;
+    }
 
      public void hilo(){
         timer = new Timer();

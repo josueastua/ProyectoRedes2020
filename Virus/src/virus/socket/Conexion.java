@@ -131,7 +131,7 @@ public class Conexion {
                 }
                 AppContext.getInstance().set("Turno", turno);
                 if(!message[1].equals("0")){
-                    datosJugador(message[2].split(":"));
+                    datosJugador(message[2].split("#"));
                     crearMazo(message[3].split("-"));
                     crearDescartes(message[4].split("-"));
                     usoTratamienro(message[2].split("-"));
