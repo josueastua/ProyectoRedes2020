@@ -320,6 +320,7 @@ public class JuegoController extends Controller implements Initializable {
         mano[3].setImage(new Image("/virus/resources/Dorso.jpg"));
         for(int i =0; i < 3; i++){
             mano[i].setImage(player.getMano().get(i).getImagen());
+            mano[i].setCarta(player.getMano().get(i));
         }
         /*
         
