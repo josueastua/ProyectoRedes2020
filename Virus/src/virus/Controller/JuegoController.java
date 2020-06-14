@@ -500,6 +500,7 @@ public class JuegoController extends Controller implements Initializable {
                                         tabOponente[fila][columna].setCarta(carta1);
                                         tabOponente[fila][columna].setImage(carta1.getImagen());
                                         segundo.setImage(carta1.getImagen());
+                                        oponentes.get(oponente).copiarMatrizOponente(tabOponente);
                                         break;
                                     }
                                     //El organo esta enfermo
@@ -517,6 +518,7 @@ public class JuegoController extends Controller implements Initializable {
                                         tabOponente[fila][0].setCarta(null);
                                         tabOponente[fila][0].setImage(null);
                                         segundo.setImage(null);
+                                        oponentes.get(oponente).copiarMatrizOponente(tabOponente);
                                         break;
                                     }
                                     //El organo esta vacunado
@@ -531,6 +533,7 @@ public class JuegoController extends Controller implements Initializable {
                                         tabOponente[fila][3-columna].setCarta(null);
                                         tabOponente[fila][3-columna].setImage(null);
                                         segundo.setImage(null);
+                                        oponentes.get(oponente).copiarMatrizOponente(tabOponente);
                                         break;
                                     }
                                     //El organo es inmune
@@ -572,6 +575,7 @@ public class JuegoController extends Controller implements Initializable {
                             tablero[fila][columna].setCarta(carta1);
                             tablero[fila][columna].setImage(carta1.getImagen());
                             segundo.setImage(carta1.getImagen());
+                            player.copiarMatrizJugador(tablero);
                         }
                     }
                 //La carta es una medicina
@@ -590,6 +594,7 @@ public class JuegoController extends Controller implements Initializable {
                                             tablero[fila][columna].setCarta(carta1);
                                             tablero[fila][columna].setImage(carta1.getImagen());
                                             segundo.setImage(carta1.getImagen());
+                                            player.copiarMatrizJugador(tablero);
                                             break;
                                         }
                                         //El organo esta enfermo
@@ -604,6 +609,7 @@ public class JuegoController extends Controller implements Initializable {
                                             tablero[3-fila][columna].setCarta(null);
                                             tablero[3-fila][columna].setImage(null);
                                             segundo.setImage(null);
+                                            player.copiarMatrizJugador(tablero);
                                             break;
                                         }
                                         //El organo esta vacunado
@@ -615,6 +621,8 @@ public class JuegoController extends Controller implements Initializable {
                                             tablero[fila][columna].setCarta(carta1);
                                             tablero[fila][columna].setImage(carta1.getImagen());
                                             segundo.setImage(carta1.getImagen());
+                                            player.copiarMatrizJugador(tablero);
+                                            break;
                                         }
                                     }
                                 }
@@ -638,6 +646,7 @@ public class JuegoController extends Controller implements Initializable {
 
     @FXML
     private void accionMazos(MouseEvent event) {
+        
     }
     
     private boolean verificarOrganoRepetido(Carta organo){

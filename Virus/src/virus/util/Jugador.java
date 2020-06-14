@@ -202,6 +202,23 @@ public class Jugador {
         return info;
     }
     
+    
+    public void copiarMatrizOponente(Cuerpo matriz[][]){
+        for(int a=0;a<5;a++){
+            for(int b=0;b<3;b++){
+                matTablero[a][b] = matriz[a][b].getCarta();
+            }
+        }
+    }
+    
+    public void copiarMatrizJugador(Cuerpo matriz[][]){
+        for(int a=0;a<5;a++){
+            for(int b=0;b<3;b++){
+                matTablero[b][a] = matriz[a][b].getCarta();
+            }
+        }
+    }
+    
     /*public void Prueba(){
         tablero.add("1:1");
         tablero.add("2:4");
