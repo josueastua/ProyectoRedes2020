@@ -306,11 +306,11 @@ public class JuegoController extends Controller implements Initializable {
             player = (Jugador) AppContext.getInstance().get("Jugador");
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
         ArrayList<Jugador> jug = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
-        jug.forEach( (jugador) -> {
+        /*jug.forEach( (jugador) -> {
             jugador.convertirCarta();
             if(!jugador.getId().equals(player.getId()))
                 oponentes.add(jugador);
-        });
+        });*/
         conseguirImagenes();
         
     }
