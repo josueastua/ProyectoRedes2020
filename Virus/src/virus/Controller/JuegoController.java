@@ -493,7 +493,7 @@ public class JuegoController extends Controller implements Initializable {
             return true;
         }
         for(int a=0;a<5;a++){
-            if(tablero[a][0].getCarta() != null){
+            if(tablero[0][a].getCarta() != null){
                 if(tablero[a][0].getCarta().getColor() == organo.getColor()){
                     return false;
                 }
