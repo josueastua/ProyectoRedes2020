@@ -409,6 +409,7 @@ public class JuegoController extends Controller implements Initializable {
         return info;
     }*/
     private void mostrarOponente(){
+        lblOponente.setText("ID: "+oponentes.get(oponente).getId()+" Nick: "+oponentes.get(oponente).getNick());
         Carta[][] tab = oponentes.get(oponente).getMatTablero();
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 3; j++){

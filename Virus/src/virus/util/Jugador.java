@@ -186,6 +186,22 @@ public class Jugador {
         
     }
     
+    public String infJugador(){
+        String info = "";
+        info += ID+"_";
+        for(Carta carta: mano){
+            info += carta.getRepresentacion()+"-";
+        }
+        info = info.substring(0, info.length() - 1);
+        for(int i = 0; i < 5; i++){
+            for(int y = 0; y < 3; y++){
+                info += matTablero[i][y].getRepresentacion()+",";
+            }
+        }
+        info = info.substring(0, info.length() - 1);
+        return info;
+    }
+    
     /*public void Prueba(){
         tablero.add("1:1");
         tablero.add("2:4");
