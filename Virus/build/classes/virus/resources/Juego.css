@@ -60,13 +60,6 @@ and open the template in the editor.
     -fx-background-color: #0db30d;
 }
 
-.combo-box:focused .arrow-button .arrow{
-    -fx-background-color: royalblue;
-}
-
-.combo-box:focused{
-    -fx-border-color: royalblue;
-}
 
 .combo-box .list-cell{
     -fx-prompt-text-fill: white;
@@ -77,6 +70,6 @@ and open the template in the editor.
 }
 
 .combo-box .list-cell:hover{
-    -fx-background-color: #d3d3d3;
-    -fx-text-fill: #003366;
+    -fx-background-color: white;
+    -fx-text-fill: #0db30d;
 }
