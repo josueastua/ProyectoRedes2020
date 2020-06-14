@@ -19,7 +19,7 @@ public class Conexion {
     Socket cliente, socket;
     ServerSocket servidor;
     int puerto = 44440;
-    String ip = "192.168.8.104";
+    String ip = "25.91.116.230";
     PrintStream salida;
     InputStreamReader respuesta;
     char msg[];
@@ -210,7 +210,7 @@ public class Conexion {
     }
     
     private void crearMazo(String[] mazo){
-        ArrayList<Object> Mazo = new ArrayList<>();
+        ArrayList<Carta> Mazo = new ArrayList<>();
         for(String carta: mazo){
             char prima = carta.charAt(0);
             Mazo.add(new Carta(Character.getNumericValue(prima), Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
@@ -219,7 +219,7 @@ public class Conexion {
     }
     
     private void crearDescartes(String[] descartes){
-        ArrayList<Object> Descartes = new ArrayList<>();
+        ArrayList<Carta> Descartes = new ArrayList<>();
         for(String carta: descartes){
             char prima = carta.charAt(0);
             Descartes.add(new Carta(Character.getNumericValue(prima), Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
