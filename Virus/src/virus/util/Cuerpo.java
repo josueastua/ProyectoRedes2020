@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
  * @author IVAN
  */
 public class Cuerpo {
-    private Object carta;
+    private Carta carta;
     private ImageView image;
 
     public Cuerpo(Carta carta, ImageView image) {
@@ -21,11 +21,11 @@ public class Cuerpo {
         this.image = image;
     }
 
-    public Object getCarta() {
+    public Carta getCarta() {
         return carta;
     }
 
-    public void setCarta(Object carta) {
+    public void setCarta(Carta carta) {
         this.carta = carta;
     }
 
