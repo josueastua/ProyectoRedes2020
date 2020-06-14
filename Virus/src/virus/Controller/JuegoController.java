@@ -477,6 +477,9 @@ public class JuegoController extends Controller implements Initializable {
                 }
             }
         }
+        
+        primero = null;
+        segundo = null;
     }
     
     private boolean verificarOrganoRepetido(Carta organo){
