@@ -96,6 +96,8 @@ public class Conexion {
                             for(int k = 0; k < manaux.length; k++){
                                 jug.addMano(new Carta(Character.getNumericValue(manaux[k].charAt(0)),Character.getNumericValue(manaux[k].charAt(2)),AppContext.getInstance().getCarta(manaux[k])));
                             }
+                            jugadores.add(jug);
+                            AppContext.getInstance().set("Jugadores", jugadores);
                         }else{
                             String[] mano = datJug[datJug.length - 1].split("-");  
                             
