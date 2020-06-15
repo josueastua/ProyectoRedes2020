@@ -750,6 +750,9 @@ public class JuegoController extends Controller implements Initializable {
     }
     
     private boolean verificarOrganoRepetido(Carta organo){
+        if(organo == null){
+            return false;
+        }
         if(organo.getColor() == 5){
             return true;
         }
