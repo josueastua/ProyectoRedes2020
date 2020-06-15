@@ -385,11 +385,13 @@ public class JuegoController extends Controller implements Initializable {
         }
         men = men.substring(0, men.length() - 1);
         men += "/";
-        for(Carta carta: descartes){
-            men += carta+"-";
+        if(!descartes.isEmpty() || descartes != null){
+            for(Carta carta: descartes){
+                men += carta+"-";
+            }
+            men = men.substring(0, men.length() - 1);
         }
-        men = men.substring(0, men.length() - 1);
-        men += "/";
+        men += "0/";
         men += "0-0-0";
         return men;
     }
@@ -409,8 +411,8 @@ public class JuegoController extends Controller implements Initializable {
                 verificarCantidadMazo();
                 player.addMano(mazo.get(0));
                 mazo.remove(0);
-                conseguirImagenes();
             }
+            conseguirImagenes();
         }
     }
     
