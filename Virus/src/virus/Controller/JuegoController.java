@@ -249,6 +249,8 @@ public class JuegoController extends Controller implements Initializable {
     
     public void actualizarJuego(){
         Platform.runLater( () -> {
+            mazo =  (ArrayList<Carta>) AppContext.getInstance().get("Mazo");
+            descartes = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
             conseguirImagenes();
             mostrarOponente();
             mostrarTablero();
@@ -320,13 +322,13 @@ public class JuegoController extends Controller implements Initializable {
         lblOponente.setText("ID: "+oponentes.get(oponente).getId()+" Nick: "+oponentes.get(oponente).getNick());
         if(player.getTurno() > 1)
             hilo();
+        mazo =  (ArrayList<Carta>) AppContext.getInstance().get("Mazo");
+        descartes = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
         conseguirImagenes();
         
     }
 
     private void conseguirImagenes(){
-        mazo =  (ArrayList<Carta>) AppContext.getInstance().get("Mazo");
-        descartes = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
         mano[3].setImage(new Image("/virus/resources/Dorso.jpg"));
         for(int i =0; i < 3; i++){
             mano[i].setImage(player.getMano().get(i).getImagen());
@@ -822,5 +824,43 @@ public class JuegoController extends Controller implements Initializable {
                 con.accionEnviar("4", "");
             }
         }, 10000, 10000);
+    }
+
+    @FXML
+    private void accionDescartar(ActionEvent event) {
+        if(!jugada && cbDescartar.getSelectionModel().getSelectedItem() != null){
+            tramitarPeticion(cbDescartar.getSelectionModel().getSelectedItem());
+            cbDescartar.setMouseTransparent(true);
+        }
+    }
+    
+    public void tramitarPeticion(String peticion){
+        int index = cbDescartar.getItems().indexOf(peticion);
+        switch(index){
+            case 0:
+                player.getMano().clear();
+                break;
+            case 2:
+                player.getMano().remove(0);
+                player.getMano().remove(0);
+                break;
+            case 3:
+                player.getMano().remove(0);
+                player.getMano().remove(1);
+                break;
+            case 4:
+                player.getMano().remove(1);
+                player.getMano().remove(1);
+                break;
+            case 5:
+                player.getMano().remove(0);
+                break;
+            case 6:
+                player.getMano().remove(1);
+                break;
+            case 7:
+                player.getMano().remove(2);
+                break;
+        }
     }
 }
