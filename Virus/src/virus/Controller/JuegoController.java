@@ -401,6 +401,7 @@ public class JuegoController extends Controller implements Initializable {
             player.addMano(mazo.get(0));
             mazo.remove(0);
             jugada = false;
+            conseguirImagenes();
         //Rellena la mano del jugador luego de botar cartas
         }else{
             int cantidad = 3 - player.getMano().size();
@@ -408,6 +409,7 @@ public class JuegoController extends Controller implements Initializable {
                 verificarCantidadMazo();
                 player.addMano(mazo.get(0));
                 mazo.remove(0);
+                conseguirImagenes();
             }
         }
     }
@@ -473,6 +475,8 @@ public class JuegoController extends Controller implements Initializable {
                     mano[pos].setCarta(null);
                     mano[pos].setImage(null);
                     player.getMano().remove(carta1);
+                    //Obtener una nueva carta del mazo
+                    comerCarta();
                     //Tranferir el organo
                     tablero[0][disponible].setCarta(carta2);
                     tablero[0][disponible].setImage(carta2.getImagen());
@@ -545,41 +549,45 @@ public class JuegoController extends Controller implements Initializable {
                                         tabOponente[fila][columna].setImage(carta1.getImagen());
                                         segundo.setImage(carta1.getImagen());
                                         oponentes.get(oponente).copiarMatrizOponente(tabOponente);
+                                        //Tomar una nueva carta
+                                        comerCarta();
                                         break;
                                     }
                                     //El organo esta enfermo
                                     case 2:{
                                         jugada = true;
-                                        ArrayList<Carta> lista = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
                                         primero.setImage(null);
                                         mano[pos].setCarta(null);
                                         mano[pos].setImage(null);
                                         player.getMano().remove(carta1);
-                                        lista.add(carta1);
-                                        lista.add(tablero[fila][3-columna].getCarta());
-                                        lista.add(tabOponente[fila][0].getCarta());
+                                        descartes.add(carta1);
+                                        descartes.add(tablero[fila][3-columna].getCarta());
+                                        descartes.add(tabOponente[fila][0].getCarta());
                                         tabOponente[fila][3-columna].setCarta(null);
                                         tabOponente[fila][3-columna].setImage(null);
                                         tabOponente[fila][0].setCarta(null);
                                         tabOponente[fila][0].setImage(null);
                                         segundo.setImage(null);
                                         oponentes.get(oponente).copiarMatrizOponente(tabOponente);
+                                        //Tomar una nueva carta
+                                        comerCarta();
                                         break;
                                     }
                                     //El organo esta vacunado
                                     case 3:{
                                         jugada = true;
-                                        ArrayList<Carta> lista = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
                                         primero.setImage(null);
                                         mano[pos].setCarta(null);
                                         mano[pos].setImage(null);
                                         player.getMano().remove(carta1);
-                                        lista.add(carta1);
-                                        lista.add(tabOponente[fila][3-columna].getCarta());
+                                        descartes.add(carta1);
+                                        descartes.add(tabOponente[fila][3-columna].getCarta());
                                         tabOponente[fila][3-columna].setCarta(null);
                                         tabOponente[fila][3-columna].setImage(null);
                                         segundo.setImage(null);
                                         oponentes.get(oponente).copiarMatrizOponente(tabOponente);
+                                        //Tomar una nueva carta
+                                        comerCarta();
                                         break;
                                     }
                                     //El organo es inmune
@@ -627,6 +635,8 @@ public class JuegoController extends Controller implements Initializable {
                             tablero[fila][columna].setImage(carta1.getImagen());
                             segundo.setImage(carta1.getImagen());
                             player.copiarMatrizJugador(tablero);
+                            //Tomar una nueva carta
+                            comerCarta();
                         }
                     }
                 //La carta es una medicina
@@ -647,22 +657,25 @@ public class JuegoController extends Controller implements Initializable {
                                             tablero[fila][columna].setImage(carta1.getImagen());
                                             segundo.setImage(carta1.getImagen());
                                             player.copiarMatrizJugador(tablero);
+                                            //Tomar una nueva carta
+                                            comerCarta();
                                             break;
                                         }
                                         //El organo esta enfermo
                                         case 2:{
                                             jugada = true;
-                                            ArrayList<Carta> lista = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
                                             primero.setImage(null);
                                             mano[pos].setCarta(null);
                                             mano[pos].setImage(null);
                                             player.getMano().remove(carta1);
-                                            lista.add(carta1);
-                                            lista.add(tablero[3-fila][columna].getCarta());
+                                            descartes.add(carta1);
+                                            descartes.add(tablero[3-fila][columna].getCarta());
                                             tablero[3-fila][columna].setCarta(null);
                                             tablero[3-fila][columna].setImage(null);
                                             segundo.setImage(null);
                                             player.copiarMatrizJugador(tablero);
+                                            //Tomar una nueva carta
+                                            comerCarta();
                                             break;
                                         }
                                         //El organo esta vacunado
@@ -676,6 +689,8 @@ public class JuegoController extends Controller implements Initializable {
                                             tablero[fila][columna].setImage(carta1.getImagen());
                                             segundo.setImage(carta1.getImagen());
                                             player.copiarMatrizJugador(tablero);
+                                            //Tomar una nueva carta
+                                            comerCarta();
                                             break;
                                         }
                                     }
