@@ -38,13 +38,13 @@ public class AppContext {
         cartas.put("1:1", new Image("virus/resources/o1.png"));
         cartas.put("1:2", new Image("virus/resources/o2.png"));
         cartas.put("1:3", new Image("virus/resources/o4.png"));
-        cartas.put("1:4", new Image("virus/resources/o4.png"));
+        cartas.put("1:4", new Image("virus/resources/o3.png"));
         cartas.put("1:5", new Image("virus/resources/o5.png"));
         
-        cartas.put("2:1", new Image("virus/resources/m13.png"));
+        cartas.put("2:1", new Image("virus/resources/m41.png"));
         cartas.put("2:2", new Image("virus/resources/m23.png"));
         cartas.put("2:3", new Image("virus/resources/m31.png"));
-        cartas.put("2:4", new Image("virus/resources/m41.png"));
+        cartas.put("2:4", new Image("virus/resources/m13.png"));
         cartas.put("2:5", new Image("virus/resources/m51.png"));
         
         cartas.put("3:2", new Image("virus/resources/v12.png"));

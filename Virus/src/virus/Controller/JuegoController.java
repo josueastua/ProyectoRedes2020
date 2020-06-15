@@ -630,7 +630,12 @@ public class JuegoController extends Controller implements Initializable {
                 int fila = Character.getNumericValue(f);
                 int columna = Character.getNumericValue(c);
                 Carta carta2 = tablero[fila][columna].getCarta();
-                System.out.println("Carta 2 "+carta2.getTipo()+":"+carta2.getColor());
+                if(carta2 != null){
+                    System.out.println("Carta 2 "+carta2.getTipo()+":"+carta2.getColor());
+                }else{
+                    System.out.println("Nulo");
+                }
+                
                 //La carta es un organo
                 if(carta1.getTipo() == 1){
                     System.out.println("Organo");
