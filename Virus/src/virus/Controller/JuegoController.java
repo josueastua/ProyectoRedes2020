@@ -629,6 +629,7 @@ public class JuegoController extends Controller implements Initializable {
                 int fila = Character.getNumericValue(f);
                 int columna = Character.getNumericValue(c);
                 Carta carta2 = tablero[fila][columna].getCarta();
+                System.out.println("Carta 2 "+carta2.getTipo()+":"+carta2.getColor());
                 //La carta es un organo
                 if(carta1.getTipo() == 1){
                     System.out.println("Organo");
@@ -661,7 +662,7 @@ public class JuegoController extends Controller implements Initializable {
                     if(fila != 0){
                         if(tablero[0][columna].getCarta() != null){
                             if(carta2 == null){
-                                if(tablero[0][columna].getCarta().getColor() == carta1.getColor() || carta1.getColor() == 5){
+                                if(tablero[0][columna].getCarta().getColor() == carta1.getColor() || carta1.getColor() == 5 || carta2.getColor() == 5){
                                     switch(verificarEstadoOrgano(columna)){
                                         //El organo esta sano
                                         case 1:{
@@ -713,7 +714,7 @@ public class JuegoController extends Controller implements Initializable {
                                     }
                                 }else{
                                     System.out.println("El color del organo es distinto");
-                                    System.out.println("Color 1 = "+ carta1.getColor() + " Color 2 = "+ carta2.getColor());
+                                    System.out.println("Color 1 = "+ carta1.getColor() + " Color 2 = " + tablero[0][columna].getCarta().getColor());
                                 }
                             }else{
                                 System.out.println("El espacio no esta disponible");
@@ -737,6 +738,7 @@ public class JuegoController extends Controller implements Initializable {
         primero = (ImageView) event.getSource();
         int pos = Integer.parseInt(primero.getId());
         Carta carta1 = mano[pos].getCarta();
+        System.out.println("Carta "+carta1.getTipo()+":"+carta1.getColor());
         if(carta1.getTipo() == 4){
             switch(carta1.getColor()){
                 //Ladron de organos

@@ -118,8 +118,7 @@
                               <ImageView id="21" fx:id="ivTab21" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <ImageView id="22" fx:id="ivTab22" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                               <ImageView id="23" fx:id="ivTab23" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                              <ImageView id="42" fx:id="ivTab24" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                              <ImageView id="24" fx:id="ivMano04" fitHeight="122.0" fitWidth="114.0" onMouseClicked="#accionMazos" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                              <ImageView id="24" fx:id="ivTab24" fitHeight="112.0" fitWidth="114.0" onMouseClicked="#accionTableroJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <GridPane fx:id="gpManoyMazo" alignment="CENTER" minHeight="81.0" prefHeight="120.0" prefWidth="570.0">
@@ -141,6 +140,7 @@
                               <ImageView id="1" fx:id="ivMano01" fitHeight="122.0" fitWidth="114.0" onMouseClicked="#accionManoJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
                               <ImageView id="2" fx:id="ivMano02" fitHeight="122.0" fitWidth="114.0" onMouseClicked="#accionManoJugador" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                               <ImageView id="3" fx:id="ivMano03" fitHeight="122.0" fitWidth="114.0" onMouseClicked="#accionMazos" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                              <ImageView id="4" fx:id="ivMano04" fitHeight="122.0" fitWidth="114.0" onMouseClicked="#accionMazos" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
                            </children>
                         </GridPane>
                         <HBox>
