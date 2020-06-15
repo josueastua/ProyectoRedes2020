@@ -631,23 +631,33 @@ public class JuegoController extends Controller implements Initializable {
                 Carta carta2 = tablero[fila][columna].getCarta();
                 //La carta es un organo
                 if(carta1.getTipo() == 1){
+                    System.out.println("Organo");
                     if(fila == 0){
                         if(verificarOrganoRepetido(carta1)){
-                            jugada = true;
-                            primero.setImage(null);
-                            mano[pos].setCarta(null);
-                            mano[pos].setImage(null);
-                            player.getMano().remove(carta1);
-                            tablero[fila][columna].setCarta(carta1);
-                            tablero[fila][columna].setImage(carta1.getImagen());
-                            segundo.setImage(carta1.getImagen());
-                            player.copiarMatrizJugador(tablero);
-                            //Tomar una nueva carta
-                            comerCarta();
+                            if(carta2 == null){
+                                jugada = true;
+                                primero.setImage(null);
+                                mano[pos].setCarta(null);
+                                mano[pos].setImage(null);
+                                player.getMano().remove(carta1);
+                                tablero[fila][columna].setCarta(carta1);
+                                tablero[fila][columna].setImage(carta1.getImagen());
+                                segundo.setImage(carta1.getImagen());
+                                player.copiarMatrizJugador(tablero);
+                                //Tomar una nueva carta
+                                comerCarta();
+                                }else{
+                                System.out.println("La posición ya esta ocupada");
+                            }
+                        }else{
+                            System.out.println("Organo repetido");
                         }
+                    }else{
+                        System.out.println("Fila incorrecta");
                     }
                 //La carta es una medicina
                 }else{
+                    System.out.println("Medicina");
                     if(fila != 0){
                         if(tablero[0][columna].getCarta() != null){
                             if(carta2 == null){
@@ -701,9 +711,17 @@ public class JuegoController extends Controller implements Initializable {
                                             break;
                                         }
                                     }
+                                }else{
+                                    System.out.println("El color del organo es distinto");
                                 }
+                            }else{
+                                System.out.println("El espacio no esta disponible");
                             }
+                        }else{
+                            System.out.println("No hay un organo al cual vacunar");
                         }
+                    }else{
+                        System.out.println("Posición incorrecta");
                     }
                 }
             }
