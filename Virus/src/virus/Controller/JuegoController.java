@@ -819,7 +819,10 @@ public class JuegoController extends Controller implements Initializable {
 
     @FXML
     private void accionDescartar(ActionEvent event) {
-        
+        if(!jugada && cbDescartar.getSelectionModel().getSelectedItem() != null){
+            tramitarPeticion(cbDescartar.getSelectionModel().getSelectedItem());
+            cbDescartar.setMouseTransparent(true);
+        }
     }
     
     public void tramitarPeticion(String peticion){
