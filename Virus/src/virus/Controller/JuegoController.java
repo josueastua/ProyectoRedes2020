@@ -381,14 +381,14 @@ public class JuegoController extends Controller implements Initializable {
         men = men.substring(0, men.length() - 1);
         men += "/";
         for(Carta carta: mazo){
-            men += carta+"-";
+            men += carta.getRepresentacion()+"-";
         }
         men = men.substring(0, men.length() - 1);
         men += "/";
         if(descartes != null){
             if(!descartes.isEmpty()){
                 for(Carta carta: descartes){
-                    men += carta+"-";
+                    men += carta.getRepresentacion()+"-";
                 }
                 men = men.substring(0, men.length() - 1);
             }else{
