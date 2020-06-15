@@ -789,4 +789,48 @@ public class JuegoController extends Controller implements Initializable {
             }
         }, 10000, 10000);
     }
+
+    @FXML
+    private void accionDescartar(ActionEvent event) {
+        
+    }
+    
+    public void tramitarPeticion(String peticion){
+        /*
+        cbDescartar.getItems().add("Las tres cartas");
+        cbDescartar.getItems().add("La carta 1 y la carta 2");
+        cbDescartar.getItems().add("La carta 1 y la carta 3");
+        cbDescartar.getItems().add("La carta 2 y la carta 3");
+        cbDescartar.getItems().add("La carta 1");
+        cbDescartar.getItems().add("La carta 2");
+        cbDescartar.getItems().add("La carta 3");
+        */
+        int index = cbDescartar.getItems().indexOf(peticion);
+        switch(index){
+            case 0:
+                player.getMano().clear();
+                break;
+            case 2:
+                player.getMano().remove(0);
+                player.getMano().remove(0);
+                break;
+            case 3:
+                player.getMano().remove(0);
+                player.getMano().remove(1);
+                break;
+            case 4:
+                player.getMano().remove(1);
+                player.getMano().remove(1);
+                break;
+            case 5:
+                player.getMano().remove(0);
+                break;
+            case 6:
+                player.getMano().remove(1);
+                break;
+            case 7:
+                player.getMano().remove(2);
+                break;
+        }
+    }
 }

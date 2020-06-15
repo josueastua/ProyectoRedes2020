@@ -133,7 +133,12 @@ public class Conexion {
                 if(!message[1].equals("0")){
                     datosJugador(message[2].split("#"));
                     crearMazo(message[3].split("-"));
-                    crearDescartes(message[4].split("-"));
+                    if(!message[4].equals("0"))
+                        crearDescartes(message[4].split("-"));
+                    else{
+                        ArrayList<Carta> Descartes = new ArrayList<>();
+                        AppContext.getInstance().set("Descartes", Descartes);
+                    }
                     usoTratamienro(message[2].split("-"));
                     JuegoController juego = (JuegoController) AppContext.getInstance().get("Juego");
                     juego.actualizarJuego();
