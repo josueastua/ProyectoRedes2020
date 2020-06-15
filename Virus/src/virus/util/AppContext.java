@@ -36,8 +36,8 @@ public class AppContext {
 
     private void cargarCartas(){
         cartas.put("1:1", new Image("virus/resources/o1.png"));
-        cartas.put("1:2", new Image("virus/resources/o2.png"));
-        cartas.put("1:3", new Image("virus/resources/o4.png"));
+        cartas.put("1:2", new Image("virus/resources/o4.png"));
+        cartas.put("1:3", new Image("virus/resources/o2.png"));
         cartas.put("1:4", new Image("virus/resources/o3.png"));
         cartas.put("1:5", new Image("virus/resources/o5.png"));
         
