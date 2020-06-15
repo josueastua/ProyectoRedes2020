@@ -392,14 +392,21 @@ public class JuegoController extends Controller implements Initializable {
         return men;
     }
     
-    public void comerCarta(int cantidad){
+    public void comerCarta(){
+        //Se encarga de reponer la carta faltante de la mano luego de una jugada
         if(jugada){
             verificarCantidadMazo();
-            player.getMano().add(mazo.get(0));
+            player.addMano(mazo.get(0));
             mazo.remove(0);
             jugada = false;
+        //Rellena la mano del jugador luego de botar cartas
         }else{
-            
+            int cantidad = 3 - player.getMano().size();
+            for(int a=0;a<cantidad;a++){
+                verificarCantidadMazo();
+                player.addMano(mazo.get(0));
+                mazo.remove(0);
+            }
         }
     }
     
