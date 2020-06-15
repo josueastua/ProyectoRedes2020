@@ -713,6 +713,7 @@ public class JuegoController extends Controller implements Initializable {
                                     }
                                 }else{
                                     System.out.println("El color del organo es distinto");
+                                    System.out.println("Color 1 = "+ carta1.getColor() + " Color 2 = "+ carta2.getColor());
                                 }
                             }else{
                                 System.out.println("El espacio no esta disponible");
@@ -776,15 +777,13 @@ public class JuegoController extends Controller implements Initializable {
     }
     
     private boolean verificarOrganoRepetido(Carta organo){
-        if(organo == null){
-            return false;
-        }
         if(organo.getColor() == 5){
             return true;
         }
         for(int a=0;a<5;a++){
             if(tablero[0][a].getCarta() != null){
                 if(tablero[0][a].getCarta().getColor() == organo.getColor()){
+                    System.out.println(a+"- "+tablero[0][a].getCarta().getColor());
                     return false;
                 }
             }
