@@ -108,52 +108,35 @@ public class Jugador {
         }
     }
     
-    /*
+    
     public String infoJugador(){
         String info = String.valueOf(ID) + "_";
-        for(int a=0;a<mano.size();a++){
-            if(mano.get(a).getClass().equals(Carta.class)){
-                Carta aux = (Carta) mano.get(a);
-                info += String.valueOf(aux.getTipo()) + ":";
-                info += String.valueOf(aux.getColor());
-                if(a+1 < mano.size()){
-                    info += "-";
-                }
-            }else{
-                Tratamiento aux = new Tratamiento();
-                info += "4:";
-                info += String.valueOf(aux.getTipo());
-                if(a+1 < mano.size()){
-                    info += "-";
-                }
+        for(int a=0;a<3;a++){
+            info += mano.get(a).getRepresentacion();
+            if(a!= 2){
+                info+="-";
             }
         }
+        info+="_";
         
-        info += " ";
-        for(int a=0;a<tablero.size();a++){
-            if(tablero.get(a).getClass().equals(Carta.class)){
-                Carta aux = (Carta) tablero.get(a);
-                info += String.valueOf(aux.getTipo()) + ":";
-                info += String.valueOf(aux.getColor());
-                if(a+1 < tablero.size()){
-                    info += "-";
+        for(int a=0;a<5;a++){
+            for(int b=0;b<3;b++){
+                if(matTablero[a][b] != null){
+                    info += matTablero[a][b].getRepresentacion();
+                }else{
+                    info += "0";
                 }
-            }else{
-                Tratamiento aux = new Tratamiento();
-                info += "4:";
-                info += String.valueOf(aux.getTipo());
-                if(a+1 < tablero.size()){
-                    info += "-";
+                if(b == 2){
+                        info = info+",";
+                    }else{
+                        info+= "-";
+                    }
                 }
-            }
-        
         }
-        if(tablero.isEmpty()){
-            info += "0";
-        }
+        info = info.substring(0,info.length()-1);
         return info;
     }
-    */
+    
     public void convertirCarta(){
         System.out.println("Tamaño de la mano " + mano.size());
         ArrayList<Carta> lista = new ArrayList();
@@ -185,24 +168,7 @@ public class Jugador {
         lista.clear();
         
     }
-    
-    public String infJugador(){
-        String info = "";
-        info += ID+"_";
-        for(Carta carta: mano){
-            info += carta.getRepresentacion()+"-";
-        }
-        info = info.substring(0, info.length() - 1);
-        for(int i = 0; i < 5; i++){
-            for(int y = 0; y < 3; y++){
-                info += matTablero[i][y].getRepresentacion()+",";
-            }
-        }
-        info = info.substring(0, info.length() - 1);
-        return info;
-    }
-    
-    
+  
     public void copiarMatrizOponente(Cuerpo matriz[][]){
         for(int a=0;a<5;a++){
             for(int b=0;b<3;b++){

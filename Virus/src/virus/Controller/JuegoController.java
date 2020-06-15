@@ -717,7 +717,10 @@ public class JuegoController extends Controller implements Initializable {
             switch(carta1.getColor()){
                 //Ladron de organos
                 case 1:{
-                    click = 1;
+                    Mensaje mensaje = new Mensaje();
+                    if(mensaje.showConfirmation("Carta ladrón de organos", this.getStage(), "¿Desea usar esta carta?")){
+                        click = 1;
+                    }
                     break;
                 }
                 //Transplante
