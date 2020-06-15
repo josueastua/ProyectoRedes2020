@@ -81,6 +81,7 @@ public class JuegoController extends Controller implements Initializable {
     int oponente = 0;
     ImageView primero = null;
     ImageView segundo = null;
+    int click = 0;
     
     
     @FXML
@@ -473,7 +474,73 @@ public class JuegoController extends Controller implements Initializable {
 
     @FXML
     private void accionTableroOponente(MouseEvent event) {
-        if(primero != null){
+        //Carta de tratamiendo ladrón de organos
+        if(click == 1){
+            int pos = Integer.parseInt(primero.getId());
+            Carta carta1 = mano[pos].getCarta();
+            segundo = (ImageView) event.getSource();
+            char f = segundo.getId().charAt(0);
+            char c= segundo.getId().charAt(1);
+            int fila = Character.getNumericValue(f);
+            int columna = Character.getNumericValue(c);
+            Carta carta2 = tabOponente[fila][columna].getCarta();
+            if(verificarInmunidad(fila)){
+                if(verificarOrganoRepetido(carta2)){
+                    int disponible = 0;
+                    for(int a=0;a<5;a++){
+                        if(tablero[0][a].getCarta() == null){
+                            disponible = a;
+                            break;
+                        }
+                    }
+                    primero.setImage(null);
+                    mano[pos].setCarta(null);
+                    mano[pos].setImage(null);
+                    player.getMano().remove(carta1);
+                    //Tranferir el organo
+                    tablero[0][disponible].setCarta(carta2);
+                    tablero[0][disponible].setImage(carta2.getImagen());
+                    tablero[0][disponible].getImage().setImage(carta2.getImagen());
+                    //Eliminar el organo del oponente
+                    tabOponente[fila][columna].setCarta(null);
+                    tabOponente[fila][columna].setImage(null);
+                    segundo.setImage(null);
+                    //Tranferir cartas que aconpañan al organo
+                    //Primera
+                    if(tabOponente[fila][1].getCarta() != null){
+                        carta2 = tabOponente[fila][1].getCarta();
+                        tablero[1][disponible].setCarta(carta2);
+                        tablero[1][disponible].setImage(carta2.getImagen());
+                        tablero[1][disponible].getImage().setImage(carta2.getImagen());
+                        //Eliminar la carta del tablero del oponente
+                        tabOponente[fila][1].setCarta(null);
+                        tabOponente[fila][1].setImage(null);
+                        tabOponente[fila][1].getImage().setImage(null);
+                    }
+                    //Segunda
+                    if(tabOponente[fila][2].getCarta() != null){
+                        carta2 = tabOponente[fila][2].getCarta();
+                        tablero[2][disponible].setCarta(carta2);
+                        tablero[2][disponible].setImage(carta2.getImagen());
+                        tablero[2][disponible].getImage().setImage(carta2.getImagen());
+                        //Eliminar la carta del tablero del oponente
+                        tabOponente[fila][2].setCarta(null);
+                        tabOponente[fila][2].setImage(null);
+                        tabOponente[fila][2].getImage().setImage(null);
+                    }
+                    
+                    player.copiarMatrizJugador(tablero);
+                    oponentes.get(oponente).copiarMatrizOponente(tabOponente);
+                }
+            }
+            
+            primero = null;
+            segundo = null;
+            click = 0;
+            
+        //Carta común de virus
+        }else{
+            if(primero != null){
             //Coordenada de la carta seleccionada en la mano del jugador
             int pos = Integer.valueOf(primero.getId());
             Carta carta1 = mano[pos].getCarta();
@@ -548,6 +615,10 @@ public class JuegoController extends Controller implements Initializable {
                 }
             }
         }
+        primero = null;
+        segundo = null;
+    }
+        
     }
 
     @FXML
@@ -633,8 +704,6 @@ public class JuegoController extends Controller implements Initializable {
             }
         }
         
-        
-        
         primero = null;
         segundo = null;
     }
@@ -642,6 +711,37 @@ public class JuegoController extends Controller implements Initializable {
     @FXML
     private void accionManoJugador(MouseEvent event) {
         primero = (ImageView) event.getSource();
+        int pos = Integer.parseInt(primero.getId());
+        Carta carta1 = mano[pos].getCarta();
+        if(carta1.getTipo() == 4){
+            switch(carta1.getColor()){
+                //Ladron de organos
+                case 1:{
+                    click = 1;
+                    break;
+                }
+                //Transplante
+                case 2:{
+                    
+                    break;
+                }
+                //Infección
+                case 3:{
+                    
+                    break;
+                }
+                //Guante de latex
+                case 4:{
+                    
+                    break;
+                }
+                //Error médico
+                case 5:{
+                    
+                    break;
+                }
+            }
+        }
     }
 
     @FXML
@@ -698,7 +798,33 @@ public class JuegoController extends Controller implements Initializable {
         }
         return 0;
     }
-
+    
+    public boolean verificarInmunidad(int fila){
+        boolean pos1 = false;
+        boolean pos2 = false;
+        
+        if(tabOponente[fila][1].getCarta() != null){
+            if(tabOponente[fila][1].getCarta().getTipo() != 2){
+                pos1 = true;
+            }
+        }else{
+            pos1 = false;
+        }
+        
+        if(tabOponente[fila][2].getCarta() != null){
+            if(tabOponente[fila][2].getCarta().getTipo() != 2){
+                pos2 = true;
+            }
+        }else{
+            pos2 = false;
+        }
+        //El organo esta inmune
+        if(pos1 && pos2){
+            return false;
+        }
+        return true;
+    }
+    
      public void hilo(){
         timer = new Timer();
         AppContext.getInstance().set("Timer", timer);

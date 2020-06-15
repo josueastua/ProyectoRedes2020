@@ -5,11 +5,13 @@
         <group>
             <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/Controller/IngresoController.java</file>
             <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/Controller/JuegoController.java</file>
+            <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/view/Especiales.fxml</file>
             <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/util/Cuerpo.java</file>
             <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/Virus.java</file>
             <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/Controller/InicioController.java</file>
             <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/util/Jugador.java</file>
             <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/socket/Conexion.java</file>
+            <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/Controller/EspecialesController.java</file>
             <file>file:/C:/GitHub/ProyectoRedes2020/Virus/src/virus/util/Carta.java</file>
         </group>
     </open-files>
