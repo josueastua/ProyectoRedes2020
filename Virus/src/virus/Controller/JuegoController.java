@@ -83,6 +83,7 @@ public class JuegoController extends Controller implements Initializable {
     ImageView primero = null;
     ImageView segundo = null;
     int click = 0;
+    boolean jugada = false;
     
     
     @FXML
@@ -390,6 +391,24 @@ public class JuegoController extends Controller implements Initializable {
         men += "0-0-0";
         return men;
     }
+    
+    public void comerCarta(int cantidad){
+        if(jugada){
+            verificarCantidadMazo();
+            player.getMano().add(mazo.get(0));
+            mazo.remove(0);
+            jugada = false;
+        }else{
+            
+        }
+    }
+    
+    public void verificarCantidadMazo(){
+        if(mazo.isEmpty()){
+            mazo.addAll(descartes);
+            descartes.clear();
+        }
+    }
 
     @FXML
     private void accionSiguente(ActionEvent event) {
@@ -433,6 +452,7 @@ public class JuegoController extends Controller implements Initializable {
             Carta carta2 = tabOponente[fila][columna].getCarta();
             if(verificarInmunidad(fila)){
                 if(verificarOrganoRepetido(carta2)){
+                    jugada = true;
                     int disponible = 0;
                     for(int a=0;a<5;a++){
                         if(tablero[0][a].getCarta() == null){
@@ -507,6 +527,7 @@ public class JuegoController extends Controller implements Initializable {
                                 switch(verificarEstadoOponente(fila)){
                                     //El organo esta sano
                                     case 1:{
+                                        jugada = true;
                                         primero.setImage(null);
                                         mano[pos].setCarta(null);
                                         mano[pos].setImage(null);
@@ -519,6 +540,7 @@ public class JuegoController extends Controller implements Initializable {
                                     }
                                     //El organo esta enfermo
                                     case 2:{
+                                        jugada = true;
                                         ArrayList<Carta> lista = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
                                         primero.setImage(null);
                                         mano[pos].setCarta(null);
@@ -537,6 +559,7 @@ public class JuegoController extends Controller implements Initializable {
                                     }
                                     //El organo esta vacunado
                                     case 3:{
+                                        jugada = true;
                                         ArrayList<Carta> lista = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
                                         primero.setImage(null);
                                         mano[pos].setCarta(null);
@@ -586,6 +609,7 @@ public class JuegoController extends Controller implements Initializable {
                 if(carta1.getTipo() == 1){
                     if(fila == 0){
                         if(verificarOrganoRepetido(carta1)){
+                            jugada = true;
                             primero.setImage(null);
                             mano[pos].setCarta(null);
                             mano[pos].setImage(null);
@@ -605,6 +629,7 @@ public class JuegoController extends Controller implements Initializable {
                                     switch(verificarEstadoOrgano(columna)){
                                         //El organo esta sano
                                         case 1:{
+                                            jugada = true;
                                             primero.setImage(null);
                                             mano[pos].setCarta(null);
                                             mano[pos].setImage(null);
@@ -617,6 +642,7 @@ public class JuegoController extends Controller implements Initializable {
                                         }
                                         //El organo esta enfermo
                                         case 2:{
+                                            jugada = true;
                                             ArrayList<Carta> lista = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
                                             primero.setImage(null);
                                             mano[pos].setCarta(null);
@@ -632,6 +658,7 @@ public class JuegoController extends Controller implements Initializable {
                                         }
                                         //El organo esta vacunado
                                         case 3:{
+                                            jugada = true;
                                             primero.setImage(null);
                                             mano[pos].setCarta(null);
                                             mano[pos].setImage(null);

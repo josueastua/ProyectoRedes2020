@@ -35,11 +35,6 @@ public class InicioController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         addEvents();
-        Jugador jug = new Jugador();
-        jug.addMano(new Carta(1,2,new Image("virus/resources/Dorso.jpg")));
-        jug.addMano(new Carta(3,3,new Image("virus/resources/Dorso.jpg")));
-        jug.addMano(new Carta(2,4,new Image("virus/resources/Dorso.jpg")));
-        System.out.println(jug.infoJugador());
     }    
 
     @FXML
