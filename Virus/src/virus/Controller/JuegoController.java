@@ -8,6 +8,7 @@ package virus.Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -72,9 +73,9 @@ public class JuegoController extends Controller implements Initializable {
     Mensaje men;
     
     ArrayList<Jugador> oponentes = new ArrayList<>(); 
-    ArrayList<String> mazo = new ArrayList<>();
+    ArrayList<Carta> mazo = new ArrayList<>();
     ArrayList<Object> mazo_img = new ArrayList<>();
-    ArrayList<String> descartes = new ArrayList<>();
+    ArrayList<Carta> descartes = new ArrayList<>();
     ArrayList<Object> descartes_img = new ArrayList<>();
     Jugador player = null;
     int turno = 1;
@@ -239,9 +240,7 @@ public class JuegoController extends Controller implements Initializable {
             if(!menu){
                 vb_contenerdor_oponentes.setPrefWidth(0);
                 vb_contenerdor_oponentes.getChildren().clear();
-                //vb_contenerdor_oponentes.setLayoutX(-320);
                 vb_player.setPrefWidth(root.getWidth());
-                        
             }
         });
         
@@ -325,90 +324,15 @@ public class JuegoController extends Controller implements Initializable {
     }
 
     private void conseguirImagenes(){
+        mazo =  (ArrayList<Carta>) AppContext.getInstance().get("Mazo");
+        descartes = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
         mano[3].setImage(new Image("/virus/resources/Dorso.jpg"));
         for(int i =0; i < 3; i++){
             mano[i].setImage(player.getMano().get(i).getImagen());
             mano[i].setCarta(player.getMano().get(i));
         }
-        /*
-        
-        Carta car;
-        Tratamiento tra;
-        for(int i =0; i < 3; i++){
-            if(player.getMano().get(i).getClass().equals(Carta.class)){
-                car = (Carta)player.getMano().get(i);
-                mano[i].setCarta(car);
-                mano[i].setImage(car.getImagen());
-            }else{
-                tra = (Tratamiento)player.getMano().get(i);
-                mano[i].setCarta(tra);
-                mano[i].setImage(tra.getImagen());
-            }
-        }
-        
-        mazo = (ArrayList<String>) AppContext.getInstance().get("Mazo");
-        mazo_img.clear();
-        mazo.forEach((carta) -> {
-            String dato = (String) carta;
-            char aux1 = dato.charAt(0);
-            char aux2 = dato.charAt(2);
-            Image imagen = AppContext.getInstance().getCarta(dato);
-            if(aux1 != 4){
-                mazo_img.add(new Carta(Character.getNumericValue(aux1), Character.getNumericValue(aux2), imagen));
-            }else{
-                mazo_img.add(new Tratamiento(Character.getNumericValue(aux2), imagen));
-            }
-        });
-        lblPlayer.setText("ID: "+player.getId()+" Nick: "+player.getNick());
-        int index = 0;
-        ObservableList<Node> mano = gpManoyMazo.getChildren();
-        System.out.println(player.getMano().size());
-        for (Object mano1 : player.getMano()) {
-            Marco_Carta aux = (Marco_Carta)mano.get(index);
-            if(mano1.getClass().equals(Carta.class)){
-                Carta carta = (Carta)mano1;
-                aux.setCarta(carta);
-                aux.setImage(carta.getImagen());
-            }else{
-                Tratamiento carta = (Tratamiento)mano1;
-                aux.setTratamiento(carta);
-                aux.setImage(carta.getImagen());
-            }
-            index++;
-        }
-        System.out.println(index);*/
     }
     
-    /*public String infoGridPane(){
-        
-        String info = "";
-        Marco_Carta aux;
-        int cont = 0;
-        int total = 0;
-        for (Node nodo : gpCartasOponente.getChildren()){
-            aux = (Marco_Carta) nodo;
-            if(aux.getCarta() != null){
-                info += String.valueOf(aux.getCarta().getTipo()) + ":" + String.valueOf(aux.getCarta().getColor());
-                cont++;
-                total++;
-            }else{
-                info += "0";
-                cont++;
-                total++;
-            }
-            
-            if(cont == 5 && total < 15){
-                info += " ";
-                cont = 0;
-            }
-            
-            if(cont > 0 && cont < 5 && total < 15){
-                info += "-";
-            }
-            
-        }
-        return info;
-    }*/
     private void mostrarOponente(){
         lblOponente.setText("ID: "+oponentes.get(oponente).getId()+" Nick: "+oponentes.get(oponente).getNick());
         Carta[][] tab = oponentes.get(oponente).getMatTablero();
@@ -442,6 +366,29 @@ public class JuegoController extends Controller implements Initializable {
     private void accionJugada(ActionEvent event) {
         if(player.getTurno() == 1 && timer == null)
             hilo();
+        System.out.println(hacerJugada());
+    }
+    
+    private String hacerJugada(){
+        List<Jugador> jugadores = (List<Jugador>) AppContext.getInstance().get("Jugadores");
+        String men = "";
+        for(Jugador jug: jugadores){
+            men += jug.infoJugador()+"#";
+        }
+        men = men.substring(0, men.length() - 1);
+        men += "/";
+        for(Carta carta: mazo){
+            men += carta+"-";
+        }
+        men = men.substring(0, men.length() - 1);
+        men += "/";
+        for(Carta carta: descartes){
+            men += carta+"-";
+        }
+        men = men.substring(0, men.length() - 1);
+        men += "/";
+        men += "0-0-0";
+        return men;
     }
 
     @FXML
