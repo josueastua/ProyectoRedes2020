@@ -668,7 +668,7 @@ public class JuegoController extends Controller implements Initializable {
                     if(fila != 0){
                         if(tablero[0][columna].getCarta() != null){
                             if(carta2 == null){
-                                if(tablero[0][columna].getCarta().getColor() == carta1.getColor() || carta1.getColor() == 5 || carta2.getColor() == 5){
+                                if(tablero[0][columna].getCarta().getColor() == carta1.getColor() || carta1.getColor() == 5 || tablero[0][columna].getCarta().getColor() == 5){
                                     switch(verificarEstadoOrgano(columna)){
                                         //El organo esta sano
                                         case 1:{
