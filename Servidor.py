@@ -4,7 +4,7 @@ import threading
 from time import sleep
 from os import system
 
-#Maneja el turno actual
+#Maneja el turno actual 
 var_turno = 1
 #Una lista con los jugadores conectos
 var_jugadores = []
@@ -21,7 +21,7 @@ var_cartas = [
 "3:1", "3:1", "3:1", "3:1", "3:2", "3:2", "3:2", "3:2", "3:3", "3:3", 
 "3:3", "3:3", "3:4", "3:4", "3:4", "3:4", "3:5", 
 #Cartas especiales
-"4:1", "4:2", "4:3", "4:4", "4:5"
+"4:1", "4:2", "4:3", "4:4", "4:5" 
 ]
 #Aqui se guardaran las cartas pero mezcladas
 var_mazo = []
@@ -30,13 +30,15 @@ var_datosJuego = ""
 #Este hilo una vez se haya conectado 3 se esperara una x cantidad de tiempo y se iniciara
 var_hilo = None
 #Para que no puedan conectarse mas jugadores despues de iniciado el juego
-var_juegoIniciado = False
+var_juegoIniciado = 0
 #Para saber si un jugador salio
 var_jugadorSalio = False
 #id del jugador que migro
-var_idSalio = ""
+var_idSalio = "0"
 #var_turno auxiliar
 var_turno_aux = 1
+#aux
+aux = None
 
 class Jugador:
     def __init__(self, id, nick, turno):
@@ -49,9 +51,10 @@ class Jugador:
         self.mano.append(carta)
     
     def toString(self):
-        aux = str(self.id)+"_"+str(self.turno)+"_"+self.nick
+        aux = str(self.id)+"_"+str(self.turno)+"_"+self.nick+"_"
         for a in self.mano:
-            aux += "_"+a
+            aux += a+"-"
+        aux = aux[0: len(aux)-1]
         return aux
 
 def generarId():
@@ -90,46 +93,49 @@ def esperaInicio():
     while(cont < 15):
         sleep(1)
         cont += 1
-    var_juegoIniciado = True
+    var_juegoIniciado = 1
     try:
         var_hilo = None
     except ValueError:
         print("Error cerrando el hilo")
 
 def infJugadoresYMazo():
-    datos = []
-    mezclarBaraja()
-    for a in var_jugadores:
-        a.addMano(var_mazo.pop(0))
-        a.addMano(var_mazo.pop(0))
-        a.addMano(var_mazo.pop(0))
-        datos.append(a.toString())
-    aux = ""
-    for a in var_mazo:
-        aux += "_"+a
-    aux = aux[1: len(aux)]
-    datos.append(aux)
-    aux = ""
-    for a in datos:
-        aux += "/"+a
-    aux = aux[1: len(aux)]
+    global aux
+    if(aux is None):
+        datos = []
+        mezclarBaraja()
+        for a in var_jugadores:
+            a.addMano(var_mazo.pop(0))
+            a.addMano(var_mazo.pop(0))
+            a.addMano(var_mazo.pop(0))
+            datos.append(a.toString())
+        aux = ""
+        for a in var_mazo:
+            aux += "_"+a
+        aux = aux[1: len(aux)]
+        datos.append(aux)
+        aux = ""
+        for a in datos:
+            aux += "/"+a
+        aux = aux[1: len(aux)]
     return aux
 
 def procesarSolicitud(clave, mensaje, hostname):
     global var_turno, var_datosJuego, var_juegoIniciado, var_jugadorSalio, var_idSalio, var_hilo, var_turno_aux
     if(clave == "1"):#Solicitud de conectarse
-        if(var_juegoIniciado is False):
+        if(var_juegoIniciado == 0):
             id = generarId()
             var_jugadores.append(Jugador(id, mensaje, var_turno_aux))
             var_turno_aux += 1
-            if(len(var_jugadores) >= 2 and var_hilo is None):
+            if(len(var_jugadores) >= 1 and var_hilo is None):
                 var_hilo = threading.Thread(target=metodoHilo) 
                 var_hilo.start()
             return "1:"+str(id)+":"+str(len(var_jugadores))
         else:
             return "Conexion rechazada: Ya ha iniciado una partida"
     elif(clave == "2"):#Solicita la cantidad de jugadores conectados
-        if(var_juegoIniciado is False):
+        print(var_juegoIniciado)
+        if(var_juegoIniciado == 0):
             return "2:"+str(len(var_jugadores))
         else:
             return "3:"+infJugadoresYMazo()
@@ -141,7 +147,10 @@ def procesarSolicitud(clave, mensaje, hostname):
             var_turno += 1
         return "Se estableció conexión con: "+hostname
     elif(clave == "4"):#pedir actualizacion de los datos del juego
-        return "4:"+str(var_turno)+"_"+str(var_jugadorSalio)+"_"+var_idSalio+"_"+var_datosJuego
+        if(var_datosJuego == ""):
+            return "Se estableció conexión con: "+hostname 
+        else:
+            return "4:"+str(var_turno)+"/"+var_idSalio+"/"+var_datosJuego
     elif(clave == "5"):
         var_jugadorSalio = True
         var_idSalio = mensaje
@@ -163,7 +172,7 @@ def iniciarServidor(host,puerto):
         hostname = socket.gethostname()
         msg_rec = c.recv(1024)
         msg_rec = msg_rec.decode('ascii')
-        msg_env = procesarSolicitud(msg_rec[0], msg_rec[2: len(msg_rec)], hostname)
+        msg_env = procesarSolicitud(msg_rec[0], msg_rec[1 : len(msg_rec)], hostname)
         print(msg_env)
         c.send(msg_env.encode('utf8'))
         print("\nMensaje decodificado: "+msg_rec+"\n")
