@@ -304,7 +304,7 @@ public class JuegoController extends Controller implements Initializable {
     public void initialize() {
         Jugador juga = new Jugador("2",2,"Nada");
         Carta matriz[][] = new Carta[5][3];
-        juga.datosMatriz("1:2-2:2-2:2,1:1-2:1-0,1:5-0-0,0-0-0,1:3-2:5-0");
+        juga.datosMatriz("1:2-2:2-2:2,1:1-2:1-0,1:5-0-0,1:4-0-0,1:3-2:5-0");
         cbDescartar.getItems().clear();
         cbDescartar.getItems().add("Las tres cartas");
         cbDescartar.getItems().add("La carta 1 y la carta 2");
@@ -332,6 +332,8 @@ public class JuegoController extends Controller implements Initializable {
         }
         conseguirImagenes();
         mostrarOponente();
+        Carta carta = new Carta(4,3,AppContext.getInstance().getCarta("4:3"));
+        mano[0].setCarta(carta);
     }
 
     private void conseguirImagenes(){
@@ -363,7 +365,7 @@ public class JuegoController extends Controller implements Initializable {
             for(int j = 0; j < 3; j++){
                 tablero[j][i].setCarta(null);
                 tablero[j][i].setImage(null);
-                if(tab[i][j].getImagen() != null){
+                if(tab[i][j] != null){
                     tablero[j][i].setCarta(tab[i][j]);
                     tablero[j][i].setImage(tab[i][j].getImagen());
                 }
@@ -414,7 +416,6 @@ public class JuegoController extends Controller implements Initializable {
             verificarCantidadMazo();
             player.addMano(mazo.get(0));
             mazo.remove(0);
-            jugada = false;
             conseguirImagenes();
         //Rellena la mano del jugador luego de botar cartas
         }else{
@@ -485,6 +486,7 @@ public class JuegoController extends Controller implements Initializable {
                             break;
                         }
                     }
+                    jugada = true;
                     primero.setImage(null);
                     mano[pos].setCarta(null);
                     mano[pos].setImage(null);
@@ -663,7 +665,7 @@ public class JuegoController extends Controller implements Initializable {
                     if(fila == 0){
                         if(verificarOrganoRepetido(carta1)){
                             if(carta2 == null){
-                               // jugada = true;
+                               jugada = true;
                                 primero.setImage(null);
                                 mano[pos].setCarta(null);
                                 mano[pos].setImage(null);
@@ -693,7 +695,7 @@ public class JuegoController extends Controller implements Initializable {
                                     switch(verificarEstadoOrgano(columna)){
                                         //El organo esta sano
                                         case 1:{
-                                           // jugada = true;
+                                            jugada = true;
                                             primero.setImage(null);
                                             mano[pos].setCarta(null);
                                             mano[pos].setImage(null);
@@ -708,7 +710,7 @@ public class JuegoController extends Controller implements Initializable {
                                         }
                                         //El organo esta enfermo
                                         case 2:{
-                                          //  jugada = true;
+                                            jugada = true;
                                             primero.setImage(null);
                                             mano[pos].setCarta(null);
                                             mano[pos].setImage(null);
@@ -725,7 +727,7 @@ public class JuegoController extends Controller implements Initializable {
                                         }
                                         //El organo esta vacunado
                                         case 3:{
-                                          //  jugada = true;
+                                            jugada = true;
                                             primero.setImage(null);
                                             mano[pos].setCarta(null);
                                             mano[pos].setImage(null);
@@ -783,17 +785,102 @@ public class JuegoController extends Controller implements Initializable {
                 }
                 //Infección
                 case 3:{
-                    
+                    //Vector para guardar el color de las cartas que pueden ser infectadas
+                    int vecColor[] = new int[5];
+                    Mensaje mensaje = new Mensaje();
+                    if(mensaje.showConfirmation("Carta infección", this.getStage(), "¿Desea usar esta carta?")){
+                        for(int a=0;a<5;a++){
+                            if(tabOponente[a][0].getCarta() != null){
+                                if(verificarEstadoOponente(a) == 1){
+                                    vecColor[a] = tabOponente[a][0].getCarta().getColor();
+                                }else{
+                                    vecColor[a] = -1;
+                                }
+                            }else{
+                                vecColor[a] = 0;
+                            }
+                        }
+                        //Verificar la segunda fila del jugador para ver si algún virus se puede transmitir
+                        Carta aux;
+                        for(int b=0;b<5;b++){
+                            for(int c=0;c<5;c++){
+                                if(vecColor[b] != 0 && vecColor[b] != -1){
+                                aux = tablero[1][c].getCarta();
+                                if(aux != null){
+                                    if(aux.getTipo() == 3){
+                                            if(aux.getColor() == vecColor[b] || aux.getColor() == 5 || vecColor[b] == 5){
+                                                tabOponente[b][1].setCarta(aux);
+                                                tabOponente[b][1].setImage(aux.getImagen());
+                                                tabOponente[b][1].getImage().setImage(aux.getImagen());
+                                                tablero[1][c].setCarta(null);
+                                                tablero[1][c].setImage(null);
+                                                tablero[1][c].getImage().setImage(null);
+                                                vecColor[b] = -1;
+                                                jugada = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        //Verificar la tercera fila del jugador para ver si algún virus se puede transmitir
+                        for(int b=0;b<5;b++){
+                            for(int c=0;c<5;c++){
+                                if(vecColor[b] != 0 && vecColor[b] != -1){
+                                aux = tablero[2][c].getCarta();
+                                if(aux != null){
+                                    if(aux.getTipo() == 3){
+                                            if(aux.getColor() == vecColor[b] || aux.getColor() == 5 || vecColor[b] == 5){
+                                                tabOponente[b][2].setCarta(aux);
+                                                tabOponente[b][2].setImage(aux.getImagen());
+                                                tabOponente[b][2].getImage().setImage(aux.getImagen());
+                                                tablero[2][c].setCarta(null);
+                                                tablero[2][c].setImage(null);
+                                                tablero[2][c].getImage().setImage(null);
+                                                vecColor[b] = -1;
+                                                jugada = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    primero = null;
+                    segundo = null;
                     break;
                 }
                 //Guante de latex
                 case 4:{
-                    
+                    Mensaje mensaje = new Mensaje();
+                    if(mensaje.showConfirmation("Carta guante de látex", this.getStage(), "¿Desea usar esta carta?")){
+                        for(Jugador oponente : oponentes){
+                            descartes.addAll(oponente.getMano());
+                            oponente.getMano().clear();
+                            for(int a=0;a<3;a++){
+                                verificarCantidadMazo();
+                                oponente.addMano(mazo.get(0));
+                                mazo.remove(0);
+                            }
+                        }
+                        jugada = true;
+                    }
+                    primero = null;
+                    segundo = null;
                     break;
                 }
                 //Error médico
                 case 5:{
-                    
+                    Mensaje mensaje = new Mensaje();
+                    if(mensaje.showConfirmation("Carta error médico", this.getStage(), "¿Desea usar esta carta?")){
+                        oponentes.get(oponente).copiarMatrizJugador(tablero);
+                        player.copiarMatrizOponente(tabOponente);
+                        mostrarOponente();
+                        mostrarTablero();
+                        primero = null;
+                        segundo = null;
+                        jugada = true;
+                    }
                     break;
                 }
             }
@@ -891,22 +978,26 @@ public class JuegoController extends Controller implements Initializable {
         boolean pos2 = false;
         
         if(tabOponente[fila][1].getCarta() != null){
-            if(tabOponente[fila][1].getCarta().getTipo() != 2){
+            if(tabOponente[fila][1].getCarta().getTipo() == 2){
                 pos1 = true;
+                System.out.println("Carta 1 medicina");
+                System.out.println(tabOponente[fila][1].getCarta().getTipo()+":"+tabOponente[fila][1].getCarta().getColor());
             }
-        }else{
-            pos1 = false;
         }
         
         if(tabOponente[fila][2].getCarta() != null){
-            if(tabOponente[fila][2].getCarta().getTipo() != 2){
+            if(tabOponente[fila][2].getCarta().getTipo() == 2){
                 pos2 = true;
+                System.out.println("Carta 2 medicina");
+                System.out.println(tabOponente[fila][1].getCarta().getTipo()+":"+tabOponente[fila][1].getCarta().getColor());
             }
-        }else{
-            pos2 = false;
         }
         //El organo esta inmune
-        return !(pos1 && pos2);
+        if(pos1 && pos2){
+            System.out.println("Inmune");
+            return false;
+        }
+        return true;
     }
     
      public void hilo(){
