@@ -141,6 +141,7 @@ public class Conexion {
                     }
                     usoTratamienro(message[2].split("-"));
                     JuegoController juego = (JuegoController) AppContext.getInstance().get("Juego");
+                    juego.esTurno();
                     juego.actualizarJuego();
                 }
                     /*

@@ -334,6 +334,7 @@ public class JuegoController extends Controller implements Initializable {
         }
         conseguirImagenes();
         mostrarOponente();
+        esTurno();
     }
 
     private void conseguirImagenes(){
@@ -391,7 +392,6 @@ public class JuegoController extends Controller implements Initializable {
         men = men.substring(0, men.length() - 1);
         men += "/";
         for(Carta carta: mazo){
-            System.out.println(carta.getRepresentacion());
             men += carta.getRepresentacion()+"-";
         }
         men = men.substring(0, men.length() - 1);
