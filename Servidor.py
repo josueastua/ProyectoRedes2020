@@ -147,6 +147,7 @@ def procesarSolicitud(clave, mensaje, hostname):
             var_turno += 1
         return "Se estableció conexión con: "+hostname
     elif(clave == "4"):#pedir actualizacion de los datos del juego
+        var_datosJuego = mensaje
         if(var_datosJuego == ""):
             return "Se estableció conexión con: "+hostname 
         else:
