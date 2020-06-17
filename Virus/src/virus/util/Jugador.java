@@ -185,6 +185,11 @@ public class Jugador {
         }
     }
     
+    @Override
+    public String toString(){
+        return nick;
+    }
+    
     /*public void Prueba(){
         tablero.add("1:1");
         tablero.add("2:4");
