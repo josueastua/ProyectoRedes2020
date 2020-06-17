@@ -26,7 +26,7 @@ var_cartas = [
 #Aqui se guardaran las cartas pero mezcladas
 var_mazo = []
 #Una variable que almacena una cadena de string codificada que representa el juego
-var_datosJuego = ""
+var_datosJuego = "0"
 #Este hilo una vez se haya conectado 3 se esperara una x cantidad de tiempo y se iniciara
 var_hilo = None
 #Para que no puedan conectarse mas jugadores despues de iniciado el juego
@@ -147,9 +147,10 @@ def procesarSolicitud(clave, mensaje, hostname):
             var_turno += 1
         return "Se estableció conexión con: "+hostname
     elif(clave == "4"):#pedir actualizacion de los datos del juego
-        if(mensaje != ""):
+        if(mensaje != "HOLA"):
             var_datosJuego = mensaje
-        if(var_datosJuego == ""):
+        print("Datos juego: "+var_datosJuego)
+        if(var_datosJuego == "0"):
             return "Se estableció conexión con: "+hostname 
         else:
             return "4:"+str(var_turno)+"/"+var_idSalio+"/"+var_datosJuego
