@@ -254,6 +254,7 @@ public class JuegoController extends Controller implements Initializable {
     
     public void actualizarJuego(){
         Platform.runLater( () -> {
+            System.out.println("Entro");
             mazo =  (ArrayList<Carta>) AppContext.getInstance().get("Mazo");
             descartes = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
             conseguirImagenes();
