@@ -33,6 +33,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
@@ -161,6 +162,8 @@ public class JuegoController extends Controller implements Initializable {
     Cuerpo[][] tablero, tabOponente;
     Cuerpo[] mano;
     private Timer timer;
+    @FXML
+    private StackPane stack;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         crearMatrices();
