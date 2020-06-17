@@ -338,6 +338,7 @@ public class EspecialesController extends Controller implements Initializable {
                         //Reflejar cambios
                         cbJugador1.getSelectionModel().getSelectedItem().copiarMatrizOponente(matPrimero);
                         cbJugador2.getSelectionModel().getSelectedItem().copiarMatrizOponente(matSegundo);
+                        AppContext.getInstance().set("Transplante", true);
                         this.getStage().close();
                     }else{
                         System.out.println("Organo inmune");
@@ -355,6 +356,6 @@ public class EspecialesController extends Controller implements Initializable {
     
     @Override
     public void initialize() {
-        
+        AppContext.getInstance().set("Transplante", false);
     }
 }

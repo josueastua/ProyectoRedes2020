@@ -305,9 +305,6 @@ public class JuegoController extends Controller implements Initializable {
    
     @Override
     public void initialize() {
-        Jugador juga = new Jugador("2",2,"Nada");
-        Carta matriz[][] = new Carta[5][3];
-        juga.datosMatriz("1:2-2:2-2:2,1:1-2:1-0,1:5-0-0,1:4-0-0,1:3-2:5-0");
         cbDescartar.getItems().clear();
         cbDescartar.getItems().add("Las tres cartas");
         cbDescartar.getItems().add("La carta 1 y la carta 2");
@@ -320,7 +317,6 @@ public class JuegoController extends Controller implements Initializable {
             player = (Jugador) AppContext.getInstance().get("Jugador");
         AppContext.getInstance().set("Juego", FlowController.getInstance().getController("Juego"));
         ArrayList<Jugador> jug = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
-        jug.add(juga);
         jug.forEach( (j) -> {
             if(!j.getId().equals(player.getId()))
                 oponentes.add(j);
@@ -335,8 +331,6 @@ public class JuegoController extends Controller implements Initializable {
         }
         conseguirImagenes();
         mostrarOponente();
-        Carta carta = new Carta(4,2,AppContext.getInstance().getCarta("4:2"));
-        mano[0].setCarta(carta);
     }
 
     private void conseguirImagenes(){
@@ -783,9 +777,16 @@ public class JuegoController extends Controller implements Initializable {
                 }
                 //Transplante
                 case 2:{
-                    FlowController.getInstance().goViewInNoResizableWindow("Especiales", false);
-                    mostrarOponente();
-                    mostrarTablero();
+                    Mensaje mensaje = new Mensaje();
+                    if(mensaje.showConfirmation("Carta transplante de organos", this.getStage(), "¿Desea usar esta carta?")){
+                        FlowController.getInstance().goViewInNoResizableWindow("Especiales", false);
+                        mostrarOponente();
+                        mostrarTablero();
+                        if((boolean)AppContext.getInstance().get("Transplante")){
+                            System.out.println("Transplante exitoso");
+                        }
+                    }
+                    
                     break;
                 }
                 //Infección
@@ -1021,7 +1022,7 @@ public class JuegoController extends Controller implements Initializable {
     private void accionDescartar(ActionEvent event) {
         if(cbDescartar.getSelectionModel().getSelectedItem() != null){
             tramitarPeticion(cbDescartar.getSelectionModel().getSelectedItem());
-            cbDescartar.setMouseTransparent(false);
+            cbDescartar.setMouseTransparent(true);
             comerCarta();
         }
     }
