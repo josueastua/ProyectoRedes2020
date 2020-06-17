@@ -127,7 +127,7 @@ def procesarSolicitud(clave, mensaje, hostname):
             id = generarId()
             var_jugadores.append(Jugador(id, mensaje, var_turno_aux))
             var_turno_aux += 1
-            if(len(var_jugadores) >= 1 and var_hilo is None):
+            if(len(var_jugadores) >= 3 and var_hilo is None):
                 var_hilo = threading.Thread(target=metodoHilo) 
                 var_hilo.start()
             return "1:"+str(id)+":"+str(len(var_jugadores))

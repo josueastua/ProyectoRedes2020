@@ -30,7 +30,7 @@
         </rowConstraints>
          <children>
             <ImageView id="00" fx:id="pri00" fitHeight="90.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
-            <ImageView id="01" fx:id="pri01" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView id="01" fx:id="pri01" fitHeight="92.0" fitWidth="123.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
             <ImageView id="02" fx:id="pri02" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
             <ImageView id="10" fx:id="pri10" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
             <ImageView id="11" fx:id="pri11" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
