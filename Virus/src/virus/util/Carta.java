@@ -36,6 +36,7 @@ public class Carta {
     }
 
     public String getRepresentacion() {
+        representacionCarta();
         return representacion;
     }
     
