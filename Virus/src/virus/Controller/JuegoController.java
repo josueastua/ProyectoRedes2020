@@ -1070,8 +1070,6 @@ public class JuegoController extends Controller implements Initializable {
             consultar = (player.getTurno() != t);
             if(consultar){
                 men.show(Alert.AlertType.INFORMATION, "Informacion de turno", "Aun no es su turno");
-            }else{
-                men.show(Alert.AlertType.INFORMATION, "Informacion de turno", "Ya es su turno");
             }
         });
         
