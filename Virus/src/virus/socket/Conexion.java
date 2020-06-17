@@ -19,7 +19,7 @@ public class Conexion {
     Socket cliente, socket;
     ServerSocket servidor;
     int puerto = 44440;
-    String ip = "192.168.1.3";
+    String ip = "10.251.46.2";
     PrintStream salida;
     InputStreamReader respuesta;
     char msg[];

@@ -332,7 +332,7 @@ public class JuegoController extends Controller implements Initializable {
         }
         conseguirImagenes();
         mostrarOponente();
-        Carta carta = new Carta(4,3,AppContext.getInstance().getCarta("4:3"));
+        Carta carta = new Carta(4,2,AppContext.getInstance().getCarta("4:2"));
         mano[0].setCarta(carta);
     }
 
@@ -780,6 +780,7 @@ public class JuegoController extends Controller implements Initializable {
                 }
                 //Transplante
                 case 2:{
+                    FlowController.getInstance().goViewInNoResizableWindow("Especiales", false);
                     
                     break;
                 }
