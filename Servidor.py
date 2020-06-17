@@ -147,9 +147,12 @@ def procesarSolicitud(clave, mensaje, hostname):
             var_turno += 1
         return "Se estableció conexión con: "+hostname
     elif(clave == "4"):#pedir actualizacion de los datos del juego
+        '''
+        print("Mensaje: "+mensaje)
         if(mensaje != "HOLA"):
             var_datosJuego = mensaje
         print("Datos juego: "+var_datosJuego)
+        '''
         if(var_datosJuego == "0"):
             return "Se estableció conexión con: "+hostname 
         else:
@@ -178,7 +181,7 @@ def iniciarServidor(host,puerto):
         msg_env = procesarSolicitud(msg_rec[0], msg_rec[1 : len(msg_rec)], hostname)
         print(msg_env)
         c.send(msg_env.encode('utf8'))
-        print("\nMensaje decodificado: "+msg_rec+"\n")
+        print("\nMensaje enviado: "+msg_env+"\n")
         c.close()
 
 if __name__ == "__main__":
