@@ -1068,6 +1068,11 @@ public class JuegoController extends Controller implements Initializable {
             int t = (int) AppContext.getInstance().get("Turno");
             root.setMouseTransparent((player.getTurno() != t));
             consultar = (player.getTurno() != t);
+            if(consultar){
+                men.show(Alert.AlertType.INFORMATION, "Informacion de turno", "Aun no es su turno");
+            }else{
+                men.show(Alert.AlertType.INFORMATION, "Informacion de turno", "Ya es su turno");
+            }
         });
         
     }
