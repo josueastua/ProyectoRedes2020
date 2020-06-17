@@ -164,6 +164,8 @@ public class JuegoController extends Controller implements Initializable {
     private Timer timer;
     @FXML
     private StackPane stack;
+    Boolean consultar = false;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         crearMatrices();
@@ -375,6 +377,8 @@ public class JuegoController extends Controller implements Initializable {
         if(player.getTurno() == 1 && timer == null)
             hilo();
         System.out.println(hacerJugada());
+        con.accionEnviar("4", hacerJugada());
+        consultar = true;
     }
     
     private String hacerJugada(){
@@ -1013,7 +1017,8 @@ public class JuegoController extends Controller implements Initializable {
             @Override
             public void run() {
                 System.out.println("HILO");
-                con.accionEnviar("4", "");
+                if(consultar)
+                    con.accionEnviar("4", "");
             }
         }, 10000, 10000);
     }
@@ -1055,5 +1060,14 @@ public class JuegoController extends Controller implements Initializable {
                 player.getMano().remove(2);
                 break;
         }
+    }
+    
+    public void esTurno(){
+        Platform.runLater(() -> {
+            int t = (int) AppContext.getInstance().get("Turno");
+            root.setMouseTransparent((player.getTurno() != t));
+            consultar = (player.getTurno() != t);
+        });
+        
     }
 }
