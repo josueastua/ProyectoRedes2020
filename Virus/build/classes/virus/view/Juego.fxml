@@ -122,17 +122,17 @@
                                     </StackPane>
                                     <StackPane fx:id="stack" GridPane.rowIndex="4">
                                        <children>
-                                          <ImageView id="40" fx:id="ivOP40" fitHeight="67.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView id="40" fx:id="ivOP40" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </StackPane>
                                     <StackPane fx:id="stack" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <children>
-                                          <ImageView id="41" fx:id="ivOP41" fitHeight="68.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView id="41" fx:id="ivOP41" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </StackPane>
                                     <StackPane fx:id="stack" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                        <children>
-                                          <ImageView id="42" fx:id="ivOP42" fitHeight="71.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView id="42" fx:id="ivOP42" fitHeight="83.0" fitWidth="104.0" onMouseClicked="#accionTableroOponente" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </StackPane>
                                  </children>
