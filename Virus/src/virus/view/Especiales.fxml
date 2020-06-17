@@ -13,9 +13,9 @@
       <ImageView fx:id="ivFondo2" fitHeight="290.0" fitWidth="380.0" layoutX="370.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="ivFondo3" fitHeight="290.0" fitWidth="380.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="ivFondo4" fitHeight="290.0" fitWidth="380.0" layoutX="370.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true" />
-      <ComboBox fx:id="cbJugador1" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="200.0" />
+      <ComboBox fx:id="cbJugador1" layoutX="14.0" layoutY="14.0" onAction="#ElegirJugador" prefHeight="31.0" prefWidth="200.0" />
       <ComboBox fx:id="cbJugador2" layoutX="536.0" layoutY="14.0" onAction="#ElegirJugador" prefHeight="31.0" prefWidth="200.0" />
-      <GridPane layoutX="13.0" layoutY="131.0" prefHeight="440.0" prefWidth="354.0">
+      <GridPane fx:id="gp1" layoutX="13.0" layoutY="131.0" prefHeight="440.0" prefWidth="354.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -29,24 +29,24 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView id="00" fx:id="pri00" fitHeight="90.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView id="01" fx:id="pri01" fitHeight="92.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-            <ImageView id="02" fx:id="pri02" fitHeight="92.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-            <ImageView id="10" fx:id="pri10" fitHeight="92.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-            <ImageView id="11" fx:id="pri11" fitHeight="92.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ImageView id="12" fx:id="pri12" fitHeight="92.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <ImageView id="20" fx:id="pri20" fitHeight="86.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
-            <ImageView id="21" fx:id="pri21" fitHeight="85.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ImageView id="22" fx:id="pri22" fitHeight="84.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <ImageView id="30" fx:id="pri30" fitHeight="85.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
-            <ImageView id="31" fx:id="pri31" fitHeight="84.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ImageView id="32" fx:id="pri32" fitHeight="85.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <ImageView id="40" fx:id="pri40" fitHeight="83.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
-            <ImageView id="41" fx:id="pri41" fitHeight="83.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <ImageView id="42" fx:id="pri42" fitHeight="82.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <ImageView id="00" fx:id="pri00" fitHeight="90.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="01" fx:id="pri01" fitHeight="92.0" fitWidth="123.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView id="02" fx:id="pri02" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+            <ImageView id="10" fx:id="pri10" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+            <ImageView id="11" fx:id="pri11" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ImageView id="12" fx:id="pri12" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ImageView id="20" fx:id="pri20" fitHeight="86.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+            <ImageView id="21" fx:id="pri21" fitHeight="85.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView id="22" fx:id="pri22" fitHeight="84.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <ImageView id="30" fx:id="pri30" fitHeight="85.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
+            <ImageView id="31" fx:id="pri31" fitHeight="84.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ImageView id="32" fx:id="pri32" fitHeight="85.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <ImageView id="40" fx:id="pri40" fitHeight="83.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
+            <ImageView id="41" fx:id="pri41" fitHeight="83.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ImageView id="42" fx:id="pri42" fitHeight="82.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <GridPane layoutX="383.0" layoutY="131.0" prefHeight="440.0" prefWidth="354.0">
+      <GridPane fx:id="gp2" layoutX="383.0" layoutY="131.0" prefHeight="440.0" prefWidth="354.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -60,21 +60,21 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ImageView id="00" fx:id="seg00" fitHeight="90.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView id="01" fx:id="seg01" fitHeight="92.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-            <ImageView id="02" fx:id="seg02" fitHeight="92.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-            <ImageView id="10" fx:id="seg10" fitHeight="92.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-            <ImageView id="11" fx:id="seg11" fitHeight="92.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ImageView id="12" fx:id="seg12" fitHeight="92.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <ImageView id="20" fx:id="seg20" fitHeight="86.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
-            <ImageView id="21" fx:id="seg21" fitHeight="84.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ImageView id="22" fx:id="seg22" fitHeight="85.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <ImageView id="30" fx:id="seg30" fitHeight="84.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
-            <ImageView id="31" fx:id="seg31" fitHeight="85.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ImageView id="32" fx:id="seg32" fitHeight="86.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <ImageView id="40" fx:id="seg40" fitHeight="84.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
-            <ImageView id="41" fx:id="seg41" fitHeight="81.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <ImageView id="42" fx:id="seg42" fitHeight="86.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <ImageView id="00" fx:id="seg00" fitHeight="90.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="01" fx:id="seg01" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView id="02" fx:id="seg02" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+            <ImageView id="10" fx:id="seg10" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+            <ImageView id="11" fx:id="seg11" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ImageView id="12" fx:id="seg12" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ImageView id="20" fx:id="seg20" fitHeight="86.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+            <ImageView id="21" fx:id="seg21" fitHeight="84.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView id="22" fx:id="seg22" fitHeight="85.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <ImageView id="30" fx:id="seg30" fitHeight="84.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
+            <ImageView id="31" fx:id="seg31" fitHeight="85.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ImageView id="32" fx:id="seg32" fitHeight="86.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <ImageView id="40" fx:id="seg40" fitHeight="84.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
+            <ImageView id="41" fx:id="seg41" fitHeight="81.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ImageView id="42" fx:id="seg42" fitHeight="86.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
          </children>
       </GridPane>
    </children>

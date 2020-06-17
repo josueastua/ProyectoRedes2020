@@ -183,8 +183,11 @@ public class FlowController {
         stage.sizeToScene();
         if(show)
             stage.show();
-        else
+        else{
+            stage.centerOnScreen();
+            stage.setAlwaysOnTop(true);
             stage.showAndWait();
+        }
     }
     
     public void goViewInResizableWindow(String viewName, double maxWidth, double minWidth, double maxHeight, double minHeight, Boolean show){

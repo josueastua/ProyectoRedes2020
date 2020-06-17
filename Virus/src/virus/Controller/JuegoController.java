@@ -784,7 +784,8 @@ public class JuegoController extends Controller implements Initializable {
                 //Transplante
                 case 2:{
                     FlowController.getInstance().goViewInNoResizableWindow("Especiales", false);
-                    
+                    mostrarOponente();
+                    mostrarTablero();
                     break;
                 }
                 //Infección
