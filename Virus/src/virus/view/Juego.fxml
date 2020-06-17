@@ -20,7 +20,7 @@
          <children>
             <HBox fx:id="hb_titulo" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="lblPlayer" alignment="CENTER" prefHeight="58.0" prefWidth="872.0" text="Label">
+                  <Label fx:id="lblPlayer" alignment="CENTER" prefHeight="58.0" prefWidth="882.0" text="Label">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
