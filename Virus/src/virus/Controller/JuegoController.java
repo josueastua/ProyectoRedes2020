@@ -381,6 +381,7 @@ public class JuegoController extends Controller implements Initializable {
         System.out.println(hacerJugada());
         con.accionEnviar("3", hacerJugada());
         consultar = true;
+        cbDescartar.setMouseTransparent(false);
     }
     
     private String hacerJugada(){
