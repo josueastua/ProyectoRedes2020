@@ -379,7 +379,7 @@ public class JuegoController extends Controller implements Initializable {
         if(player.getTurno() == 1 && timer == null)
             hilo();
         System.out.println(hacerJugada());
-        con.accionEnviar("4", hacerJugada());
+        con.accionEnviar("3", hacerJugada());
         consultar = true;
     }
     
