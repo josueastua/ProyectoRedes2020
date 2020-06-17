@@ -1019,7 +1019,7 @@ public class JuegoController extends Controller implements Initializable {
             public void run() {
                 System.out.println("HILO");
                 if(consultar)
-                    con.accionEnviar("4", "");
+                    con.accionEnviar("4", "HOLA");
             }
         }, 10000, 10000);
     }
