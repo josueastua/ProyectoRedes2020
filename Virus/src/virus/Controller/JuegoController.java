@@ -792,7 +792,13 @@ public class JuegoController extends Controller implements Initializable {
                         mostrarTablero();
                         if((boolean)AppContext.getInstance().get("Transplante")){
                             System.out.println("Transplante exitoso");
-                        }
+                            mano[pos].setCarta(null);
+                            mano[pos].setImage(null);
+                            primero.setImage(null);
+                            jugada = true;
+                            comerCarta();
+                            AppContext.getInstance().set("Transplante", false);
+                         }
                     }
                     
                     break;
@@ -814,6 +820,11 @@ public class JuegoController extends Controller implements Initializable {
                                 vecColor[a] = 0;
                             }
                         }
+                        jugada = true;
+                        mano[pos].setCarta(null);
+                        mano[pos].setImage(null);
+                        primero.setImage(null);
+                        comerCarta();
                         //Verificar la segunda fila del jugador para ver si algún virus se puede transmitir
                         Carta aux;
                         for(int b=0;b<5;b++){
@@ -830,7 +841,6 @@ public class JuegoController extends Controller implements Initializable {
                                                 tablero[1][c].setImage(null);
                                                 tablero[1][c].getImage().setImage(null);
                                                 vecColor[b] = -1;
-                                                jugada = true;
                                             }
                                         }
                                     }
@@ -852,7 +862,6 @@ public class JuegoController extends Controller implements Initializable {
                                                 tablero[2][c].setImage(null);
                                                 tablero[2][c].getImage().setImage(null);
                                                 vecColor[b] = -1;
-                                                jugada = true;
                                             }
                                         }
                                     }
@@ -878,6 +887,10 @@ public class JuegoController extends Controller implements Initializable {
                             }
                         }
                         jugada = true;
+                        mano[pos].setCarta(null);
+                        mano[pos].setImage(null);
+                        primero.setImage(null);
+                        comerCarta();
                     }
                     primero = null;
                     segundo = null;
@@ -894,6 +907,10 @@ public class JuegoController extends Controller implements Initializable {
                         primero = null;
                         segundo = null;
                         jugada = true;
+                        mano[pos].setCarta(null);
+                        mano[pos].setImage(null);
+                        primero.setImage(null);
+                        comerCarta();
                     }
                     break;
                 }
