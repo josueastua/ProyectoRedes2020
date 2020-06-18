@@ -882,6 +882,7 @@ public class JuegoController extends Controller implements Initializable {
                             System.out.println("Transplante exitoso");
                             mano[pos].setCarta(null);
                             mano[pos].setImage(null);
+                            player.getMano().remove(carta1);
                             primero.setImage(null);
                             jugada = true;
                             descartes.add(carta1);
@@ -912,6 +913,7 @@ public class JuegoController extends Controller implements Initializable {
                         mano[pos].setCarta(null);
                         mano[pos].setImage(null);
                         primero.setImage(null);
+                        player.getMano().remove(carta1);
                         descartes.add(carta1);
                         comerCarta();
                         //Guardar los datos de una lista sobre la carta de infección y los jugadores
@@ -984,6 +986,7 @@ public class JuegoController extends Controller implements Initializable {
                         jugada = true;
                         mano[pos].setCarta(null);
                         mano[pos].setImage(null);
+                        player.getMano().remove(carta1);
                         primero.setImage(null);
                         descartes.add(carta1);
                         comerCarta();
@@ -1010,6 +1013,7 @@ public class JuegoController extends Controller implements Initializable {
                         jugada = true;
                         mano[pos].setCarta(null);
                         mano[pos].setImage(null);
+                        player.getMano().remove(carta1);
                         descartes.add(carta1);
                         primero.setImage(null);
                         comerCarta();
