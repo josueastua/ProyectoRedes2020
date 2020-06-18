@@ -1032,8 +1032,6 @@ public class JuegoController extends Controller implements Initializable {
                         player.copiarMatrizOponente(tabOponente);
                         mostrarOponente();
                         mostrarTablero();
-                        primero = null;
-                        segundo = null;
                         jugada = true;
                         mano[pos].setCarta(null);
                         mano[pos].setImage(null);
@@ -1048,6 +1046,8 @@ public class JuegoController extends Controller implements Initializable {
                         lista.add(oponentes.get(oponente).getID());
                         AppContext.getInstance().set("Especiales", lista);
                     }
+                    primero = null;
+                    segundo = null;
                     break;
                 }
             }
