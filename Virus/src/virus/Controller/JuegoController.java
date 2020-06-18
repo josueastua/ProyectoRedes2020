@@ -260,6 +260,9 @@ public class JuegoController extends Controller implements Initializable {
             conseguirImagenes();
             mostrarOponente();
             mostrarTablero();
+            ArrayList<String> lista = new ArrayList();
+            lista.add("0");
+            AppContext.getInstance().set("Especiales", lista);
         });
     }
     
@@ -435,6 +438,29 @@ public class JuegoController extends Controller implements Initializable {
         }
     }
     
+    public boolean verificarVictoria(){
+        int cont = 0;
+        for(int a=0;a<5;a++){
+            if(tablero[0][a].getCarta() != null){
+                if(tablero[1][a].getCarta() == null && tablero[2][a].getCarta() == null){
+                    cont++;
+                }else{
+                    if(tablero[1][a].getCarta() != null){
+                        if(tablero[1][a].getCarta().getTipo() != 3){
+                            cont++;
+                        }
+                    }
+                    if(tablero[2][a].getCarta() != null){
+                        if(tablero[2][a].getCarta().getTipo() != 3){
+                            cont++;
+                        }
+                    }
+                }
+            }
+        }
+        return cont >= 4;
+    }
+    
     public void verificarCantidadMazo(){
         if(mazo.isEmpty()){
             mazo.addAll(descartes);
@@ -497,6 +523,13 @@ public class JuegoController extends Controller implements Initializable {
                     mano[pos].setCarta(null);
                     mano[pos].setImage(null);
                     player.getMano().remove(carta1);
+                    descartes.add(carta1);
+                    //Añadir los datos de los jugadores implicados en el ladrón de organos
+                    ArrayList<String> lista = new ArrayList();
+                    lista.add("1");
+                    lista.add(player.getID());
+                    lista.add(oponentes.get(oponente).getID());
+                    AppContext.getInstance().set("Especiales", lista);
                     //Obtener una nueva carta del mazo
                     comerCarta();
                     //Tranferir el organo
@@ -533,7 +566,13 @@ public class JuegoController extends Controller implements Initializable {
                     
                     player.copiarMatrizJugador(tablero);
                     oponentes.get(oponente).copiarMatrizOponente(tabOponente);
+                }else{
+                    Mensaje men = new Mensaje();
+                    men.show(Alert.AlertType.WARNING,"Jugada invalida", "No se pueden tener dos organos repetidos.");
                 }
+            }else{
+                Mensaje men = new Mensaje();
+                men.show(Alert.AlertType.WARNING,"Jugada invalida", "El organo seleccionado esta inmune.");
             }
             
             primero = null;
@@ -628,14 +667,17 @@ public class JuegoController extends Controller implements Initializable {
                                     }
                                 }
                             }else{
-                                System.out.println("Color distinto");
+                                Mensaje men = new Mensaje();
+                                men.show(Alert.AlertType.WARNING,"Jugada invalida", "El organo seleccionado es de color distinto");
                             }
                         }
                     }else{
-                        System.out.println("No hay organo para infectar");
+                        Mensaje men = new Mensaje();
+                        men.show(Alert.AlertType.WARNING,"Jugada invalida", "No existe un organo al cual infectar.");
                     }
                 }else{
-                    System.out.println("Columna incorrecta");
+                    Mensaje men = new Mensaje();
+                    men.show(Alert.AlertType.WARNING,"Jugada invalida", "La posición seleccionada es invalida.");
                 }
             }
         }
@@ -683,13 +725,16 @@ public class JuegoController extends Controller implements Initializable {
                                 //Tomar una nueva carta
                                 comerCarta();
                                 }else{
-                                System.out.println("La posición ya esta ocupada");
+                                Mensaje men = new Mensaje();
+                                men.show(Alert.AlertType.WARNING,"Jugada invalida", "La posición seleccionada ya esta ocupada");
                             }
                         }else{
-                            System.out.println("Organo repetido");
+                            Mensaje men = new Mensaje();
+                            men.show(Alert.AlertType.WARNING,"Jugada invalida", "Ya existe un organo del mismo color.");
                         }
                     }else{
-                        System.out.println("Fila incorrecta");
+                        Mensaje men = new Mensaje();
+                        men.show(Alert.AlertType.WARNING,"Jugada invalida", "La posición seleccionada es incorrectta.");
                     }
                 //La carta es una medicina
                 }else if(carta1.getTipo() == 2){ 
@@ -748,17 +793,20 @@ public class JuegoController extends Controller implements Initializable {
                                         }
                                     }
                                 }else{
-                                    System.out.println("El color del organo es distinto");
-                                    System.out.println("Color 1 = "+ carta1.getColor() + " Color 2 = " + tablero[0][columna].getCarta().getColor());
+                                    Mensaje men = new Mensaje();
+                                    men.show(Alert.AlertType.WARNING,"Jugada invalida", "El color del organo es distinto.");
                                 }
                             }else{
-                                System.out.println("El espacio no esta disponible");
+                                Mensaje men = new Mensaje();
+                                men.show(Alert.AlertType.WARNING,"Jugada invalida", "La posición seleccionada ya esta ocupada");
                             }
                         }else{
-                            System.out.println("No hay un organo al cual vacunar");
+                            Mensaje men = new Mensaje();
+                            men.show(Alert.AlertType.WARNING,"Jugada invalida", "No hay un organo para vacunar.");
                         }
                     }else{
-                        System.out.println("Posición incorrecta");
+                        Mensaje men = new Mensaje();
+                        men.show(Alert.AlertType.WARNING,"Jugada invalida", "La posición seleccionada es incorrecta.");
                     }
                 }
             }
@@ -797,11 +845,11 @@ public class JuegoController extends Controller implements Initializable {
                             mano[pos].setImage(null);
                             primero.setImage(null);
                             jugada = true;
+                            descartes.add(carta1);
                             comerCarta();
                             AppContext.getInstance().set("Transplante", false);
                          }
                     }
-                    
                     break;
                 }
                 //Infección
@@ -825,7 +873,14 @@ public class JuegoController extends Controller implements Initializable {
                         mano[pos].setCarta(null);
                         mano[pos].setImage(null);
                         primero.setImage(null);
+                        descartes.add(carta1);
                         comerCarta();
+                        //Guardar los datos de una lista sobre la carta de infección y los jugadores
+                        ArrayList<String> lista = new ArrayList<>();
+                        lista.add("3");
+                        lista.add(player.getID());
+                        lista.add(oponentes.get(oponente).getID());
+                        AppContext.getInstance().set("Especiales", lista);
                         //Verificar la segunda fila del jugador para ver si algún virus se puede transmitir
                         Carta aux;
                         for(int b=0;b<5;b++){
@@ -891,7 +946,13 @@ public class JuegoController extends Controller implements Initializable {
                         mano[pos].setCarta(null);
                         mano[pos].setImage(null);
                         primero.setImage(null);
+                        descartes.add(carta1);
                         comerCarta();
+                        //Guardar los datos de la carta guante de latex para reflejarlo en los otros jugadores
+                        ArrayList<String>lista = new ArrayList();
+                        lista.add("4");
+                        lista.add(player.getID());
+                        AppContext.getInstance().set("Especiales", lista);
                     }
                     primero = null;
                     segundo = null;
@@ -910,8 +971,15 @@ public class JuegoController extends Controller implements Initializable {
                         jugada = true;
                         mano[pos].setCarta(null);
                         mano[pos].setImage(null);
+                        descartes.add(carta1);
                         primero.setImage(null);
                         comerCarta();
+                        //Guardar los datos de los jugadores afectador por error médico
+                        ArrayList<String>lista = new ArrayList();
+                        lista.add("5");
+                        lista.add(player.getID());
+                        lista.add(oponentes.get(oponente).getID());
+                        AppContext.getInstance().set("Especiales", lista);
                     }
                     break;
                 }

@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -279,15 +280,25 @@ public class EspecialesController extends Controller implements Initializable {
                         //Reflejar cambios
                         cbJugador1.getSelectionModel().getSelectedItem().copiarMatrizOponente(matPrimero);
                         cbJugador2.getSelectionModel().getSelectedItem().copiarMatrizOponente(matSegundo);
+                        AppContext.getInstance().set("Transplante", true);
+                        //Añadir los datos de la carta de tratamiento y los jugadores
+                        ArrayList<String> lista = new ArrayList<>();
+                        lista.add("2");
+                        lista.add(cbJugador1.getSelectionModel().getSelectedItem().getID());
+                        lista.add(cbJugador2.getSelectionModel().getSelectedItem().getID());
+                        AppContext.getInstance().set("Especiales", lista);
                         this.getStage().close();
                     }else{
-                        System.out.println("Organo inmune");
+                        Mensaje men = new Mensaje();
+                        men.show(Alert.AlertType.WARNING,"Jugada invalida", "El organo seleccionado esta inmune.");
                     }
                 }else{
-                    System.out.println("Organo repetido");
+                    Mensaje men = new Mensaje();
+                    men.show(Alert.AlertType.WARNING,"Jugada invalida", "Alguno de los jugadores ya tiene un organo del mismo color.");
                 }
             }else{
-                System.out.println("No se seleccionarón 2 organos para el transplante");
+                Mensaje men = new Mensaje();
+                men.show(Alert.AlertType.WARNING,"Jugada invalida", "Alguna posición seleccionada no corresponde a un organo.");
             }
             primero = null;
             segundo = null;
@@ -340,15 +351,24 @@ public class EspecialesController extends Controller implements Initializable {
                         cbJugador1.getSelectionModel().getSelectedItem().copiarMatrizOponente(matPrimero);
                         cbJugador2.getSelectionModel().getSelectedItem().copiarMatrizOponente(matSegundo);
                         AppContext.getInstance().set("Transplante", true);
+                        //Añadir los datos de la carta de tratamiento y los jugadores
+                        ArrayList<String> lista = new ArrayList<>();
+                        lista.add("2");
+                        lista.add(cbJugador1.getSelectionModel().getSelectedItem().getID());
+                        lista.add(cbJugador2.getSelectionModel().getSelectedItem().getID());
+                        AppContext.getInstance().set("Especiales", lista);
                         this.getStage().close();
                     }else{
-                        System.out.println("Organo inmune");
+                        Mensaje men = new Mensaje();
+                        men.show(Alert.AlertType.WARNING,"Jugada invalida", "El organo seleccionado esta inmune.");
                     }
                 }else{
-                    System.out.println("Organo repetido");
+                    Mensaje men = new Mensaje();
+                    men.show(Alert.AlertType.WARNING,"Jugada invalida", "Alguno de los jugadores ya tiene un organo del mismo color.");
                 }
             }else{
-                System.out.println("No se seleccionarón 2 organos para el transplante");
+                Mensaje men = new Mensaje();
+                men.show(Alert.AlertType.WARNING,"Jugada invalida", "Alguna posición seleccionada no corresponde a un organo.");
             }
             primero = null;
             segundo = null;
