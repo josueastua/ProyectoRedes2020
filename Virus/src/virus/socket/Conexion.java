@@ -156,8 +156,8 @@ public class Conexion {
         for(String player: data){
             jugador = player.split("_");
             for(Jugador jug: jugadores){
-                jug.getMano().clear();
                 if(jug.getId().equals(jugador[0])){
+                    jug.getMano().clear();
                     cartas = jugador[1].split("-");
                     for(String carta: cartas){
                         jug.addMano(new Carta(Character.getNumericValue(carta.charAt(0)),Character.getNumericValue(carta.charAt(2)),AppContext.getInstance().getCarta(carta)));
