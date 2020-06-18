@@ -262,7 +262,7 @@ public class JuegoController extends Controller implements Initializable {
             mostrarOponente();
             mostrarTablero();
             ArrayList<String> lista = new ArrayList();
-            lista.add("0");
+            lista.add("0"); lista.add("0"); lista.add("0");
             AppContext.getInstance().set("Especiales", lista);
             if(verificarVictoria()){
                 accionFade();
@@ -442,7 +442,7 @@ public class JuegoController extends Controller implements Initializable {
         List<String> lista = (List<String>) AppContext.getInstance().get("Especiales");
         if(lista == null)
             men+="0-0-0";
-        else if(lista.size() == 3)
+        else if(lista.size() < 3)
             men+="0-0-0";
         else
             men += lista.get(0)+"-"+lista.get(1)+"-"+lista.get(2);
@@ -546,12 +546,12 @@ public class JuegoController extends Controller implements Initializable {
             vb_contenerdor_oponentes.setPrefWidth(320);
             vb_contenerdor_oponentes.getChildren().add(vb_oponente);
             vb_player.setPrefWidth(root.getWidth()-320);
-            tt.setByX(-320);
+            tt.setByX(-400);
             tt.setToX(0);
             btnShow.setText("Ocultar Oponente");
         }else{
             tt.setByX(0);
-            tt.setToX(-320);
+            tt.setToX(-400);
             btnShow.setText("Mostrar Oponente");
         }
         tt.play();
