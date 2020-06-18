@@ -424,7 +424,7 @@ public class JuegoController extends Controller implements Initializable {
         }
         men += "/";
         List<String> lista = (List<String>) AppContext.getInstance().get("Especiales");
-        if(lista != null)
+        if(lista == null)
             men+="0-0-0";
         else
             men += lista.get(0)+"-"+lista.get(1)+"-"+lista.get(2);
@@ -1205,8 +1205,8 @@ public class JuegoController extends Controller implements Initializable {
         Platform.runLater(() -> {
             jugada = false;
             int t = (int) AppContext.getInstance().get("Turno");
-            root.setMouseTransparent((player.getTurno() != t));
-            consultar = (player.getTurno() != t);
+            root.setMouseTransparent(t == player.getTurno() ? false : true);
+            consultar = (t == player.getTurno() ? false : true);
             if(!consultar){
                 men.show(Alert.AlertType.INFORMATION, "Informacion de turno", "Ya puedes jugar");
             }
