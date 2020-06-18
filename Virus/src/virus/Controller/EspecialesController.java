@@ -5,11 +5,9 @@
  */
 package virus.Controller;
 
-import com.sun.imageio.plugins.jpeg.JPEG;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import virus.util.AppContext;
 import virus.util.Carta;
 import virus.util.Cuerpo;
@@ -112,6 +111,8 @@ public class EspecialesController extends Controller implements Initializable {
     ArrayList<Jugador> jugadores;
     ImageView primero;
     ImageView segundo;
+    @FXML
+    private StackPane stack;
     
     /**
      * Initializes the controller class.
