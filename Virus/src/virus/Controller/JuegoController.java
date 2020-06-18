@@ -14,6 +14,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -1195,5 +1196,16 @@ public class JuegoController extends Controller implements Initializable {
             }
         });
         
+    }
+    
+    public void accionFade(){
+       FadeTransition fade = new FadeTransition(Duration.seconds(1));
+        fade.setFromValue(10);
+        fade.setToValue(0.0);
+        fade.setNode(root);
+        fade.setOnFinished((event) -> {
+            FlowController.getInstance().goViewInNoResizableWindow("Winner", Boolean.TRUE);
+            this.getStage().close();
+        }); 
     }
 }
