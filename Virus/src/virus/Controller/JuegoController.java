@@ -443,9 +443,7 @@ public class JuegoController extends Controller implements Initializable {
         men += "/";
         List<String> lista = (List<String>) AppContext.getInstance().get("Especiales");
         if(lista == null)
-            men+="0-0-0";
-        else if(lista.size() < 3)
-            men+="0-0-0";
+            men += "0-0-0";
         else
             men += lista.get(0)+"-"+lista.get(1)+"-"+lista.get(2);
         return men;
