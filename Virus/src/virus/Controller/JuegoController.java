@@ -346,7 +346,8 @@ public class JuegoController extends Controller implements Initializable {
             men.show(Alert.AlertType.INFORMATION, "Jugar", "Aun no es su turno");
             consultar = true;
         }
-        List<String> lista = null;
+        List<String> lista = new ArrayList<>();
+        lista.add("0"); lista.add("0"); lista.add("0");
         AppContext.getInstance().set("Especiales", lista) ;
     }
 
