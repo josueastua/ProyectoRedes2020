@@ -188,6 +188,7 @@ public class Conexion {
         for(String player: data){
             jugador = player.split("_");
             for(Jugador jug: jugadores){
+                jug.getMano().clear();
                 if(jug.getId().equals(jugador[0])){
                     cartas = jugador[1].split("-");
                     for(String carta: cartas){
