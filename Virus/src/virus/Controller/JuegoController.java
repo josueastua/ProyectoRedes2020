@@ -341,8 +341,12 @@ public class JuegoController extends Controller implements Initializable {
         }
         conseguirImagenes();
         mostrarOponente();
-        if(player.getTurno() != 1)
+        if(player.getTurno() != 1){
+            root.setMouseTransparent(true);
             men.show(Alert.AlertType.INFORMATION, "Jugar", "Aun no es su turno");
+        }
+        List<String> lista = null;
+        AppContext.getInstance().set("Especiales", lista) ;
     }
 
     private void conseguirImagenes(){
