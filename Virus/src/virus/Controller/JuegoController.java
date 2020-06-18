@@ -1191,29 +1191,30 @@ public class JuegoController extends Controller implements Initializable {
     
     public void tramitarPeticion(String peticion){
         int index = cbDescartar.getItems().indexOf(peticion);
+        System.out.println("Index: "+index);
         switch(index){
             case 0:
                 player.getMano().clear();
                 break;
-            case 2:
+            case 1:
                 player.getMano().remove(0);
                 player.getMano().remove(0);
                 break;
-            case 3:
+            case 2:
                 player.getMano().remove(0);
+                player.getMano().remove(1);
+                break;
+            case 3:
+                player.getMano().remove(1);
                 player.getMano().remove(1);
                 break;
             case 4:
-                player.getMano().remove(1);
-                player.getMano().remove(1);
-                break;
-            case 5:
                 player.getMano().remove(0);
                 break;
-            case 6:
+            case 5:
                 player.getMano().remove(1);
                 break;
-            case 7:
+            case 6:
                 player.getMano().remove(2);
                 break;
         }
@@ -1241,5 +1242,6 @@ public class JuegoController extends Controller implements Initializable {
             FlowController.getInstance().goViewInNoResizableWindow("Winner", Boolean.TRUE);
             this.getStage().close();
         }); 
+        fade.play();
     }
 }
