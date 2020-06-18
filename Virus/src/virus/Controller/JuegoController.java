@@ -440,6 +440,7 @@ public class JuegoController extends Controller implements Initializable {
     
     public boolean verificarVictoria(){
         int cont = 0;
+        //Verificar si el jugadot actual ganó la partida
         for(int a=0;a<5;a++){
             if(tablero[0][a].getCarta() != null){
                 if(tablero[1][a].getCarta() == null && tablero[2][a].getCarta() == null){
@@ -458,7 +459,38 @@ public class JuegoController extends Controller implements Initializable {
                 }
             }
         }
-        return cont >= 4;
+        if(cont >= 4){
+            AppContext.getInstance().set("Ganador", player);
+            return true;
+        }
+        //Verificar si algún oponente ganó la partida
+        cont = 0;
+        for(Jugador oponente : oponentes){
+            for(int a=0;a<5;a++){
+                if(oponente.getMatTablero()[a][0] != null){
+                    if(oponente.getMatTablero()[a][1] == null && oponente.getMatTablero()[a][2] == null){
+                        cont++;
+                    }else{
+                        if(oponente.getMatTablero()[a][1] != null){
+                            if(oponente.getMatTablero()[a][1].getTipo() != 3){
+                                cont++;
+                            }
+                        }
+                        if(oponente.getMatTablero()[a][2] != null){
+                            if(oponente.getMatTablero()[a][2].getTipo() != 3){
+                                cont++;
+                            }
+                        }
+                    }
+                }
+            }
+            if(cont >= 4){
+                AppContext.getInstance().set("Ganador",oponente);
+                return true;
+            }
+            cont = 0;
+        }
+        return false;
     }
     
     public void verificarCantidadMazo(){
