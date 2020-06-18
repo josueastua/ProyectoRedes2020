@@ -334,7 +334,8 @@ public class JuegoController extends Controller implements Initializable {
         }
         conseguirImagenes();
         mostrarOponente();
-        esTurno();
+        if(player.getTurno() != 1)
+            men.show(Alert.AlertType.INFORMATION, "Jugar", "Aun no es su turno");
     }
 
     private void conseguirImagenes(){
@@ -1041,7 +1042,7 @@ public class JuegoController extends Controller implements Initializable {
                 if(consultar)
                     con.accionEnviar("4", "HOLA");
             }
-        }, 10000, 10000);
+        }, 5000, 5000);
     }
 
     @FXML

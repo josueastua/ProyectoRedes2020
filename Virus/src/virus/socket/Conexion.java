@@ -144,38 +144,6 @@ public class Conexion {
                     juego.esTurno();
                     juego.actualizarJuego();
                 }
-                    /*
-                    String[] datosJuego = message[2].split("/");
-                    for(int i = 0; i < datosJuego.length; i++){
-                        if(i < datosJuego.length - 4){
-                            datosJugador(datosJuego[i].split("_"));
-                        }else if(i == datosJuego.length - 4){
-                            String[] cartas = datosJuego[i].split("-");
-                            ArrayList<String> mazo = new ArrayList<>();
-                            for(int a = 0; a < cartas.length; a++){
-                                mazo.add(cartas[a]);
-                            }
-                            AppContext.getInstance().set("Mazo", mazo);
-                        }else if(i == datosJuego.length - 3){
-                            String[] cartas = datosJuego[i].split("-");
-                            ArrayList<String> descartes = new ArrayList<>();
-                            for(int a = 0; a < cartas.length; a++){
-                                descartes.add(cartas[a]);
-                            }
-                            AppContext.getInstance().set("Descartes", descartes);
-                        }else{
-                            break;
-                        }
-                    }
-                    String especial = datosJuego[datosJuego.length-2];
-                    JuegoController juego = (JuegoController) AppContext.getInstance().get("Juego");
-                    if(!especial.equals("0")){
-                        juego.informarCartaEspecial(especial, datosJuego[datosJuego.length-1]);
-                    }
-                    juego.actualizarJuego();
-                }else{
-                    String id = message[2];
-                }*/
                 break;
             default:
                 break;
@@ -198,24 +166,6 @@ public class Conexion {
                 }
             }
         }
-        /*
-        for(int i = 0; i < jugadores.size(); i++){
-            jugador = data[0].split("_");
-            if(jugadores.get(i).getId().equals(jugador[0])){
-                cartas = data[1].split("-");
-                jugadores.get(i).getMano().clear();
-                for(int card = 0; card < cartas.length; card++){
-                    jugadores.get(i).addMano(cartas[card]);
-                }
-                if(!data[2].equals("0")){
-                    jugadores.get(i).getTablero().clear();
-                    cartas = data[2].split("-");
-                    for(int card = 0; card < cartas.length; card++){
-                        jugadores.get(i).addTablero(cartas[card]);
-                    }
-                }
-            }
-        }*/
     }
     
     private void crearMazo(String[] mazo){
