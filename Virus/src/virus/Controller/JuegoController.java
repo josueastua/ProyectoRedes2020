@@ -433,8 +433,10 @@ public class JuegoController extends Controller implements Initializable {
             men += "0";
         }else{
             for(Carta carta: descartes){
-                System.out.println(carta.toString() + descartes.indexOf(carta));
-                men += carta.getRepresentacion()+"-";
+                if(carta == null)
+                    System.out.println("cdn");
+                else
+                    men += carta.getRepresentacion()+"-";
             }
             men = men.substring(0, men.length() - 1);
         }
