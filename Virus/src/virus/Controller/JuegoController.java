@@ -570,72 +570,77 @@ public class JuegoController extends Controller implements Initializable {
             int fila = Character.getNumericValue(f);
             int columna = Character.getNumericValue(c);
             Carta carta2 = tabOponente[fila][columna].getCarta();
-            if(verificarInmunidad(fila)){
-                if(verificarOrganoRepetido(carta2)){
-                   //jugada = true;
-                    int disponible = 0;
-                    for(int a=0;a<5;a++){
-                        if(tablero[0][a].getCarta() == null){
-                            disponible = a;
-                            break;
+            if(carta2 != null){
+                if(verificarInmunidad(fila)){
+                    if(verificarOrganoRepetido(carta2)){
+                        //jugada = true;
+                        int disponible = 0;
+                        for(int a=0;a<5;a++){
+                            if(tablero[0][a].getCarta() == null){
+                                disponible = a;
+                                break;
+                            }
                         }
-                    }
-                    jugada = true;
-                    primero.setImage(null);
-                    mano[pos].setCarta(null);
-                    mano[pos].setImage(null);
-                    player.getMano().remove(carta1);
-                    descartes.add(carta1);
-                    //Añadir los datos de los jugadores implicados en el ladrón de organos
-                    ArrayList<String> lista = new ArrayList();
-                    lista.add("1");
-                    lista.add(player.getID());
-                    lista.add(oponentes.get(oponente).getID());
-                    AppContext.getInstance().set("Especiales", lista);
-                    //Obtener una nueva carta del mazo
-                    comerCarta();
-                    //Tranferir el organo
-                    tablero[0][disponible].setCarta(carta2);
-                    tablero[0][disponible].setImage(carta2.getImagen());
-                    tablero[0][disponible].getImage().setImage(carta2.getImagen());
-                    //Eliminar el organo del oponente
-                    tabOponente[fila][columna].setCarta(null);
-                    tabOponente[fila][columna].setImage(null);
-                    segundo.setImage(null);
-                    //Tranferir cartas que aconpañan al organo
-                    //Primera
-                    if(tabOponente[fila][1].getCarta() != null){
-                        carta2 = tabOponente[fila][1].getCarta();
-                        tablero[1][disponible].setCarta(carta2);
-                        tablero[1][disponible].setImage(carta2.getImagen());
-                        tablero[1][disponible].getImage().setImage(carta2.getImagen());
-                        //Eliminar la carta del tablero del oponente
-                        tabOponente[fila][1].setCarta(null);
-                        tabOponente[fila][1].setImage(null);
-                        tabOponente[fila][1].getImage().setImage(null);
-                    }
-                    //Segunda
-                    if(tabOponente[fila][2].getCarta() != null){
-                        carta2 = tabOponente[fila][2].getCarta();
-                        tablero[2][disponible].setCarta(carta2);
-                        tablero[2][disponible].setImage(carta2.getImagen());
-                        tablero[2][disponible].getImage().setImage(carta2.getImagen());
-                        //Eliminar la carta del tablero del oponente
-                        tabOponente[fila][2].setCarta(null);
-                        tabOponente[fila][2].setImage(null);
-                        tabOponente[fila][2].getImage().setImage(null);
-                    }
-                    
+                        jugada = true;
+                        primero.setImage(null);
+                        mano[pos].setCarta(null);
+                        mano[pos].setImage(null);
+                        player.getMano().remove(carta1);
+                        descartes.add(carta1);
+                        //Añadir los datos de los jugadores implicados en el ladrón de organos
+                        ArrayList<String> lista = new ArrayList();
+                        lista.add("1");
+                        lista.add(player.getID());
+                        lista.add(oponentes.get(oponente).getID());
+                        AppContext.getInstance().set("Especiales", lista);
+                        //Obtener una nueva carta del mazo
+                        comerCarta();
+                        //Tranferir el organo
+                        tablero[0][disponible].setCarta(carta2);
+                        tablero[0][disponible].setImage(carta2.getImagen());
+                        tablero[0][disponible].getImage().setImage(carta2.getImagen());
+                        //Eliminar el organo del oponente
+                        tabOponente[fila][columna].setCarta(null);
+                        tabOponente[fila][columna].setImage(null);
+                        segundo.setImage(null);
+                        //Tranferir cartas que aconpañan al organo
+                        //Primera
+                        if(tabOponente[fila][1].getCarta() != null){
+                            carta2 = tabOponente[fila][1].getCarta();
+                            tablero[1][disponible].setCarta(carta2);
+                            tablero[1][disponible].setImage(carta2.getImagen());
+                            tablero[1][disponible].getImage().setImage(carta2.getImagen());
+                            //Eliminar la carta del tablero del oponente
+                            tabOponente[fila][1].setCarta(null);
+                            tabOponente[fila][1].setImage(null);
+                            tabOponente[fila][1].getImage().setImage(null);
+                        }
+                        //Segunda
+                        if(tabOponente[fila][2].getCarta() != null){
+                            carta2 = tabOponente[fila][2].getCarta();
+                            tablero[2][disponible].setCarta(carta2);
+                            tablero[2][disponible].setImage(carta2.getImagen());
+                            tablero[2][disponible].getImage().setImage(carta2.getImagen());
+                            //Eliminar la carta del tablero del oponente
+                            tabOponente[fila][2].setCarta(null);
+                            tabOponente[fila][2].setImage(null);
+                            tabOponente[fila][2].getImage().setImage(null);
+                        }
                     player.copiarMatrizJugador(tablero);
                     oponentes.get(oponente).copiarMatrizOponente(tabOponente);
+                    }else{
+                        Mensaje men = new Mensaje();
+                        men.show(Alert.AlertType.WARNING,"Jugada invalida", "No se pueden tener dos organos repetidos.");
+                    }
                 }else{
                     Mensaje men = new Mensaje();
-                    men.show(Alert.AlertType.WARNING,"Jugada invalida", "No se pueden tener dos organos repetidos.");
+                    men.show(Alert.AlertType.WARNING,"Jugada invalida", "El organo seleccionado esta inmune.");
                 }
             }else{
                 Mensaje men = new Mensaje();
-                men.show(Alert.AlertType.WARNING,"Jugada invalida", "El organo seleccionado esta inmune.");
+                men.show(Alert.AlertType.WARNING,"Jugada invalida", "No se seleccionó ningún organo..");
             }
+
             
             primero = null;
             segundo = null;
