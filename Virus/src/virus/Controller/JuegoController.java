@@ -414,6 +414,7 @@ public class JuegoController extends Controller implements Initializable {
         }
         men = men.substring(0, men.length() - 1);
         men += "/";
+        /*
         if(descartes != null){
             if(!descartes.isEmpty() && descartes.size() > 0){
                 for(Carta carta: descartes){
@@ -426,6 +427,15 @@ public class JuegoController extends Controller implements Initializable {
             }
         }else{
             men += "0";
+        }*/
+        if(descartes.isEmpty()){
+            men += "0";
+        }else{
+            for(Carta carta: descartes){
+                System.out.println(carta.toString() + descartes.indexOf(carta));
+                men += carta.getRepresentacion()+"-";
+            }
+            men = men.substring(0, men.length() - 1);
         }
         men += "/";
         List<String> lista = (List<String>) AppContext.getInstance().get("Especiales");
