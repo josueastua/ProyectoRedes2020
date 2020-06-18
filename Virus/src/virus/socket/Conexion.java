@@ -152,12 +152,13 @@ public class Conexion {
     
     private void datosJugador(String[] data){
         ArrayList<Jugador> jugadores = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
+        for(Jugador jug: jugadores)
+            jug.getMano().clear();
         String[] jugador, cartas;
         for(String player: data){
             jugador = player.split("_");
             for(Jugador jug: jugadores){
                 if(jug.getId().equals(jugador[0])){
-                    jug.getMano().clear();
                     cartas = jugador[1].split("-");
                     for(String carta: cartas){
                         jug.addMano(new Carta(Character.getNumericValue(carta.charAt(0)),Character.getNumericValue(carta.charAt(2)),AppContext.getInstance().getCarta(carta)));
