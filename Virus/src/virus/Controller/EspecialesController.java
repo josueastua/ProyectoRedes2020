@@ -326,46 +326,52 @@ public class EspecialesController extends Controller implements Initializable {
             if(columna1 == 0 && columna2 == 0){
                 Carta carta1 = matPrimero[fila1][columna1].getCarta();
                 Carta carta2 = matSegundo[fila2][columna2].getCarta();
-                if(verificarOrganorepetido(1, carta1.getColor()) && verificarOrganorepetido(2, carta2.getColor())){
-                    if(verificarInmunidad(1, fila1)  && verificarInmunidad(2, fila2)){
-                        //Transplantar los organos
-                        //Copiar el organo del primer jugador para transplantarlo
-                        Cuerpo aux1[] = new Cuerpo[3];
-                        aux1[0] = matPrimero[fila1][0];
-                        aux1[1] = matPrimero[fila1][1];
-                        aux1[2] = matPrimero[fila1][2];
-                        //Copiar el organo del segundo jugador para transplantarlo
-                        Cuerpo aux2[] = new Cuerpo[3];
-                        aux2[0] = matSegundo[fila2][0];
-                        aux2[1] = matSegundo[fila2][1];
-                        aux2[2] = matSegundo[fila2][2];
-                        //Transplantar el primero
-                        matPrimero[fila1][0] = aux2[0];
-                        matPrimero[fila1][1] = aux2[1];
-                        matPrimero[fila1][2] = aux2[2];
-                        //Transplantar el segundo
-                        matSegundo[fila2][0] = aux1[0];
-                        matSegundo[fila2][1] = aux1[1];
-                        matSegundo[fila2][2] = aux1[2];
-                        //Reflejar cambios
-                        cbJugador1.getSelectionModel().getSelectedItem().copiarMatrizOponente(matPrimero);
-                        cbJugador2.getSelectionModel().getSelectedItem().copiarMatrizOponente(matSegundo);
-                        AppContext.getInstance().set("Transplante", true);
-                        //Añadir los datos de la carta de tratamiento y los jugadores
-                        ArrayList<String> lista = new ArrayList<>();
-                        lista.add("2");
-                        lista.add(cbJugador1.getSelectionModel().getSelectedItem().getID());
-                        lista.add(cbJugador2.getSelectionModel().getSelectedItem().getID());
-                        AppContext.getInstance().set("Especiales", lista);
-                        this.getStage().close();
+                if(carta1 != null && carta2 != null){
+                    if(verificarOrganorepetido(1, carta1.getColor()) && verificarOrganorepetido(2, carta2.getColor())){
+                        if(verificarInmunidad(1, fila1)  && verificarInmunidad(2, fila2)){
+                            //Transplantar los organos
+                            //Copiar el organo del primer jugador para transplantarlo
+                            Cuerpo aux1[] = new Cuerpo[3];
+                            aux1[0] = matPrimero[fila1][0];
+                            aux1[1] = matPrimero[fila1][1];
+                            aux1[2] = matPrimero[fila1][2];
+                            //Copiar el organo del segundo jugador para transplantarlo
+                            Cuerpo aux2[] = new Cuerpo[3];
+                            aux2[0] = matSegundo[fila2][0];
+                            aux2[1] = matSegundo[fila2][1];
+                            aux2[2] = matSegundo[fila2][2];
+                            //Transplantar el primero
+                            matPrimero[fila1][0] = aux2[0];
+                            matPrimero[fila1][1] = aux2[1];
+                            matPrimero[fila1][2] = aux2[2];
+                            //Transplantar el segundo
+                            matSegundo[fila2][0] = aux1[0];
+                            matSegundo[fila2][1] = aux1[1];
+                            matSegundo[fila2][2] = aux1[2];
+                            //Reflejar cambios
+                            cbJugador1.getSelectionModel().getSelectedItem().copiarMatrizOponente(matPrimero);
+                            cbJugador2.getSelectionModel().getSelectedItem().copiarMatrizOponente(matSegundo);
+                            AppContext.getInstance().set("Transplante", true);
+                            //Añadir los datos de la carta de tratamiento y los jugadores
+                            ArrayList<String> lista = new ArrayList<>();
+                            lista.add("2");
+                            lista.add(cbJugador1.getSelectionModel().getSelectedItem().getID());
+                            lista.add(cbJugador2.getSelectionModel().getSelectedItem().getID());
+                            AppContext.getInstance().set("Especiales", lista);
+                            this.getStage().close();
+                        }else{
+                            Mensaje men = new Mensaje();
+                            men.show(Alert.AlertType.WARNING,"Jugada invalida", "El organo seleccionado esta inmune.");
+                        }
                     }else{
-                        Mensaje men = new Mensaje();
-                        men.show(Alert.AlertType.WARNING,"Jugada invalida", "El organo seleccionado esta inmune.");
-                    }
-                }else{
                     Mensaje men = new Mensaje();
                     men.show(Alert.AlertType.WARNING,"Jugada invalida", "Alguno de los jugadores ya tiene un organo del mismo color.");
+                    }
+                }else{
+                   Mensaje men = new Mensaje();
+                   men.show(Alert.AlertType.WARNING,"Jugada invalida", "Alguna posición seleccionada no corresponde a un organo."); 
                 }
+                
             }else{
                 Mensaje men = new Mensaje();
                 men.show(Alert.AlertType.WARNING,"Jugada invalida", "Alguna posición seleccionada no corresponde a un organo.");
