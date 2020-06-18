@@ -264,6 +264,9 @@ public class JuegoController extends Controller implements Initializable {
             ArrayList<String> lista = new ArrayList();
             lista.add("0");
             AppContext.getInstance().set("Especiales", lista);
+            if(verificarVictoria()){
+                accionFade();
+            }
         });
     }
     
@@ -388,6 +391,9 @@ public class JuegoController extends Controller implements Initializable {
         consultar = true;
         cbDescartar.setMouseTransparent(false);
         jugada = false;
+        if(verificarVictoria()){
+            accionFade();
+        }
     }
     
     private String hacerJugada(){
