@@ -996,6 +996,7 @@ public class JuegoController extends Controller implements Initializable {
                         ArrayList<String>lista = new ArrayList();
                         lista.add("4");
                         lista.add(player.getID());
+                        lista.add("0");
                         AppContext.getInstance().set("Especiales", lista);
                     }
                     primero = null;
