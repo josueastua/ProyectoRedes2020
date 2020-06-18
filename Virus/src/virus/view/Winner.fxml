@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 
-<AnchorPane id="AnchorPane" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="890.0" stylesheets="@../resources/Inicio.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="virus.view.WinnerController">
+<AnchorPane id="AnchorPane" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="890.0" stylesheets="@../resources/Inicio.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="virus.Controller.WinnerController">
    <children>
       <ImageView fx:id="imv_sd" fitHeight="350.0" fitWidth="445.0" layoutX="445.0" pickOnBounds="true" smooth="false" />
       <ImageView fx:id="imv_si" fitHeight="350.0" fitWidth="445.0" pickOnBounds="true" smooth="false" />

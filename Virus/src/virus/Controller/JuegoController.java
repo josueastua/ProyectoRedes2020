@@ -1239,7 +1239,8 @@ public class JuegoController extends Controller implements Initializable {
     }
     
     public void accionFade(){
-       FadeTransition fade = new FadeTransition(Duration.seconds(1));
+        timer.cancel();
+        FadeTransition fade = new FadeTransition(Duration.seconds(1));
         fade.setFromValue(10);
         fade.setToValue(0.0);
         fade.setNode(root);

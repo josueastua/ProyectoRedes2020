@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virus.view;
+package virus.Controller;
 
 import static java.lang.System.exit;
 import java.net.URL;
@@ -66,11 +66,15 @@ public class WinnerController extends Controller implements Initializable {
     }
     
     public void mostrarWinner(Jugador winner){
+        ImageView imv = null;
         Carta[][] tab = winner.getMatTablero();
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 5; j++){
                 if(tab[j][i] != null)
-                    gpCartas.add(new ImageView(tab[j][i].getImagen()), i, j);
+                    imv = new ImageView(tab[j][i].getImagen());
+                    imv.setFitHeight(30);
+                    imv.setFitWidth(60);
+                    gpCartas.add(imv, i, j);
             }
         }
     }
