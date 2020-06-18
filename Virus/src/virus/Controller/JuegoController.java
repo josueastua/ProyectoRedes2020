@@ -476,15 +476,20 @@ public class JuegoController extends Controller implements Initializable {
                 if(tablero[1][a].getCarta() == null && tablero[2][a].getCarta() == null){
                     cont++;
                 }else{
-                    if(tablero[1][a].getCarta() != null){
+                    if(tablero[1][a].getCarta() != null && tablero[2][a].getCarta() == null){
                         if(tablero[1][a].getCarta().getTipo() != 3){
                             cont++;
                         }
                     }
-                    if(tablero[2][a].getCarta() != null){
+                    if(tablero[2][a].getCarta() != null && tablero[1][a].getCarta() == null){
                         if(tablero[2][a].getCarta().getTipo() != 3){
                             cont++;
                         }
+                    }
+                }
+                if(tablero[1][a].getCarta() != null && tablero[2][a].getCarta() != null){
+                    if(tablero[1][a].getCarta().getTipo() == 2 && tablero[2][a].getCarta().getTipo() == 2){
+                        cont++;
                     }
                 }
             }
@@ -501,15 +506,20 @@ public class JuegoController extends Controller implements Initializable {
                     if(oponente.getMatTablero()[a][1] == null && oponente.getMatTablero()[a][2] == null){
                         cont++;
                     }else{
-                        if(oponente.getMatTablero()[a][1] != null){
+                        if(oponente.getMatTablero()[a][1] != null && oponente.getMatTablero()[a][2] == null){
                             if(oponente.getMatTablero()[a][1].getTipo() != 3){
                                 cont++;
                             }
                         }
-                        if(oponente.getMatTablero()[a][2] != null){
+                        if(oponente.getMatTablero()[a][2] != null && oponente.getMatTablero()[a][1] == null){
                             if(oponente.getMatTablero()[a][2].getTipo() != 3){
                                 cont++;
                             }
+                        }
+                    }
+                    if(oponente.getMatTablero()[a][1] != null && oponente.getMatTablero()[a][2] != null){
+                        if(oponente.getMatTablero()[a][1].getTipo() == 2 && oponente.getMatTablero()[a][2].getTipo() == 2){
+                            cont++;
                         }
                     }
                 }
