@@ -26,7 +26,12 @@ public class Cuerpo {
     }
 
     public void setCarta(Carta carta) {
-        this.carta = carta;
+        if(carta == null){
+           this.carta = new Carta();
+           this.carta = null;
+        }else{
+            this.carta = carta;
+        }
     }
 
     public ImageView getImage() {
