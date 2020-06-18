@@ -382,6 +382,7 @@ public class JuegoController extends Controller implements Initializable {
         con.accionEnviar("3", hacerJugada());
         consultar = true;
         cbDescartar.setMouseTransparent(false);
+        jugada = false;
     }
     
     private String hacerJugada(){
@@ -400,6 +401,7 @@ public class JuegoController extends Controller implements Initializable {
         if(descartes != null){
             if(!descartes.isEmpty()){
                 for(Carta carta: descartes){
+                    System.out.println(carta.toString() + descartes.indexOf(carta));
                     men += carta.getRepresentacion()+"-";
                 }
                 men = men.substring(0, men.length() - 1);
@@ -1066,6 +1068,7 @@ public class JuegoController extends Controller implements Initializable {
     
     public void esTurno(){
         Platform.runLater(() -> {
+            jugada = false;
             int t = (int) AppContext.getInstance().get("Turno");
             root.setMouseTransparent((player.getTurno() != t));
             consultar = (player.getTurno() != t);
