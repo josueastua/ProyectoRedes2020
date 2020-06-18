@@ -5,11 +5,9 @@
  */
 package virus.Controller;
 
-import com.sun.imageio.plugins.jpeg.JPEG;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
