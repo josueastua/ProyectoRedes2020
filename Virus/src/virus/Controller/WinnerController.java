@@ -70,11 +70,12 @@ public class WinnerController extends Controller implements Initializable {
         Carta[][] tab = winner.getMatTablero();
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 5; j++){
-                if(tab[j][i] != null)
+                if(tab[j][i] != null){
                     imv = new ImageView(tab[j][i].getImagen());
                     imv.setFitHeight(30);
                     imv.setFitWidth(60);
                     gpCartas.add(imv, i, j);
+                }
             }
         }
     }
