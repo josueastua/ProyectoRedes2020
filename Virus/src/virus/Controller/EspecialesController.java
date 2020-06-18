@@ -252,8 +252,8 @@ public class EspecialesController extends Controller implements Initializable {
             int columna2 = Character.getNumericValue(c2);
             //Validar que las cartas sean organos
             if(columna1 == 0 && columna2 == 0){
-                Carta carta1 = matPrimero[f1][c1].getCarta();
-                Carta carta2 = matSegundo[f2][c2].getCarta();
+                Carta carta1 = matPrimero[fila1][columna1].getCarta();
+                Carta carta2 = matSegundo[fila2][columna2].getCarta();
                 if(verificarOrganorepetido(1, carta1.getColor()) && verificarOrganorepetido(2, carta2.getColor())){
                     if(verificarInmunidad(1, fila1)  && verificarInmunidad(2, fila2)){
                         //Transplantar los organos
@@ -312,8 +312,8 @@ public class EspecialesController extends Controller implements Initializable {
             int columna2 = Character.getNumericValue(c2);
             //Validar que las cartas sean organos
             if(columna1 == 0 && columna2 == 0){
-                Carta carta1 = matPrimero[f1][c1].getCarta();
-                Carta carta2 = matSegundo[f2][c2].getCarta();
+                Carta carta1 = matPrimero[fila1][columna1].getCarta();
+                Carta carta2 = matSegundo[fila2][columna2].getCarta();
                 if(verificarOrganorepetido(1, carta1.getColor()) && verificarOrganorepetido(2, carta2.getColor())){
                     if(verificarInmunidad(1, fila1)  && verificarInmunidad(2, fila2)){
                         //Transplantar los organos
