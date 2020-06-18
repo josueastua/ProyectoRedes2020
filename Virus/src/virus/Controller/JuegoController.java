@@ -406,12 +406,12 @@ public class JuegoController extends Controller implements Initializable {
                 }
                 men = men.substring(0, men.length() - 1);
             }else{
-                men += "0/";
+                men += "0";
             }
         }else{
-            men += "0/";
+            men += "0";
         }
-        men += "0-0-0";
+        men += "/0-0-0";
         return men;
     }
     
