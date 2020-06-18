@@ -344,6 +344,7 @@ public class JuegoController extends Controller implements Initializable {
         if(player.getTurno() != 1){
             root.setMouseTransparent(true);
             men.show(Alert.AlertType.INFORMATION, "Jugar", "Aun no es su turno");
+            consultar = true;
         }
         List<String> lista = null;
         AppContext.getInstance().set("Especiales", lista) ;
@@ -1153,7 +1154,7 @@ public class JuegoController extends Controller implements Initializable {
         return true;
     }
     
-     public void hilo(){
+    public void hilo(){
         timer = new Timer();
         AppContext.getInstance().set("Timer", timer);
         timer.schedule(new TimerTask() {
