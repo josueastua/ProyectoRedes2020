@@ -269,9 +269,10 @@ public class JuegoController extends Controller implements Initializable {
                     }
                     break;
                 case "2":
-                    if(player.getId().equals(id2) || player.getId().equals(id1))
+                    if(player.getId().equals(id2) || player.getId().equals(id1)){
                         mensaje += "Trasplante de Organos";
                         mostrar = true;
+                    }
                     break;
                 case "3":
                    
@@ -285,9 +286,10 @@ public class JuegoController extends Controller implements Initializable {
                     mostrar = true;
                     break;
                 case "5":
-                    if(player.getId().equals(id2))
+                    if(player.getId().equals(id2)){
                         mensaje += "Error medico";
                         mostrar = true;
+                    }
                     break;
                 default:
                     break;
