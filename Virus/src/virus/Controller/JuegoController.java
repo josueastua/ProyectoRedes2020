@@ -1194,6 +1194,7 @@ public class JuegoController extends Controller implements Initializable {
             tramitarPeticion(cbDescartar.getSelectionModel().getSelectedItem());
             cbDescartar.setMouseTransparent(true);
             comerCarta();
+            accionJugada();
         }
     }
     
