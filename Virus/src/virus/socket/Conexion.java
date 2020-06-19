@@ -139,7 +139,7 @@ public class Conexion {
                         ArrayList<Carta> Descartes = new ArrayList<>();
                         AppContext.getInstance().set("Descartes", Descartes);
                     }
-                    usoTratamienro(message[2].split("-"));
+                    usoTratamienro(message[5].split("-"));
                     JuegoController juego = (JuegoController) AppContext.getInstance().get("Juego");
                     juego.esTurno();
                     juego.actualizarJuego();

@@ -242,7 +242,6 @@ public class JuegoController extends Controller implements Initializable {
     
     public void actualizarJuego(){
         Platform.runLater( () -> {
-            System.out.println("Entro");
             mazo =  (ArrayList<Carta>) AppContext.getInstance().get("Mazo");
             descartes = (ArrayList<Carta>) AppContext.getInstance().get("Descartes");
             conseguirImagenes();
@@ -258,45 +257,39 @@ public class JuegoController extends Controller implements Initializable {
     }
     
     public void informarCartaEspecial(String carta, String id1, String id2){
+        System.out.println("Carta: "+carta+" ID 1: "+id1+" ID 2: "+id2);
         Platform.runLater( () -> {
             String mensaje = "Un jugador te aplico ";
             Boolean mostrar = false;
             switch(carta){
                 case "1":
-                    mensaje += "Ladron de Organos";
-                    if(player.getId().equals(id2) || player.getId().equals(id1)){
-                        men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
-                        mostrar = true;
+                    if(player.getId().equals(id2)){
+                        mensaje += "Ladron de Organos";
                     }
                     break;
                 case "2":
-                    mensaje += "Trasplante de Organos";
+                    if(player.getId().equals(id2) || player.getId().equals(id1))
+                        mensaje += "Trasplante de Organos";
                     break;
                 case "3":
-                    mensaje += "Infeccion";
+                   
                     if(player.getId().equals(id2) || player.getId().equals(id1)){
-                        men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
-                        mostrar = true;
+                        mensaje += "Infeccion";
                     }
                     break;
                 case "4":
-                    mensaje += "Guante de latex";
                     if(player.getId().equals(id2) || player.getId().equals(id1)){
-                        men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
-                        mostrar = true;
+                        mensaje += "Guante de latex";
                     }
                     break;
                 case "5":
-                    mensaje += "Error medico";
+                    if(player.getId().equals(id2))
+                        mensaje += "Error medico";
                     break;
                 default:
                     break;
             }
-            if(!mostrar){
-                if(player.getId().equals(id2)){
-                    men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
-                }
-            }
+             men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
         });   
     }
    
@@ -377,7 +370,6 @@ public class JuegoController extends Controller implements Initializable {
     private void accionJugada() {
         if(player.getTurno() == 1 && timer == null)
             hilo();
-        System.out.println(hacerJugada());
         con.accionEnviar("3", hacerJugada());
         consultar = true;
         cbDescartar.setMouseTransparent(false);
@@ -400,20 +392,6 @@ public class JuegoController extends Controller implements Initializable {
         }
         men = men.substring(0, men.length() - 1);
         men += "/";
-        /*
-        if(descartes != null){
-            if(!descartes.isEmpty() && descartes.size() > 0){
-                for(Carta carta: descartes){
-                    System.out.println(carta.toString() + descartes.indexOf(carta));
-                    men += carta.getRepresentacion()+"-";
-                }
-                men = men.substring(0, men.length() - 1);
-            }else{
-                men += "0";
-            }
-        }else{
-            men += "0";
-        }*/
         if(descartes.isEmpty()){
             men += "0";
         }else{
@@ -659,7 +637,7 @@ public class JuegoController extends Controller implements Initializable {
                 if(carta2!=null){
                     System.out.println("Carta "+carta2.getTipo()+":"+carta2.getColor());
                 }else{
-                    System.out.println("NULO");
+                    System.out.println("Nulo");
                 }
                 //Funcionalidad de la carta virus
                 if(columna != 0){
@@ -727,7 +705,7 @@ public class JuegoController extends Controller implements Initializable {
                                         //El organo es inmune
                                         case 4:{
                                             //Nada que hacer
-                                            System.out.println("ES INMUNE");
+                                            men.show(Alert.AlertType.WARNING,"Jugada invalida", "El organo seleccionado esta inmune");
                                             break;
                                         }
                                     }
@@ -1199,10 +1177,12 @@ public class JuegoController extends Controller implements Initializable {
     @FXML
     private void accionDescartar(ActionEvent event) {
         if(cbDescartar.getSelectionModel().getSelectedItem() != null){
-            tramitarPeticion(cbDescartar.getSelectionModel().getSelectedItem());
+            String selected = cbDescartar.getSelectionModel().getSelectedItem();
+            tramitarPeticion(selected);
             cbDescartar.setMouseTransparent(true);
             comerCarta();
             accionJugada();
+            cbDescartar.getSelectionModel().clearSelection(cbDescartar.getItems().indexOf(selected));
         }
     }
     
