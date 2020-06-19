@@ -250,8 +250,6 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="142.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="142.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="142.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="142.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="142.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -272,11 +270,9 @@
                                     <ImageView id="2" fx:id="ivMano02" fitHeight="122.0" fitWidth="114.0" onMouseClicked="#accionManoJugador" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </StackPane>
-                              <ImageView id="3" fx:id="ivMano03" fitHeight="122.0" fitWidth="114.0" onMouseClicked="#accionMazos" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
-                              <ImageView id="4" fx:id="ivMano04" fitHeight="122.0" fitWidth="114.0" onMouseClicked="#accionMazos" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
                            </children>
                         </GridPane>
-                        <HBox>
+                        <HBox alignment="CENTER">
                            <VBox.margin>
                               <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                            </VBox.margin>
@@ -286,11 +282,6 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <Button fx:id="btnJugada" mnemonicParsing="false" onAction="#accionJugada" prefHeight="52.0" prefWidth="275.0" text="Hacer Jugada">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
                            </children>
                         </HBox>
                      </children>

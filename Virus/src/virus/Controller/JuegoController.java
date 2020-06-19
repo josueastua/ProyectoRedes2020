@@ -5,23 +5,18 @@
  */
 package virus.Controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -30,14 +25,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import virus.socket.Conexion;
 import virus.util.AppContext;
 import virus.util.Carta;
@@ -53,7 +45,6 @@ import virus.util.Mensaje;
 public class JuegoController extends Controller implements Initializable {
     Conexion con;
     @FXML private GridPane gpCartas;
-    @FXML private Button btnJugada;
     @FXML private Label lblOponente;
     @FXML private GridPane gpCartasOponente;
     @FXML private Button btn_Oponente;
@@ -154,9 +145,7 @@ public class JuegoController extends Controller implements Initializable {
     private ImageView ivMano01;
     @FXML
     private ImageView ivMano02;
-    @FXML
     private ImageView ivMano03;
-    @FXML
     private ImageView ivMano04;
     @FXML
     private ComboBox<String> cbDescartar;
@@ -183,7 +172,7 @@ public class JuegoController extends Controller implements Initializable {
     public void crearMatrices(){
         tablero = new Cuerpo[3][5];
         tabOponente = new Cuerpo[5][3];
-        mano = new Cuerpo[5];
+        mano = new Cuerpo[3];
         
         tablero[0][0] = new Cuerpo(null, ivTab00); tablero[0][1] = new Cuerpo(null, ivTab01); tablero[0][2] = new Cuerpo(null, ivTab02); tablero[0][3] = new Cuerpo(null, ivTab03); tablero[0][4] = new Cuerpo(null, ivTab04); 
         tablero[1][0] = new Cuerpo(null, ivTab10); tablero[1][1] = new Cuerpo(null, ivTab11); tablero[1][2] = new Cuerpo(null, ivTab12); tablero[1][3] = new Cuerpo(null, ivTab13); tablero[1][4] = new Cuerpo(null, ivTab14);
@@ -352,7 +341,6 @@ public class JuegoController extends Controller implements Initializable {
     }
 
     private void conseguirImagenes(){
-        mano[3].setImage(new Image("/virus/resources/Dorso.jpg"));
         for(int i =0; i < 3; i++){
             mano[i].setImage(player.getMano().get(i).getImagen());
             mano[i].setCarta(player.getMano().get(i));
@@ -388,7 +376,6 @@ public class JuegoController extends Controller implements Initializable {
         }
     }
     
-    @FXML
     private void accionJugada(ActionEvent event) {
         if(player.getTurno() == 1 && timer == null)
             hilo();
@@ -1069,10 +1056,6 @@ public class JuegoController extends Controller implements Initializable {
         }
     }
 
-    @FXML
-    private void accionMazos(MouseEvent event) {
-        
-    }
     
     private boolean verificarOrganoRepetido(Carta organo){
         if(organo.getColor() == 5){
