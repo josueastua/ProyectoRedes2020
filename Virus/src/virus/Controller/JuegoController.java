@@ -926,6 +926,7 @@ public class JuegoController extends Controller implements Initializable {
                 }
                 //Infección
                 case 3:{
+                    boolean cambio = false;
                     //Vector para guardar el color de las cartas que pueden ser infectadas
                     int vecColor[] = new int[5];
                     Mensaje mensaje = new Mensaje();
@@ -959,6 +960,7 @@ public class JuegoController extends Controller implements Initializable {
                                                 tablero[1][c].setImage(null);
                                                 tablero[1][c].getImage().setImage(null);
                                                 vecColor[b] = -1;
+                                                cambio = true;
                                             }
                                         }
                                     }
@@ -980,18 +982,10 @@ public class JuegoController extends Controller implements Initializable {
                                                 tablero[2][c].setImage(null);
                                                 tablero[2][c].getImage().setImage(null);
                                                 vecColor[b] = -1;
+                                                cambio = true;
                                             }
                                         }
                                     }
-                                }
-                            }
-                        }
-                        boolean cambio = false;
-                        for(int a=0;a<3;a++){
-                            for(int b=0;b<5;b++){
-                                if(matAux[a][b].getCarta() != null && tablero[a][b] == null){
-                                    cambio = true;
-                                    break;
                                 }
                             }
                         }
