@@ -275,16 +275,14 @@ public class JuegoController extends Controller implements Initializable {
                     break;
                 case "3":
                    
-                    if(player.getId().equals(id2) || player.getId().equals(id1)){
+                    if(player.getId().equals(id2)){
                         mensaje += "Infeccion";
                         mostrar = true;
                     }
                     break;
                 case "4":
-                    if(player.getId().equals(id2) || player.getId().equals(id1)){
-                        mensaje += "Guante de latex";
-                        mostrar = true;
-                    }
+                    mensaje += "Guante de latex";
+                    mostrar = true;
                     break;
                 case "5":
                     if(player.getId().equals(id2))
