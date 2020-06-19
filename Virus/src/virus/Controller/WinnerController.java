@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import virus.Controller.Controller;
 import virus.util.AppContext;
 import virus.util.Carta;
@@ -66,15 +67,19 @@ public class WinnerController extends Controller implements Initializable {
     }
     
     public void mostrarWinner(Jugador winner){
+        StackPane stack;
         ImageView imv = null;
         Carta[][] tab = winner.getMatTablero();
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 5; j++){
                 if(tab[j][i] != null){
                     imv = new ImageView(tab[j][i].getImagen());
-                    imv.setFitHeight(30);
-                    imv.setFitWidth(60);
-                    gpCartas.add(imv, i, j);
+                    imv.setFitHeight(108);
+                    imv.setFitWidth(86);
+                    stack = new StackPane();
+                    stack.setPrefSize(167.6, 110);
+                    stack.getChildren().add(imv);
+                    gpCartas.add(stack, i, j);
                 }
             }
         }

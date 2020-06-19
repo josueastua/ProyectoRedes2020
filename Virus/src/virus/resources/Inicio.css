@@ -59,7 +59,7 @@
     -fx-stroke-width: 1.5;
 }
 
-.image-view{
+#imv_si, #imv_id, #imv_sd, #imv_ii{
     -fx-opacity: 0.05;
     -fx-preserve-ratio: FALSE;
     -fx-smooth: FALSE;
