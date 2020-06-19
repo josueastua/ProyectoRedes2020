@@ -1199,10 +1199,12 @@ public class JuegoController extends Controller implements Initializable {
     @FXML
     private void accionDescartar(ActionEvent event) {
         if(cbDescartar.getSelectionModel().getSelectedItem() != null){
-            tramitarPeticion(cbDescartar.getSelectionModel().getSelectedItem());
+            String selected = cbDescartar.getSelectionModel().getSelectedItem();
+            tramitarPeticion(selected);
             cbDescartar.setMouseTransparent(true);
             comerCarta();
             accionJugada();
+            cbDescartar.getSelectionModel().clearSelection(cbDescartar.getItems().indexOf(selected));
         }
     }
     
