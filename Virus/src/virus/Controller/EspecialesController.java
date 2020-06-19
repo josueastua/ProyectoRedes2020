@@ -135,10 +135,6 @@ public class EspecialesController extends Controller implements Initializable {
         ArrayList<Jugador> lista = (ArrayList<Jugador>) AppContext.getInstance().get("Jugadores");
         cbJugador1.getItems().addAll(lista);
         cbJugador2.getItems().addAll(lista);
-        gp1.setMouseTransparent(true);
-        gp2.setMouseTransparent(true);
-        cbJugador1.setMouseTransparent(false);
-        cbJugador2.setMouseTransparent(false);
     }
     
     public void cargarImagenes(int jug){
@@ -388,5 +384,9 @@ public class EspecialesController extends Controller implements Initializable {
     @Override
     public void initialize() {
         AppContext.getInstance().set("Transplante", false);
+        gp1.setMouseTransparent(true);
+        gp2.setMouseTransparent(true);
+        cbJugador1.setMouseTransparent(false);
+        cbJugador2.setMouseTransparent(false);
     }
 }
