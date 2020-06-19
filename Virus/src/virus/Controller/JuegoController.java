@@ -276,14 +276,16 @@ public class JuegoController extends Controller implements Initializable {
                     break;
                 case "3":
                    
-                    if(player.getId().equals(id2)){
+                    if(!player.getId().equals(id1)){
                         mensaje += "Infeccion";
                         mostrar = true;
                     }
                     break;
                 case "4":
-                    mensaje += "Guante de latex";
-                    mostrar = true;
+                    if(!player.getID().equals(id1)){
+                        mensaje += "Guante de latex";
+                        mostrar = true;
+                    }
                     break;
                 case "5":
                     if(player.getId().equals(id2)){
@@ -303,6 +305,7 @@ public class JuegoController extends Controller implements Initializable {
    
     @Override
     public void initialize() {
+        this.getStage().setOnCloseRequest( close -> { close.consume(); });
         cbDescartar.getItems().clear();
         cbDescartar.getItems().add("Las tres cartas");
         cbDescartar.getItems().add("La carta 1 y la carta 2");
