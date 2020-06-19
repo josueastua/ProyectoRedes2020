@@ -78,7 +78,6 @@ def mezclarBaraja():
         asignados.append(False)
     while(todosUsados(asignados)):
         aux = randint(0, len(asignados)-1)
-        print(aux, str(len(asignados)), sep = " - ")
         if(asignados[aux] == False):
             var_mazo.append(var_cartas[aux])
             asignados[aux] = True
@@ -87,7 +86,6 @@ def metodoHilo():
     esperaInicio()
 
 def esperaInicio():
-    print("Inicio Espera")
     global var_hilo, var_juegoIniciado
     cont = 0
     while(cont < 15):
@@ -147,12 +145,6 @@ def procesarSolicitud(clave, mensaje, hostname):
             var_turno += 1
         return "Se estableció conexión con: "+hostname
     elif(clave == "4"):#pedir actualizacion de los datos del juego
-        '''
-        print("Mensaje: "+mensaje)
-        if(mensaje != "HOLA"):
-            var_datosJuego = mensaje
-        print("Datos juego: "+var_datosJuego)
-        '''
         if(var_datosJuego == "0"):
             return "Se estableció conexión con: "+hostname 
         else:
@@ -174,12 +166,11 @@ def iniciarServidor(host,puerto):
     system("cls")
     while True:
         (c, addr) = s.accept()
-        print("Se estableció conexión con: " + str(addr))
         hostname = socket.gethostname()
         msg_rec = c.recv(1024)
         msg_rec = msg_rec.decode('ascii')
         msg_env = procesarSolicitud(msg_rec[0], msg_rec[1 : len(msg_rec)], hostname)
-        print(msg_env)
+        print("Se estableció conexión con: " + str(addr)+"\n"+(msg_rec))
         c.send(msg_env.encode('utf8'))
         print("\nMensaje enviado: "+msg_env+"\n")
         c.close()
