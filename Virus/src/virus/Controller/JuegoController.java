@@ -801,7 +801,7 @@ public class JuegoController extends Controller implements Initializable {
                         }
                     }else{
                         Mensaje men = new Mensaje();
-                        men.show(Alert.AlertType.WARNING,"Jugada invalida", "La posición seleccionada es incorrectta.");
+                        men.show(Alert.AlertType.WARNING,"Jugada invalida", "La posición seleccionada es incorrecta.");
                     }
                 //La carta es una medicina
                 }else if(carta1.getTipo() == 2){ 
@@ -897,7 +897,7 @@ public class JuegoController extends Controller implements Initializable {
                 //Ladron de organos
                 case 1:{
                     Mensaje mensaje = new Mensaje();
-                    if(mensaje.showConfirmation("Carta ladrón de organos", this.getStage(), "¿Desea usar esta carta?")){
+                    if(mensaje.showConfirmation("Carta ladrón de organos", this.getStage(), "¿Desea usar esta carta?\nPara utilizar esta carta seleccione un\norgano del tablero de un oponente para robarlo.")){
                         click = 1;
                     }
                     break;
@@ -905,7 +905,7 @@ public class JuegoController extends Controller implements Initializable {
                 //Transplante
                 case 2:{
                     Mensaje mensaje = new Mensaje();
-                    if(mensaje.showConfirmation("Carta transplante de organos", this.getStage(), "¿Desea usar esta carta?")){
+                    if(mensaje.showConfirmation("Carta transplante de organos", this.getStage(), "¿Desea usar esta carta?\nPara usar esta carta elija 2 jugadores\npara intercambiar sus organos.")){
                         FlowController.getInstance().goViewInNoResizableWindow("Especiales", false);
                         mostrarOponente();
                         mostrarTablero();
@@ -930,7 +930,7 @@ public class JuegoController extends Controller implements Initializable {
                     //Vector para guardar el color de las cartas que pueden ser infectadas
                     int vecColor[] = new int[5];
                     Mensaje mensaje = new Mensaje();
-                    if(mensaje.showConfirmation("Carta infección", this.getStage(), "¿Desea usar esta carta?")){
+                    if(mensaje.showConfirmation("Carta infección", this.getStage(), "¿Desea usar esta carta?\nEsta carta traspasa todos los virus que\npuedan infectar organos del oponente.")){
                         Cuerpo matAux[][] = new Cuerpo[3][5];
                         matAux = tablero.clone();
                         for(int a=0;a<5;a++){
@@ -1015,7 +1015,7 @@ public class JuegoController extends Controller implements Initializable {
                 //Guante de latex
                 case 4:{
                     Mensaje mensaje = new Mensaje();
-                    if(mensaje.showConfirmation("Carta guante de látex", this.getStage(), "¿Desea usar esta carta?")){
+                    if(mensaje.showConfirmation("Carta guante de látex", this.getStage(), "¿Desea usar esta carta?\nEsta carta hace que los oponentes boten\nsus cartas y pierdan su turno.")){
                         for(Jugador oponente : oponentes){
                             descartes.addAll(oponente.getMano());
                             oponente.getMano().clear();
@@ -1046,7 +1046,7 @@ public class JuegoController extends Controller implements Initializable {
                 //Error médico
                 case 5:{
                     Mensaje mensaje = new Mensaje();
-                    if(mensaje.showConfirmation("Carta error médico", this.getStage(), "¿Desea usar esta carta?")){
+                    if(mensaje.showConfirmation("Carta error médico", this.getStage(), "¿Desea usar esta carta?\nEsta carta cambia el cuerpo del tablero\ncon el del oponente seleccionado.")){
                         oponentes.get(oponente).copiarMatrizJugador(tablero);
                         player.copiarMatrizOponente(tabOponente);
                         mostrarOponente();
