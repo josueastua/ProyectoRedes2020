@@ -288,14 +288,14 @@ public class EspecialesController extends Controller implements Initializable {
                             AppContext.getInstance().set("Especiales", lista);
                             this.getStage().close();
                         }else{
-                            men.show(Alert.AlertType.WARNING,"Jugada invalida", "El organo seleccionado esta inmune.");
+                            men.showModal(Alert.AlertType.WARNING,"Jugada invalida", this.getStage(), "El organo seleccionado esta inmune.");
                         }
                     }else{
-                        men.show(Alert.AlertType.WARNING,"Jugada invalida", "Alguno de los jugadores ya tiene un organo del mismo color.");
+                        men.showModal(Alert.AlertType.WARNING,"Jugada invalida", this.getStage(), "Alguno de los jugadores ya tiene un organo del mismo color.");
                     }
                 }
             }else{
-                men.show(Alert.AlertType.WARNING,"Jugada invalida", "Alguna posición seleccionada no corresponde a un organo.");
+                men.showModal(Alert.AlertType.WARNING,"Jugada invalida", this.getStage(),  "Alguna posición seleccionada no corresponde a un organo.");
             }
             primero = null;
             segundo = null;
