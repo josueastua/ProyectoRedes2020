@@ -154,7 +154,7 @@ public class JuegoController extends Controller implements Initializable {
     private Timer timer;
     @FXML
     private StackPane stack;
-    Boolean consultar = false, show = false
+    Boolean consultar = false, show = false;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
