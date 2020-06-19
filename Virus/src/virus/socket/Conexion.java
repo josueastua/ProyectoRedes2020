@@ -134,7 +134,7 @@ public class Conexion {
                     datosJugador(message[2].split("#"));
                     crearMazo(message[3].split("-"));
                     if(!message[4].equals("0"))
-                        crearDescartes(message[4].split("-"));
+                        crearDescartes(message[4]);
                     else{
                         ArrayList<Carta> Descartes = new ArrayList<>();
                         AppContext.getInstance().set("Descartes", Descartes);
