@@ -171,7 +171,7 @@ def iniciarServidor(host,puerto):
         msg_env = procesarSolicitud(msg_rec[0], msg_rec[1 : len(msg_rec)], hostname)
         print("Se estableció conexión con: " + str(addr)+"\nMensaje recibido: "+(msg_rec))
         c.send(msg_env.encode('utf8'))
-        print("\nMensaje enviado: "+msg_env+"\n")
+        print("Mensaje enviado: "+msg_env+"\n")
         c.close()
 
 if __name__ == "__main__":

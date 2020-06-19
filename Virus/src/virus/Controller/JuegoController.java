@@ -154,7 +154,7 @@ public class JuegoController extends Controller implements Initializable {
     private Timer timer;
     @FXML
     private StackPane stack;
-    Boolean consultar = false;
+    Boolean consultar = false, show = false
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -289,7 +289,10 @@ public class JuegoController extends Controller implements Initializable {
                 default:
                     break;
             }
-             men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
+            if(!show){
+                men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
+                show = true;
+            }
         });   
     }
    
@@ -374,6 +377,7 @@ public class JuegoController extends Controller implements Initializable {
         consultar = true;
         cbDescartar.setMouseTransparent(false);
         jugada = false;
+        show = false;
         if(verificarVictoria()){
             accionFade();
         }
