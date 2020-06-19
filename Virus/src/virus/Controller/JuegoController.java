@@ -930,6 +930,8 @@ public class JuegoController extends Controller implements Initializable {
                     int vecColor[] = new int[5];
                     Mensaje mensaje = new Mensaje();
                     if(mensaje.showConfirmation("Carta infección", this.getStage(), "¿Desea usar esta carta?")){
+                        Cuerpo matAux[][] = new Cuerpo[3][5];
+                        matAux = tablero.clone();
                         for(int a=0;a<5;a++){
                             if(tabOponente[a][0].getCarta() != null){
                                 if(verificarEstadoOponente(a) == 1){
@@ -941,19 +943,6 @@ public class JuegoController extends Controller implements Initializable {
                                 vecColor[a] = 0;
                             }
                         }
-                        jugada = true;
-                        mano[pos].setCarta(null);
-                        mano[pos].setImage(null);
-                        primero.setImage(null);
-                        player.getMano().remove(carta1);
-                        descartes.add(carta1);
-                        comerCarta();
-                        //Guardar los datos de una lista sobre la carta de infección y los jugadores
-                        ArrayList<String> lista = new ArrayList<>();
-                        lista.add("3");
-                        lista.add(player.getID());
-                        lista.add(oponentes.get(oponente).getID());
-                        AppContext.getInstance().set("Especiales", lista);
                         //Verificar la segunda fila del jugador para ver si algún virus se puede transmitir
                         Carta aux;
                         for(int b=0;b<5;b++){
@@ -997,8 +986,34 @@ public class JuegoController extends Controller implements Initializable {
                                 }
                             }
                         }
+                        boolean cambio = false;
+                        for(int a=0;a<3;a++){
+                            for(int b=0;a<5;a++){
+                                if(matAux[a][b].getCarta() != null && tablero[a][b] == null){
+                                    cambio = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if(cambio){
+                            jugada = true;
+                            mano[pos].setCarta(null);
+                            mano[pos].setImage(null);
+                            primero.setImage(null);
+                            player.getMano().remove(carta1);
+                            descartes.add(carta1);
+                            comerCarta();
+                            //Guardar los datos de una lista sobre la carta de infección y los jugadores
+                            ArrayList<String> lista = new ArrayList<>();
+                            lista.add("3");
+                            lista.add(player.getID());
+                            lista.add(oponentes.get(oponente).getID());
+                            AppContext.getInstance().set("Especiales", lista);
+                            accionJugada();
+                        }
                     }
-                    accionJugada();
+                    
+                    
                     primero = null;
                     segundo = null;
                     break;
@@ -1029,7 +1044,6 @@ public class JuegoController extends Controller implements Initializable {
                         lista.add(player.getID());
                         lista.add("0");
                         AppContext.getInstance().set("Especiales", lista);
-                        accionJugada();
                     }
                     primero = null;
                     segundo = null;
