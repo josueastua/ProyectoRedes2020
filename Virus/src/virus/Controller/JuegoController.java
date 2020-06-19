@@ -376,7 +376,7 @@ public class JuegoController extends Controller implements Initializable {
         }
     }
     
-    private void accionJugada(ActionEvent event) {
+    private void accionJugada() {
         if(player.getTurno() == 1 && timer == null)
             hilo();
         System.out.println(hacerJugada());
@@ -625,6 +625,7 @@ public class JuegoController extends Controller implements Initializable {
                         }
                     player.copiarMatrizJugador(tablero);
                     oponentes.get(oponente).copiarMatrizOponente(tabOponente);
+                    accionJugada();
                     }else{
                         Mensaje men = new Mensaje();
                         men.show(Alert.AlertType.WARNING,"Jugada invalida", "No se pueden tener dos organos repetidos.");
@@ -682,6 +683,7 @@ public class JuegoController extends Controller implements Initializable {
                                             oponentes.get(oponente).copiarMatrizOponente(tabOponente);
                                             //Tomar una nueva carta
                                             comerCarta();
+                                            accionJugada();
                                             break;
                                         }
                                         //El organo esta enfermo
@@ -702,6 +704,7 @@ public class JuegoController extends Controller implements Initializable {
                                             oponentes.get(oponente).copiarMatrizOponente(tabOponente);
                                             //Tomar una nueva carta
                                             comerCarta();
+                                            accionJugada();
                                             break;
                                         }
                                         //El organo esta vacunado
@@ -720,6 +723,7 @@ public class JuegoController extends Controller implements Initializable {
                                             oponentes.get(oponente).copiarMatrizOponente(tabOponente);
                                             //Tomar una nueva carta
                                             comerCarta();
+                                            accionJugada();
                                             break;
                                         }
                                         //El organo es inmune
@@ -777,7 +781,7 @@ public class JuegoController extends Controller implements Initializable {
                     if(fila == 0){
                         if(verificarOrganoRepetido(carta1)){
                             if(carta2 == null){
-                               jugada = true;
+                                jugada = true;
                                 primero.setImage(null);
                                 mano[pos].setCarta(null);
                                 mano[pos].setImage(null);
@@ -788,6 +792,7 @@ public class JuegoController extends Controller implements Initializable {
                                 player.copiarMatrizJugador(tablero);
                                 //Tomar una nueva carta
                                 comerCarta();
+                                accionJugada();
                                 }else{
                                 Mensaje men = new Mensaje();
                                 men.show(Alert.AlertType.WARNING,"Jugada invalida", "La posición seleccionada ya esta ocupada");
@@ -821,6 +826,7 @@ public class JuegoController extends Controller implements Initializable {
                                             player.copiarMatrizJugador(tablero);
                                             //Tomar una nueva carta
                                             comerCarta();
+                                            accionJugada();
                                             break;
                                         }
                                         //El organo esta enfermo
@@ -838,6 +844,7 @@ public class JuegoController extends Controller implements Initializable {
                                             player.copiarMatrizJugador(tablero);
                                             //Tomar una nueva carta
                                             comerCarta();
+                                            accionJugada();
                                             break;
                                         }
                                         //El organo esta vacunado
@@ -853,6 +860,7 @@ public class JuegoController extends Controller implements Initializable {
                                             player.copiarMatrizJugador(tablero);
                                             //Tomar una nueva carta
                                             comerCarta();
+                                            accionJugada();
                                             break;
                                         }
                                     }
@@ -913,6 +921,7 @@ public class JuegoController extends Controller implements Initializable {
                             descartes.add(carta1);
                             comerCarta();
                             AppContext.getInstance().set("Transplante", false);
+                            accionJugada();
                          }
                     }
                     break;
@@ -991,6 +1000,7 @@ public class JuegoController extends Controller implements Initializable {
                             }
                         }
                     }
+                    accionJugada();
                     primero = null;
                     segundo = null;
                     break;
@@ -1021,6 +1031,7 @@ public class JuegoController extends Controller implements Initializable {
                         lista.add(player.getID());
                         lista.add("0");
                         AppContext.getInstance().set("Especiales", lista);
+                        accionJugada();
                     }
                     primero = null;
                     segundo = null;
@@ -1047,6 +1058,7 @@ public class JuegoController extends Controller implements Initializable {
                         lista.add(player.getID());
                         lista.add(oponentes.get(oponente).getID());
                         AppContext.getInstance().set("Especiales", lista);
+                        accionJugada();
                     }
                     primero = null;
                     segundo = null;
