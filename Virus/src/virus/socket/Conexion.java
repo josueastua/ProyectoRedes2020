@@ -194,7 +194,7 @@ public class Conexion {
     }
     
     private void usoTratamienro(String tra){
-        System.out.println("Especial");
+        System.out.println("Especial: "+tra);
         String[] tratamiento = tra.split("-");
         try{
             if(!tratamiento[0].equals("0")){
