@@ -340,6 +340,12 @@ public class JuegoController extends Controller implements Initializable {
         List<String> lista = new ArrayList<>();
         lista.add("0"); lista.add("0"); lista.add("0");
         AppContext.getInstance().set("Especiales", lista) ;
+        /*player.getMano().remove(2);
+        Carta carta = new Carta(4,3,AppContext.getInstance().getCarta("4:3"));
+        player.getMano().add(carta);
+        mano[2].setCarta(carta);
+        mano[2].setImage(carta.getImagen());
+        ivMano02.setImage(carta.getImagen());*/
     }
 
     private void conseguirImagenes(){
@@ -986,6 +992,8 @@ public class JuegoController extends Controller implements Initializable {
                             primero.setImage(null);
                             player.getMano().remove(carta1);
                             descartes.add(carta1);
+                            oponentes.get(oponente).copiarMatrizOponente(tabOponente);
+                            player.copiarMatrizJugador(tablero);
                             comerCarta();
                             //Guardar los datos de una lista sobre la carta de infección y los jugadores
                             ArrayList<String> lista = new ArrayList<>();
