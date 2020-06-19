@@ -79,7 +79,7 @@ public class WinnerController extends Controller implements Initializable {
                     stack = new StackPane();
                     stack.setPrefSize(167.6, 110);
                     stack.getChildren().add(imv);
-                    gpCartas.add(stack, i, j);
+                    gpCartas.add(stack, j, i);
                 }
             }
         }
