@@ -255,8 +255,8 @@ public class EspecialesController extends Controller implements Initializable {
                 Carta carta1 = matPrimero[fila1][columna1].getCarta();
                 Carta carta2 = matSegundo[fila2][columna2].getCarta();
                 if(carta1 != null && carta2 != null){
-                    if(verificarOrganorepetido(2, carta1.getColor()) && verificarOrganorepetido(1, carta2.getColor())){
-                            if(verificarInmunidad(1, fila1)  && verificarInmunidad(2, fila2)){
+                    if((carta1.getColor() == carta2.getColor()) ||(verificarOrganorepetido(2, carta1.getColor()) && verificarOrganorepetido(1, carta2.getColor()))){
+                        if(verificarInmunidad(1, fila1)  && verificarInmunidad(2, fila2)){
                             //Transplantar los organos
                             //Copiar el organo del primer jugador para transplantarlo
                             Cuerpo aux1[] = new Cuerpo[3];
@@ -327,7 +327,7 @@ public class EspecialesController extends Controller implements Initializable {
                 Carta carta1 = matPrimero[fila1][columna1].getCarta();
                 Carta carta2 = matSegundo[fila2][columna2].getCarta();
                 if(carta1 != null && carta2 != null){
-                    if(verificarOrganorepetido(2, carta1.getColor()) && verificarOrganorepetido(1, carta2.getColor())){
+                    if((carta1.getColor() == carta2.getColor()) ||(verificarOrganorepetido(2, carta1.getColor()) && verificarOrganorepetido(1, carta2.getColor()))){
                         if(verificarInmunidad(1, fila1) && verificarInmunidad(2, fila2)){
                             //Transplantar los organos
                             //Copiar el organo del primer jugador para transplantarlo
