@@ -137,6 +137,8 @@ public class EspecialesController extends Controller implements Initializable {
         cbJugador2.getItems().addAll(lista);
         gp1.setMouseTransparent(true);
         gp2.setMouseTransparent(true);
+        cbJugador1.setMouseTransparent(false);
+        cbJugador2.setMouseTransparent(false);
     }
     
     public void cargarImagenes(int jug){
