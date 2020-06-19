@@ -263,40 +263,33 @@ public class JuegoController extends Controller implements Initializable {
             Boolean mostrar = false;
             switch(carta){
                 case "1":
-                    mensaje += "Ladron de Organos";
-                    if(player.getId().equals(id2) || player.getId().equals(id1)){
-                        men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
-                        mostrar = true;
+                    if(player.getId().equals(id2)){
+                        mensaje += "Ladron de Organos";
                     }
                     break;
                 case "2":
-                    mensaje += "Trasplante de Organos";
+                    if(player.getId().equals(id2) || player.getId().equals(id1))
+                        mensaje += "Trasplante de Organos";
                     break;
                 case "3":
-                    mensaje += "Infeccion";
+                   
                     if(player.getId().equals(id2) || player.getId().equals(id1)){
-                        men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
-                        mostrar = true;
+                        mensaje += "Infeccion";
                     }
                     break;
                 case "4":
-                    mensaje += "Guante de latex";
                     if(player.getId().equals(id2) || player.getId().equals(id1)){
-                        men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
-                        mostrar = true;
+                        mensaje += "Guante de latex";
                     }
                     break;
                 case "5":
-                    mensaje += "Error medico";
+                    if(player.getId().equals(id2))
+                        mensaje += "Error medico";
                     break;
                 default:
                     break;
             }
-            if(!mostrar){
-                if(player.getId().equals(id2)){
-                    men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
-                }
-            }
+             men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
         });   
     }
    
@@ -644,7 +637,7 @@ public class JuegoController extends Controller implements Initializable {
                 if(carta2!=null){
                     System.out.println("Carta "+carta2.getTipo()+":"+carta2.getColor());
                 }else{
-                    men.show(Alert.AlertType.WARNING,"Jugada invalida", "La casilla seleccionada es invalida");
+                    System.out.println("Nulo");
                 }
                 //Funcionalidad de la carta virus
                 if(columna != 0){

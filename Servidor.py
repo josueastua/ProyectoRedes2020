@@ -132,7 +132,6 @@ def procesarSolicitud(clave, mensaje, hostname):
         else:
             return "Conexion rechazada: Ya ha iniciado una partida"
     elif(clave == "2"):#Solicita la cantidad de jugadores conectados
-        print(var_juegoIniciado)
         if(var_juegoIniciado == 0):
             return "2:"+str(len(var_jugadores))
         else:
@@ -170,7 +169,7 @@ def iniciarServidor(host,puerto):
         msg_rec = c.recv(1024)
         msg_rec = msg_rec.decode('ascii')
         msg_env = procesarSolicitud(msg_rec[0], msg_rec[1 : len(msg_rec)], hostname)
-        print("Se estableció conexión con: " + str(addr)+"\n"+(msg_rec))
+        print("Se estableció conexión con: " + str(addr)+"\nMensaje recibido: "+(msg_rec))
         c.send(msg_env.encode('utf8'))
         print("\nMensaje enviado: "+msg_env+"\n")
         c.close()
