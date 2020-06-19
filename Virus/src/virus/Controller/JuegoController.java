@@ -187,8 +187,6 @@ public class JuegoController extends Controller implements Initializable {
         mano[0] = new Cuerpo(null, ivMano00);
         mano[1] = new Cuerpo(null, ivMano01);
         mano[2] = new Cuerpo(null, ivMano02);
-        mano[3] = new Cuerpo(null, ivMano03);
-        mano[4] = new Cuerpo(null, ivMano04);
         
     }
     
