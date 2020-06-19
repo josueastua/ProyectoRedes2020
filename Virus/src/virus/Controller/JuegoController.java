@@ -5,6 +5,7 @@
  */
 package virus.Controller;
 
+import static java.lang.System.exit;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -305,7 +306,7 @@ public class JuegoController extends Controller implements Initializable {
    
     @Override
     public void initialize() {
-        this.getStage().setOnCloseRequest( close -> { close.consume(); });
+        this.getStage().setOnCloseRequest( close -> { exit(1); });
         cbDescartar.getItems().clear();
         cbDescartar.getItems().add("Las tres cartas");
         cbDescartar.getItems().add("La carta 1 y la carta 2");
