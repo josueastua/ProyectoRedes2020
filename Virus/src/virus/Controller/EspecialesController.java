@@ -114,6 +114,7 @@ public class EspecialesController extends Controller implements Initializable {
     ImageView segundo;
     @FXML
     private StackPane stack;
+    Mensaje men = new Mensaje();
     
     /**
      * Initializes the controller class.
@@ -219,7 +220,6 @@ public class EspecialesController extends Controller implements Initializable {
             if(cbJugador1.getSelectionModel().getSelectedItem() != cbJugador2.getSelectionModel().getSelectedItem()){
                 cargarImagenes(1);
                 cargarImagenes(2);
-                Mensaje men = new Mensaje();
                 if(men.showConfirmation("Transplante de organos", this.getStage(), "¿Desea elegir estos jugadores para al transplante?")){
                     cbJugador1.setMouseTransparent(true);
                     cbJugador2.setMouseTransparent(true);
@@ -288,16 +288,13 @@ public class EspecialesController extends Controller implements Initializable {
                             AppContext.getInstance().set("Especiales", lista);
                             this.getStage().close();
                         }else{
-                            Mensaje men = new Mensaje();
                             men.show(Alert.AlertType.WARNING,"Jugada invalida", "El organo seleccionado esta inmune.");
                         }
                     }else{
-                        Mensaje men = new Mensaje();
                         men.show(Alert.AlertType.WARNING,"Jugada invalida", "Alguno de los jugadores ya tiene un organo del mismo color.");
                     }
                 }
             }else{
-                Mensaje men = new Mensaje();
                 men.show(Alert.AlertType.WARNING,"Jugada invalida", "Alguna posición seleccionada no corresponde a un organo.");
             }
             primero = null;
@@ -360,7 +357,7 @@ public class EspecialesController extends Controller implements Initializable {
                             AppContext.getInstance().set("Especiales", lista);
                             this.getStage().close();
                         }else{
-                            Mensaje men = new Mensaje();
+                            
                             men.showModal(Alert.AlertType.WARNING,"Jugada invalida",this.getStage(),"El organo seleccionado esta inmune.");
                         }
                     }else{
