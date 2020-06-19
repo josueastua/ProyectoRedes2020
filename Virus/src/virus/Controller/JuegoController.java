@@ -265,31 +265,36 @@ public class JuegoController extends Controller implements Initializable {
                 case "1":
                     if(player.getId().equals(id2)){
                         mensaje += "Ladron de Organos";
+                        mostrar = true;
                     }
                     break;
                 case "2":
                     if(player.getId().equals(id2) || player.getId().equals(id1))
                         mensaje += "Trasplante de Organos";
+                        mostrar = true;
                     break;
                 case "3":
                    
                     if(player.getId().equals(id2) || player.getId().equals(id1)){
                         mensaje += "Infeccion";
+                        mostrar = true;
                     }
                     break;
                 case "4":
                     if(player.getId().equals(id2) || player.getId().equals(id1)){
                         mensaje += "Guante de latex";
+                        mostrar = true;
                     }
                     break;
                 case "5":
                     if(player.getId().equals(id2))
                         mensaje += "Error medico";
+                        mostrar = true;
                     break;
                 default:
                     break;
             }
-            if(!show){
+            if(!show && mostrar){
                 men.show(Alert.AlertType.INFORMATION, "Carta Especial", mensaje);
                 show = true;
             }
@@ -1171,7 +1176,6 @@ public class JuegoController extends Controller implements Initializable {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("HILO");
                 if(consultar)
                     con.accionEnviar("4", "HOLA");
             }

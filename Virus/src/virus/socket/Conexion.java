@@ -139,7 +139,7 @@ public class Conexion {
                         ArrayList<Carta> Descartes = new ArrayList<>();
                         AppContext.getInstance().set("Descartes", Descartes);
                     }
-                    usoTratamienro(message[5].split("-"));
+                    usoTratamienro(message[5]);
                     JuegoController juego = (JuegoController) AppContext.getInstance().get("Juego");
                     juego.esTurno();
                     juego.actualizarJuego();
@@ -191,7 +191,9 @@ public class Conexion {
         AppContext.getInstance().set("Descartes", Descartes);
     }
     
-    private void usoTratamienro(String[] tratamiento){
+    private void usoTratamienro(String descart){
+        System.out.println("Descartes: "+descart);
+        String[] tratamiento = descart.split("-");
         if(!tratamiento[0].equals("0")){
             JuegoController juego = (JuegoController) AppContext.getInstance().get("Juego");
             juego.informarCartaEspecial(tratamiento[0], tratamiento[1], tratamiento[2]);
