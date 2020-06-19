@@ -1197,30 +1197,40 @@ public class JuegoController extends Controller implements Initializable {
     public void tramitarPeticion(String peticion){
         int index = cbDescartar.getItems().indexOf(peticion);
         System.out.println("Index: "+index);
+        Carta aux1, aux2;
         switch(index){
             case 0:
                 player.getMano().clear();
                 break;
             case 1:
-                player.getMano().remove(0);
-                player.getMano().remove(0);
+                aux1 = player.getMano().get(0);
+                aux2 = player.getMano().get(1);
+                player.getMano().remove(aux1);
+                player.getMano().remove(aux2);
                 break;
             case 2:
-                player.getMano().remove(0);
-                player.getMano().remove(1);
+                aux1 = player.getMano().get(0);
+                aux2 = player.getMano().get(2);
+                player.getMano().remove(aux1);
+                player.getMano().remove(aux2);
                 break;
             case 3:
-                player.getMano().remove(1);
-                player.getMano().remove(1);
+                aux1 = player.getMano().get(1);
+                aux2 = player.getMano().get(2);
+                player.getMano().remove(aux1);
+                player.getMano().remove(aux2);
                 break;
             case 4:
-                player.getMano().remove(0);
+                aux1 = player.getMano().get(0);
+                player.getMano().remove(aux1);
                 break;
             case 5:
-                player.getMano().remove(1);
+                aux1 = player.getMano().get(1);
+                player.getMano().remove(aux1);
                 break;
             case 6:
-                player.getMano().remove(2);
+                aux1 = player.getMano().get(2);
+                player.getMano().remove(aux1);
                 break;
         }
     }
