@@ -176,7 +176,7 @@ public class EspecialesController extends Controller implements Initializable {
     public boolean verificarOrganorepetido(int jug, int color){
         if(jug == 1){
             for(int a=0;a<5;a++){
-                if(matPrimero[a][0]!= null){
+                if(matPrimero[a][0].getCarta()!= null){
                     if(matPrimero[a][0].getCarta().getColor() == color){
                         System.out.println("Jugador 1");
                         return false;
@@ -186,7 +186,7 @@ public class EspecialesController extends Controller implements Initializable {
             return true;
         }else{
             for(int a=0;a<5;a++){
-                if(matSegundo[a][0]!= null){
+                if(matSegundo[a][0].getCarta()!= null){
                     if(matSegundo[a][0].getCarta().getColor() == color){
                         System.out.println("Jugador 2");
                         return false;
