@@ -195,8 +195,8 @@ public class Conexion {
     
     private void usoTratamienro(String tra){
         System.out.println("Especial: "+tra);
-        String[] tratamiento = tra.split("-");
         try{
+            String[] tratamiento = tra.split("-");
             if(!tratamiento[0].equals("0")){
                 JuegoController juego = (JuegoController) AppContext.getInstance().get("Juego");
                 juego.informarCartaEspecial(tratamiento[0], tratamiento[1], tratamiento[2]);
