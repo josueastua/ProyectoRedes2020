@@ -305,6 +305,7 @@ public class JuegoController extends Controller implements Initializable {
    
     @Override
     public void initialize() {
+        this.getStage().setOnCloseRequest( close -> { close.consume(); });
         cbDescartar.getItems().clear();
         cbDescartar.getItems().add("Las tres cartas");
         cbDescartar.getItems().add("La carta 1 y la carta 2");
