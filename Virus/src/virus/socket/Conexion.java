@@ -181,8 +181,12 @@ public class Conexion {
     private void crearDescartes(String[] descartes){
         ArrayList<Carta> Descartes = new ArrayList<>();
         for(String carta: descartes){
-            char prima = carta.charAt(0);
-            Descartes.add(new Carta(Character.getNumericValue(prima), Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
+            if(carta.length() >= 3){
+                char prima = carta.charAt(0);
+                Descartes.add(new Carta(Character.getNumericValue(prima), Character.getNumericValue(carta.charAt(2)), AppContext.getInstance().getCarta(carta)));
+            }else{
+                System.out.println("Descartes Carta: "+carta);
+            }
         }
         AppContext.getInstance().set("Descartes", Descartes);
     }
