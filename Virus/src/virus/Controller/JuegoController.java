@@ -282,7 +282,7 @@ public class JuegoController extends Controller implements Initializable {
                     }
                     break;
                 case "4":
-                    if(!player.getID().equals(id1) && !player.getID().equals(id2)){
+                    if(!player.getID().equals(id1)){
                         mensaje += "Guante de latex";
                         mostrar = true;
                     }
