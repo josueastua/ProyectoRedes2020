@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="580.0" prefWidth="750.0" stylesheets="@../resources/Ventanas.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="virus.Controller.EspecialesController">
+   <children>
+      <ImageView fx:id="ivFondo1" fitHeight="290.0" fitWidth="380.0" pickOnBounds="true" smooth="false" />
+      <ImageView fx:id="ivFondo2" fitHeight="290.0" fitWidth="380.0" layoutX="370.0" pickOnBounds="true" smooth="false" />
+      <ImageView fx:id="ivFondo3" fitHeight="290.0" fitWidth="380.0" layoutY="290.0" pickOnBounds="true" smooth="false" />
+      <ImageView fx:id="ivFondo4" fitHeight="290.0" fitWidth="380.0" layoutX="370.0" layoutY="295.0" pickOnBounds="true" smooth="false" />
+      <ComboBox fx:id="cbJugador1" layoutX="14.0" layoutY="14.0" onAction="#ElegirJugador" prefHeight="49.0" prefWidth="314.0" promptText="Jugador" />
+      <ComboBox fx:id="cbJugador2" layoutX="422.0" layoutY="14.0" onAction="#ElegirJugador" prefHeight="49.0" prefWidth="314.0" promptText="Jugador" />
+      <GridPane fx:id="gp1" layoutX="13.0" layoutY="131.0" prefHeight="440.0" prefWidth="354.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="88.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="94.0" minHeight="10.0" prefHeight="94.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <StackPane fx:id="stack">
+               <children>
+                  <ImageView id="00" fx:id="pri00" fitHeight="90.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="1">
+               <children>
+                  <ImageView id="01" fx:id="pri01" fitHeight="92.0" fitWidth="123.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="2">
+               <children>
+                  <ImageView id="02" fx:id="pri02" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.rowIndex="1">
+               <children>
+                  <ImageView id="10" fx:id="pri10" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <ImageView id="11" fx:id="pri11" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <ImageView id="12" fx:id="pri12" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.rowIndex="2">
+               <children>
+                  <ImageView id="20" fx:id="pri20" fitHeight="86.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <ImageView id="21" fx:id="pri21" fitHeight="85.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <children>
+                  <ImageView id="22" fx:id="pri22" fitHeight="84.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.rowIndex="3">
+               <children>
+                  <ImageView id="30" fx:id="pri30" fitHeight="85.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <ImageView id="31" fx:id="pri31" fitHeight="84.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <children>
+                  <ImageView id="32" fx:id="pri32" fitHeight="85.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.rowIndex="4">
+               <children>
+                  <ImageView id="40" fx:id="pri40" fitHeight="83.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <ImageView id="41" fx:id="pri41" fitHeight="83.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <children>
+                  <ImageView id="42" fx:id="pri42" fitHeight="82.0" fitWidth="118.0" onMouseClicked="#organoMat1" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+         </children>
+      </GridPane>
+      <GridPane fx:id="gp2" layoutX="383.0" layoutY="131.0" prefHeight="440.0" prefWidth="354.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="88.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="94.0" minHeight="10.0" prefHeight="94.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <StackPane fx:id="stack">
+               <children>
+                  <ImageView id="00" fx:id="seg00" fitHeight="90.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="1">
+               <children>
+                  <ImageView id="01" fx:id="seg01" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="2">
+               <children>
+                  <ImageView id="02" fx:id="seg02" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.rowIndex="1">
+               <children>
+                  <ImageView id="10" fx:id="seg10" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <ImageView id="11" fx:id="seg11" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <ImageView id="12" fx:id="seg12" fitHeight="92.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.rowIndex="2">
+               <children>
+                  <ImageView id="20" fx:id="seg20" fitHeight="86.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <ImageView id="21" fx:id="seg21" fitHeight="84.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <children>
+                  <ImageView id="22" fx:id="seg22" fitHeight="85.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.rowIndex="3">
+               <children>
+                  <ImageView id="30" fx:id="seg30" fitHeight="84.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <ImageView id="31" fx:id="seg31" fitHeight="85.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <children>
+                  <ImageView id="32" fx:id="seg32" fitHeight="86.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.rowIndex="4">
+               <children>
+                  <ImageView id="40" fx:id="seg40" fitHeight="84.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <ImageView id="41" fx:id="seg41" fitHeight="81.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="stack" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <children>
+                  <ImageView id="42" fx:id="seg42" fitHeight="86.0" fitWidth="118.0" onMouseClicked="#organoMat2" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
